@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo: PPG + Sleep Audio - Sistema Completo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 300;
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+    
+    .modules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    @media (max-width: 768px) {
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .module-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .module-icon {
+      font-size: 2rem;
+    }
+    
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+    
+    .pulse-display {
+      width: 180px;
+      height: 180px;
+      margin: 20px auto;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff3b30 0%, #d63228 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.1s;
+    }
+    
+    .pulse-display.beating {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(255,59,48,0.8);
+    }
+    
+    .bpm-value {
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+    
+    .metric-label {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+    
+    .metric-value {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    .phase-indicator {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .phase-AWAKE { background: #FFC107; color: #000; }
+    .phase-DROWSY { background: #9C27B0; color: #fff; }
+    .phase-LIGHT_SLEEP { background: #2196F3; color: #fff; }
+    .phase-DEEP_SLEEP { background: #1565C0; color: #fff; }
+    .phase-REM { background: #E91E63; color: #fff; }
+    
+    .quality-bar-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    
+    .quality-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f44336 0%, #FFC107 50%, #4CAF50 100%);
+      transition: width 0.3s ease;
+      border-radius: 4px;
+    }
+    
+    .controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    button {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(76,175,80,0.4);
+    }
+    
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    
+    .btn-danger {
+      background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+      color: white;
+    }
+    
+    .affirmations {
+      margin-top: 20px;
+    }
+    
+    .affirmation-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    
+    .affirmation-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+    
+    .affirmation-item {
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .affirmation-item.played {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+    
+    .combined-analysis {
+      background: linear-gradient(135deg, rgba(138,43,226,0.2) 0%, rgba(75,0,130,0.2) 100%);
+      border: 2px solid rgba(138,43,226,0.3);
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+    
+    .combined-analysis h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .status-message {
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    
+    .status-ok {
+      background: rgba(76,175,80,0.2);
+      border: 1px solid rgba(76,175,80,0.4);
+      color: #4CAF50;
+    }
+    
+    .status-warning {
+      background: rgba(255,193,7,0.2);
+      border: 1px solid rgba(255,193,7,0.4);
+      color: #FFC107;
+    }
+    
+    .status-info {
+      background: rgba(33,150,243,0.2);
+      border: 1px solid rgba(33,150,243,0.4);
+      color: #2196F3;
+    }
+    
+    .timeline {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      max-height: 150px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .timeline-entry {
+      padding: 4px 0;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Sistema Completo: PPG + Sleep Audio</h1>
+    
+    <div class="modules-grid">
+      <!-- PPG Monitor -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-icon">🫀</span>
+          <span class="module-title">PPG Monitor</span>
+        </div>
+        
+        <div class="pulse-display" id="pulse-circle">
+          <div class="bpm-value" id="bpm-display">--</div>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Estado</span>
+          <span class="metric-value" id="ppg-state">Detenido</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Calidad de Señal</span>
+          <span class="metric-value" id="signal-quality">--</span>
+        </div>
+        <div class="quality-bar-container">
+          <div class="quality-bar-fill" id="quality-bar" style="width: 0%"></div>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">HRV (RMSSD)</span>
+          <span class="metric-value" id="hrv-rmssd">--</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Coherencia</span>
+          <span class="metric-value" id="coherence">--</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Latidos Detectados</span>
+          <span class="metric-value" id="beat-count">0</span>
+        </div>
+        
+        <div class="controls">
+          <button class="btn-primary" id="ppg-start">Iniciar PPG</button>
+          <button class="btn-danger" id="ppg-stop">Detener</button>
+        </div>
+      </div>
+      
+      <!-- Sleep Audio Analyzer -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-icon">😴</span>
+          <span class="module-title">Sleep Audio Analyzer</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Fase Actual</span>
+          <span class="phase-indicator phase-AWAKE" id="current-phase">AWAKE</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Respiración</span>
+          <span class="metric-value" id="breath-rate">--/min</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Duración Fase</span>
+          <span class="metric-value" id="phase-duration">00:00</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Deep Sleep Total</span>
+          <span class="metric-value" id="deep-sleep-total">00:00</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Afirmaciones Reproducidas</span>
+          <span class="metric-value" id="subliminal-count">0</span>
+        </div>
+        
+        <div class="metric-row">
+          <span class="metric-label">Triggers Lúcidos</span>
+          <span class="metric-value" id="lucid-count">0</span>
+        </div>
+        
+        <div class="affirmations">
+          <input 
+            type="text" 
+            class="affirmation-input" 
+            id="affirmation-input" 
+            placeholder="Agregar afirmación..."
+          >
+          <button class="btn-secondary" id="add-affirmation">+ Agregar</button>
+          
+          <div class="affirmation-list" id="affirmation-list"></div>
+        </div>
+        
+        <div class="controls">
+          <button class="btn-primary" id="sleep-start">Iniciar Sleep</button>
+          <button class="btn-secondary" id="toggle-emdr">EMDR OFF</button>
+          <button class="btn-danger" id="sleep-stop">Detener</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Análisis Combinado -->
+    <div class="combined-analysis">
+      <h2>📊 Análisis Combinado (Multi-Sensor)</h2>
+      
+      <div class="metric-row">
+        <span class="metric-label">Detección Híbrida</span>
+        <span class="metric-value" id="hybrid-detection">Esperando datos...</span>
+      </div>
+      
+      <div class="metric-row">
+        <span class="metric-label">Confiabilidad</span>
+        <span class="metric-value" id="reliability">--</span>
+      </div>
+      
+      <div class="status-message status-info" id="status-message">
+        Inicia ambos módulos para análisis combinado
+      </div>
+      
+      <div class="timeline" id="timeline">
+        <div class="timeline-entry">Sistema listo...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="modules/ppg-monitor.js"></script>
+  <script src="modules/sleep-audio-analyzer.js"></script>
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // VARIABLES GLOBALES
+    // ═══════════════════════════════════════════════════════════════
+    
+    let ppg = null;
+    let sleepAnalyzer = null;
+    let affirmations = [];
+    let updateInterval = null;
+    
+    // ═══════════════════════════════════════════════════════════════
+    // PPG MONITOR SETUP
+    // ═══════════════════════════════════════════════════════════════
+    
+    document.getElementById('ppg-start').onclick = async () => {
+      try {
+        ppg = new PPGMonitor({}, {
+          onBPMUpdate: (bpm) => {
+            document.getElementById('bpm-display').innerText = bpm;
+            updateCombinedAnalysis();
+          },
+          
+          onSignalQuality: (quality) => {
+            document.getElementById('signal-quality').innerText = quality + '%';
+            document.getElementById('quality-bar').style.width = quality + '%';
+          },
+          
+          onBeat: (data) => {
+            const circle = document.getElementById('pulse-circle');
+            circle.classList.add('beating');
+            setTimeout(() => circle.classList.remove('beating'), 100);
+            
+            document.getElementById('beat-count').innerText = data.beatNumber;
+            addTimeline(`💓 Latido #${data.beatNumber}`);
+          },
+          
+          onHRVUpdate: (hrv) => {
+            document.getElementById('hrv-rmssd').innerText = hrv.rmssd.toFixed(1);
+            document.getElementById('coherence').innerText = hrv.coherence.toFixed(0) + '%';
+            updateCombinedAnalysis();
+          },
+          
+          onCalibrated: (info) => {
+            addTimeline(`✓ PPG Calibrado: ${info.bpm} BPM`);
+          },
+          
+          onStateChange: (state) => {
+            document.getElementById('ppg-state').innerText = state.to;
+            addTimeline(`PPG: ${state.from} → ${state.to}`);
+          },
+          
+          onError: (error) => {
+            alert('Error PPG: ' + error.message);
+          }
+        });
+        
+        await ppg.start();
+        addTimeline('🫀 PPG Monitor iniciado');
+        
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+    document.getElementById('ppg-stop').onclick = () => {
+      if (ppg) {
+        ppg.stop();
+        ppg = null;
+        addTimeline('🫀 PPG Monitor detenido');
+      }
+    };
+    
+    // ═══════════════════════════════════════════════════════════════
+    // SLEEP AUDIO ANALYZER SETUP
+    // ═══════════════════════════════════════════════════════════════
+    
+    document.getElementById('sleep-start').onclick = async () => {
+      try {
+        sleepAnalyzer = new SleepAudioAnalyzer({}, {
+          onPhaseChange: (data) => {
+            const phaseEl = document.getElementById('current-phase');
+            phaseEl.innerText = data.to;
+            phaseEl.className = 'phase-indicator phase-' + data.to;
+            
+            addTimeline(`😴 Fase: ${data.from} → ${data.to}`);
+            updateCombinedAnalysis();
+          },
+          
+          onBreathDetected: (data) => {
+            document.getElementById('breath-rate').innerText = data.rate + '/min';
+          },
+          
+          onSubliminalPlayed: (data) => {
+            addTimeline(`🔇 Subliminal: ${data.affirmation}`);
+            updateAffirmationList();
+          },
+          
+          onLucidTrigger: (data) => {
+            addTimeline(`✨ Trigger Lúcido #${data.triggerNumber}`);
+            document.getElementById('lucid-count').innerText = data.triggerNumber;
+          },
+          
+          onRecordingReady: (recording) => {
+            addTimeline('📼 Grabación lista');
+            
+            const a = document.createElement('a');
+            a.href = recording.url;
+            a.download = 'sleep-session.webm';
+            a.click();
+          },
+          
+          onError: (error) => {
+            alert('Error Sleep: ' + error.message);
+          }
+        });
+        
+        // Cargar afirmaciones
+        sleepAnalyzer.loadAffirmations(affirmations);
+        
+        await sleepAnalyzer.start();
+        addTimeline('😴 Sleep Analyzer iniciado');
+        
+        // Actualizar UI cada segundo
+        updateInterval = setInterval(updateSleepUI, 1000);
+        
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+    document.getElementById('sleep-stop').onclick = () => {
+      if (sleepAnalyzer) {
+        sleepAnalyzer.stop();
+        sleepAnalyzer = null;
+        
+        if (updateInterval) {
+          clearInterval(updateInterval);
+          updateInterval = null;
+        }
+        
+        addTimeline('😴 Sleep Analyzer detenido');
+      }
+    };
+    
+    // EMDR Toggle
+    let emdrEnabled = false;
+    document.getElementById('toggle-emdr').onclick = () => {
+      if (!sleepAnalyzer) return;
+      
+      emdrEnabled = !emdrEnabled;
+      sleepAnalyzer.toggleEMDR(emdrEnabled);
+      
+      const btn = document.getElementById('toggle-emdr');
+      btn.innerText = emdrEnabled ? 'EMDR ON' : 'EMDR OFF';
+      btn.className = emdrEnabled ? 'btn-primary' : 'btn-secondary';
+      
+      addTimeline(`EMDR ${emdrEnabled ? 'activado' : 'desactivado'}`);
+    };
+    
+    // ═══════════════════════════════════════════════════════════════
+    // AFIRMACIONES
+    // ═══════════════════════════════════════════════════════════════
+    
+    document.getElementById('add-affirmation').onclick = () => {
+      const input = document.getElementById('affirmation-input');
+      const text = input.value.trim();
+      
+      if (text) {
+        affirmations.push(text);
+        input.value = '';
+        updateAffirmationList();
+        
+        if (sleepAnalyzer) {
+          sleepAnalyzer.loadAffirmations(affirmations);
+        }
+      }
+    };
+    
+    document.getElementById('affirmation-input').onkeypress = (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('add-affirmation').click();
+      }
+    };
+    
+    function updateAffirmationList() {
+      const list = document.getElementById('affirmation-list');
+      
+      if (!sleepAnalyzer) {
+        list.innerHTML = affirmations.map((aff, i) => `
+          <div class="affirmation-item">
+            <span>✓</span>
+            <span>${aff}</span>
+          </div>
+        `).join('');
+      } else {
+        list.innerHTML = sleepAnalyzer.subliminalQueue.map((aff, i) => `
+          <div class="affirmation-item ${aff.played ? 'played' : ''}">
+            <span>${aff.played ? '✓' : '⏳'}</span>
+            <span>${aff.content}</span>
+          </div>
+        `).join('');
+      }
+    }
+    
+    // ═══════════════════════════════════════════════════════════════
+    // UI UPDATES
+    // ═══════════════════════════════════════════════════════════════
+    
+    function updateSleepUI() {
+      if (!sleepAnalyzer) return;
+      
+      const status = sleepAnalyzer.getStatus();
+      
+      document.getElementById('phase-duration').innerText = 
+        formatTime(status.phaseDuration);
+      
+      document.getElementById('deep-sleep-total').innerText = 
+        formatTime(status.deepSleepTotal);
+      
+      document.getElementById('subliminal-count').innerText = 
+        status.subliminalPlayed;
+    }
+    
+    function updateCombinedAnalysis() {
+      if (!ppg || !sleepAnalyzer) return;
+      
+      const ppgStatus = ppg.getStatus();
+      const sleepStatus = sleepAnalyzer.getStatus();
+      
+      // Análisis híbrido
+      let detection = 'Analizando...';
+      let reliability = 'Media';
+      let statusClass = 'status-info';
+      let statusMsg = '';
+      
+      // Deep Sleep confirmado por ambos sensores
+      if (sleepStatus.currentPhase === 'DEEP_SLEEP' && 
+          ppgStatus.bpm > 0 && ppgStatus.bpm < 55 && 
+          ppgStatus.hrv.coherence < 50) {
+        detection = '🌙 DEEP SLEEP CONFIRMADO';
+        reliability = 'MUY ALTA';
+        statusClass = 'status-ok';
+        statusMsg = 'Ambos sensores confirman sueño profundo. Reproduciendo afirmaciones.';
+      }
+      
+      // REM detectado
+      else if (sleepStatus.currentPhase === 'REM') {
+        detection = '✨ REM - Sueños Activos';
+        reliability = 'Alta';
+        statusClass = 'status-ok';
+        statusMsg = 'Fase REM detectada. Triggers de lucidez activados.';
+      }
+      
+      // Drowsy / Light Sleep
+      else if (['DROWSY', 'LIGHT_SLEEP'].includes(sleepStatus.currentPhase)) {
+        detection = '😌 Transición al Sueño';
+        reliability = 'Media';
+        statusClass = 'status-info';
+        statusMsg = 'Usuario en proceso de dormirse. Esperando sueño profundo.';
+      }
+      
+      // Despierto
+      else if (sleepStatus.currentPhase === 'AWAKE' && ppgStatus.bpm > 60) {
+        detection = '👁️ Despierto';
+        reliability = 'Alta';
+        statusClass = 'status-warning';
+        statusMsg = 'Usuario despierto y alerta.';
+      }
+      
+      // Datos inconsistentes
+      if (ppgStatus.signalQuality < 40) {
+        reliability = 'BAJA';
+        statusMsg += ' ⚠️ Calidad de señal PPG baja.';
+      }
+      
+      document.getElementById('hybrid-detection').innerText = detection;
+      document.getElementById('reliability').innerText = reliability;
+      
+      const statusEl = document.getElementById('status-message');
+      statusEl.innerText = statusMsg;
+      statusEl.className = 'status-message ' + statusClass;
+    }
+    
+    function addTimeline(message) {
+      const timeline = document.getElementById('timeline');
+      const timestamp = new Date().toLocaleTimeString();
+      
+      const entry = document.createElement('div');
+      entry.className = 'timeline-entry';
+      entry.innerText = `[${timestamp}] ${message}`;
+      
+      timeline.appendChild(entry);
+      timeline.scrollTop = timeline.scrollHeight;
+    }
+    
+    function formatTime(ms) {
+      const minutes = Math.floor(ms / 60000);
+      const seconds = Math.floor((ms % 60000) / 1000);
+      return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    // ═══════════════════════════════════════════════════════════════
+    // INICIALIZACIÓN
+    // ═══════════════════════════════════════════════════════════════
+    
+    // Cargar afirmaciones de ejemplo
+    affirmations = [
+      'Estoy en paz profunda y total',
+      'Mi mente se libera de preocupaciones',
+      'Descanso completamente',
+      'Cada célula de mi cuerpo se regenera',
+      'Despierto renovado y lleno de energía'
+    ];
+    
+    updateAffirmationList();
+    addTimeline('Sistema inicializado correctamente');
+  </script>
+</body>
+</html>

@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Monitor de Pulso y Relajación</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Monitor Cardíaco</h1>
+
+        <div id="startScreen">
+            <p class="instruction-text">Esta app experimental mide tu pulso y te guía a la relajación con sonido.</p>
+
+            <div class="control-group">
+                <label for="timeSlider">Tiempo de sesión: <span id="timeDisplay">10</span> min</label>
+                <input type="range" id="timeSlider" min="1" max="60" value="10">
+            </div>
+
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="debugMode"> Modo Debug (visualizar señales)
+                </label>
+            </div>
+
+            <br>
+            <button id="startBtn">Iniciar Medición</button>
+        </div>
+
+        <div id="appInterface" class="hidden">
+            <div id="sessionTimer" class="session-timer">00:00</div>
+
+            <div class="pulse-display" id="pulseCircle">
+                <span id="bpmDisplay" class="bpm-value">--</span>
+                <span class="bpm-unit">BPM</span>
+            </div>
+
+            <p id="statusMsg" class="status-text">Buscando cámara...</p>
+
+            <!-- Signal Quality Indicator -->
+            <div id="signalQuality" class="signal-quality hidden">
+                <div class="quality-bar">
+                    <div id="qualityIndicator" class="quality-indicator"></div>
+                </div>
+                <span id="qualityText">Calidad: --</span>
+            </div>
+
+            <canvas id="signalCanvas" width="300" height="50"></canvas>
+
+            <!-- Debug Panel -->
+            <div id="debugPanel" class="debug-panel hidden">
+                <h3>Debug Info</h3>
+                <div id="debugInfo"></div>
+                <canvas id="debugCanvas" width="300" height="150"></canvas>
+            </div>
+
+            <p class="instruction-text">Coloca tu dedo suavemente sobre la cámara trasera y el flash.</p>
+        </div>
+    </div>
+
+    <!-- Hidden elements for processing -->
+    <video id="videoInput" playsinline></video>
+    <canvas id="processCanvas" width="80" height="80" style="display:none;"></canvas>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        const CONFIG = {
+            // PPG Signal Processing
+            SAMPLE_RATE: 30, // Hz - target frame rate
+            HISTORY_SIZE: 256, // ~8.5 seconds at 30fps
+            SMOOTH_WINDOW: 3, // Moving average window
+            
+            // Heart Rate Constraints
+            MIN_BPM: 40,
+            MAX_BPM: 180,
+            MIN_PEAK_DISTANCE_MS: 333, // 180 BPM max
+            MAX_PEAK_DISTANCE_MS: 1500, // 40 BPM min
+            
+            // Signal Quality
+            MIN_SIGNAL_STRENGTH: 5, // Minimum red channel variance
+            SATURATION_THRESHOLD: 240, // Detect overexposure
+            MIN_BRIGHTNESS: 30, // Too dark threshold
+            
+            // Peak Detection
+            PEAK_THRESHOLD_MULTIPLIER: 1.3, // Peak must be 30% above local mean
+            VALLEY_THRESHOLD_MULTIPLIER: 0.85, // Valley must be 15% below local mean
+            CONSISTENCY_WINDOW: 5, // Number of beats to average for BPM
+            
+            // State Transitions
+            INITIAL_CALIBRATION_BEATS: 8, // Beats needed for initial calibration
+            UPDATE_CALIBRATION_BEATS: 5, // Beats needed for re-calibration
+            SIGNAL_LOSS_TIMEOUT_MS: 5000, // Time before declaring signal loss
+            
+            // Measurement Cycles
+            RELAX_DURATION_MS: 30000, // 30 seconds relaxation before re-check
+            
+            // Flash/Torch
+            TORCH_ENABLED: true
+        };
+
+        // ==================== APP STATES ====================
+        const STATE = {
+            IDLE: 'IDLE',
+            MEASURING_INITIAL: 'MEASURING_INITIAL',
+            RELAXING: 'RELAXING',
+            MEASURING_UPDATE: 'MEASURING_UPDATE',
+            FINISHED: 'FINISHED'
+        };
+
+        // ==================== DOM ELEMENTS ====================
+        const DOM = {
+            startBtn: document.getElementById('startBtn'),
+            startScreen: document.getElementById('startScreen'),
+            appInterface: document.getElementById('appInterface'),
+            timeSlider: document.getElementById('timeSlider'),
+            timeDisplay: document.getElementById('timeDisplay'),
+            sessionTimer: document.getElementById('sessionTimer'),
+            debugMode: document.getElementById('debugMode'),
+            
+            video: document.getElementById('videoInput'),
+            processCanvas: document.getElementById('processCanvas'),
+            bpmDisplay: document.getElementById('bpmDisplay'),
+            statusMsg: document.getElementById('statusMsg'),
+            pulseCircle: document.getElementById('pulseCircle'),
+            
+            signalCanvas: document.getElementById('signalCanvas'),
+            signalQuality: document.getElementById('signalQuality'),
+            qualityIndicator: document.getElementById('qualityIndicator'),
+            qualityText: document.getElementById('qualityText'),
+            
+            debugPanel: document.getElementById('debugPanel'),
+            debugInfo: document.getElementById('debugInfo'),
+            debugCanvas: document.getElementById('debugCanvas')
+        };
+
+        // Get contexts
+        const ctx = DOM.processCanvas.getContext('2d', { willReadFrequently: true });
+        const signalCtx = DOM.signalCanvas.getContext('2d');
+        const debugCtx = DOM.debugCanvas.getContext('2d');
+
+        // ==================== STATE VARIABLES ====================
+        let currentState = STATE.IDLE;
+        let debugEnabled = false;
+        
+        // Camera & Video
+        let mediaStream = null;
+        let videoTrack = null;
+        let animationFrameId = null;
+        
+        // PPG Signal Processing
+        let rawSignal = []; // Raw red channel values
+        let filteredSignal = []; // After preprocessing
+        let timestamps = []; // Corresponding timestamps
+        let peakIndices = []; // Detected peak locations
+        let valleyIndices = []; // Detected valley locations
+        
+        // Heart Rate Calculation
+        let rrIntervals = []; // R-R intervals in ms
+        let currentBPM = 0;
+        let signalQuality = 0; // 0-100
+        let lastPeakTime = 0;
+        let stableBeatsCount = 0;
+        
+        // Session Management
+        let sessionTotalSeconds = 600;
+        let sessionTimeLeft = 600;
+        let sessionIntervalId = null;
+        let measurementStartTime = 0;
+        let nextCalibrationTime = 0;
+        
+        // Audio System
+        let audioContext = null;
+        let audioSchedulerId = null;
+        let nextNoteTime = 0;
+        let currentGuidedBPM = 70;
+        let targetGuidedBPM = 60;
+        let relaxPhaseStartTime = 0;
+
+        // ==================== SIGNAL PROCESSING UTILITIES ====================
+        
+        /**
+         * Bandpass filter implementation (simple moving average + derivative)
+         * Removes DC component and high-frequency noise
+         */
+        function preprocessSignal(rawValues) {
+            if (rawValues.length < CONFIG.SMOOTH_WINDOW) return rawValues;
+            
+            // Step 1: Remove DC component (slow drift)
+            const dcRemoved = removeDC(rawValues);
+            
+            // Step 2: Moving average for noise reduction
+            const smoothed = movingAverage(dcRemoved, CONFIG.SMOOTH_WINDOW);
+            
+            return smoothed;
+        }
+        
+        function removeDC(values) {
+            const mean = values.reduce((a, b) => a + b, 0) / values.length;
+            return values.map(v => v - mean);
+        }
+        
+        function movingAverage(values, windowSize) {
+            const result = [];
+            for (let i = 0; i < values.length; i++) {
+                const start = Math.max(0, i - Math.floor(windowSize / 2));
+                const end = Math.min(values.length, i + Math.ceil(windowSize / 2));
+                const window = values.slice(start, end);
+                const avg = window.reduce((a, b) => a + b, 0) / window.length;
+                result.push(avg);
+            }
+            return result;
+        }
+        
+        /**
+         * Calculate signal quality based on variance and saturation
+         */
+        function calculateSignalQuality(rawValues) {
+            if (rawValues.length < 10) return 0;
+            
+            const recent = rawValues.slice(-30); // Last 1 second
+            const mean = recent.reduce((a, b) => a + b, 0) / recent.length;
+            
+            // Check brightness
+            if (mean < CONFIG.MIN_BRIGHTNESS) return 0; // Too dark
+            if (mean > CONFIG.SATURATION_THRESHOLD) return 0; // Saturated
+            
+            // Calculate variance (signal strength)
+            const variance = recent.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / recent.length;
+            const stdDev = Math.sqrt(variance);
+            
+            // Signal quality: 0-100
+            // Good PPG signal should have stdDev between 5-30
+            let quality = 0;
+            if (stdDev >= CONFIG.MIN_SIGNAL_STRENGTH) {
+                quality = Math.min(100, (stdDev / 30) * 100);
+            }
+            
+            // Penalize if too much variance (movement)
+            if (stdDev > 40) {
+                quality = quality * 0.5;
+            }
+            
+            return Math.round(quality);
+        }
+        
+        /**
+         * Adaptive peak detection using local statistics
+         */
+        function detectPeaksAndValleys(signal, timestamps) {
+            const peaks = [];
+            const valleys = [];
+            
+            const windowSize = 15; // Local window for threshold calculation
+            
+            for (let i = windowSize; i < signal.length - windowSize; i++) {
+                const window = signal.slice(i - windowSize, i + windowSize);
+                const localMean = window.reduce((a, b) => a + b, 0) / window.length;
+                const localMax = Math.max(...window);
+                const localMin = Math.min(...window);
+                
+                const current = signal[i];
+                const prev = signal[i - 1];
+                const next = signal[i + 1];
+                
+                // Peak detection: local maximum above threshold
+                if (current > prev && current > next) {
+                    if (current > localMean * CONFIG.PEAK_THRESHOLD_MULTIPLIER) {
+                        const timeSinceLastPeak = timestamps[i] - lastPeakTime;
+                        
+                        if (timeSinceLastPeak > CONFIG.MIN_PEAK_DISTANCE_MS && 
+                            timeSinceLastPeak < CONFIG.MAX_PEAK_DISTANCE_MS) {
+                            peaks.push(i);
+                            lastPeakTime = timestamps[i];
+                        }
+                    }
+                }
+                
+                // Valley detection: local minimum below threshold
+                if (current < prev && current < next) {
+                    if (current < localMean * CONFIG.VALLEY_THRESHOLD_MULTIPLIER) {
+                        valleys.push(i);
+                    }
+                }
+            }
+            
+            return { peaks, valleys };
+        }
+        
+        /**
+         * Calculate BPM from detected peaks
+         */
+        function calculateBPM(peaks, timestamps) {
+            if (peaks.length < 2) return null;
+            
+            // Calculate intervals between consecutive peaks
+            const intervals = [];
+            for (let i = 1; i < peaks.length; i++) {
+                const interval = timestamps[peaks[i]] - timestamps[peaks[i - 1]];
+                intervals.push(interval);
+            }
+            
+            // Store in RR intervals buffer
+            rrIntervals.push(...intervals);
+            if (rrIntervals.length > CONFIG.CONSISTENCY_WINDOW) {
+                rrIntervals = rrIntervals.slice(-CONFIG.CONSISTENCY_WINDOW);
+            }
+            
+            // Calculate average interval
+            if (rrIntervals.length < 2) return null;
+            
+            // Remove outliers (basic median filter)
+            const sorted = [...rrIntervals].sort((a, b) => a - b);
+            const median = sorted[Math.floor(sorted.length / 2)];
+            const filtered = rrIntervals.filter(val => Math.abs(val - median) < median * 0.3);
+            
+            if (filtered.length === 0) return null;
+            
+            const avgInterval = filtered.reduce((a, b) => a + b, 0) / filtered.length;
+            const bpm = 60000 / avgInterval;
+            
+            // Validate BPM range
+            if (bpm < CONFIG.MIN_BPM || bpm > CONFIG.MAX_BPM) return null;
+            
+            return Math.round(bpm);
+        }
+
+        // ==================== CAMERA MANAGEMENT ====================
+        
+        async function startCamera() {
+            try {
+                logDebug('Iniciando cámara...');
+                
+                const constraints = {
+                    video: {
+                        facingMode: 'environment',
+                        width: { ideal: 640 },
+                        height: { ideal: 480 }
+                    }
+                };
+                
+                mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+                videoTrack = mediaStream.getVideoTracks()[0];
+                
+                DOM.video.srcObject = mediaStream;
+                await DOM.video.play();
+                
+                // Enable torch if available
+                if (CONFIG.TORCH_ENABLED) {
+                    await enableTorch(true);
+                }
+                
+                logDebug('Cámara iniciada correctamente');
+                DOM.statusMsg.innerText = "Señal detectada. Coloca tu dedo.";
+                
+                // Show signal quality indicator
+                DOM.signalQuality.classList.remove('hidden');
+                
+                // Reset signal buffers
+                resetSignalBuffers();
+                
+                // Start processing
+                measurementStartTime = Date.now();
+                processVideoFrame();
+                
+            } catch (error) {
+                console.error('Error al acceder a la cámara:', error);
+                DOM.statusMsg.innerText = `Error: ${error.message}`;
+                
+                if (error.name === 'NotAllowedError') {
+                    DOM.statusMsg.innerText = "Permiso de cámara denegado. Por favor, permite el acceso.";
+                } else if (error.name === 'NotFoundError') {
+                    DOM.statusMsg.innerText = "No se encontró cámara trasera. Verifica tu dispositivo.";
+                }
+            }
+        }
+        
+        async function enableTorch(enabled) {
+            try {
+                if (!videoTrack) return;
+                
+                const capabilities = videoTrack.getCapabilities();
+                
+                if ('torch' in capabilities) {
+                    await videoTrack.applyConstraints({
+                        advanced: [{ torch: enabled }]
+                    });
+                    logDebug(`Flash ${enabled ? 'encendido' : 'apagado'}`);
+                } else {
+                    logDebug('Este dispositivo no soporta flash de cámara');
+                }
+            } catch (error) {
+                console.error('Error con flash:', error);
+            }
+        }
+        
+        function stopCamera() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+            
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+                mediaStream = null;
+                videoTrack = null;
+            }
+            
+            DOM.signalQuality.classList.add('hidden');
+            logDebug('Cámara detenida');
+        }
+        
+        function resetSignalBuffers() {
+            rawSignal = [];
+            filteredSignal = [];
+            timestamps = [];
+            peakIndices = [];
+            valleyIndices = [];
+            rrIntervals = [];
+            lastPeakTime = 0;
+            stableBeatsCount = 0;
+        }
+
+        // ==================== VIDEO PROCESSING ====================
+        
+        function processVideoFrame() {
+            if (currentState !== STATE.MEASURING_INITIAL && 
+                currentState !== STATE.MEASURING_UPDATE) {
+                return; // Stop processing
+            }
+            
+            animationFrameId = requestAnimationFrame(processVideoFrame);
+            
+            if (!mediaStream || DOM.video.paused || DOM.video.ended) {
+                return;
+            }
+            
+            try {
+                // Extract frame
+                const width = DOM.processCanvas.width;
+                const height = DOM.processCanvas.height;
+                ctx.drawImage(DOM.video, 0, 0, width, height);
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                
+                // Calculate average red channel value
+                let totalRed = 0;
+                let pixelCount = 0;
+                
+                // Sample center region only (more stable)
+                const centerX = Math.floor(width * 0.25);
+                const centerY = Math.floor(height * 0.25);
+                const regionWidth = Math.floor(width * 0.5);
+                const regionHeight = Math.floor(height * 0.5);
+                
+                for (let y = centerY; y < centerY + regionHeight; y++) {
+                    for (let x = centerX; x < centerX + regionWidth; x++) {
+                        const index = (y * width + x) * 4;
+                        totalRed += data[index]; // Red channel
+                        pixelCount++;
+                    }
+                }
+                
+                const avgRed = totalRed / pixelCount;
+                const timestamp = Date.now();
+                
+                // Add to buffers
+                rawSignal.push(avgRed);
+                timestamps.push(timestamp);
+                
+                // Maintain buffer size
+                if (rawSignal.length > CONFIG.HISTORY_SIZE) {
+                    rawSignal.shift();
+                    timestamps.shift();
+                }
+                
+                // Process signal if we have enough samples
+                if (rawSignal.length >= 30) {
+                    analyzeSignal();
+                }
+                
+                // Update visualizations
+                updateSignalQuality();
+                drawSignalGraph();
+                
+                if (debugEnabled) {
+                    updateDebugPanel();
+                }
+                
+            } catch (error) {
+                console.error('Error procesando frame:', error);
+            }
+        }
+        
+        function analyzeSignal() {
+            // Preprocess signal
+            filteredSignal = preprocessSignal(rawSignal);
+            
+            // Calculate signal quality
+            signalQuality = calculateSignalQuality(rawSignal);
+            
+            if (signalQuality < 20) {
+                // Poor signal quality
+                if (Date.now() - measurementStartTime > 3000) {
+                    DOM.statusMsg.innerText = "Señal débil. Presiona más fuerte.";
+                }
+                return;
+            }
+            
+            // Detect peaks and valleys
+            const detected = detectPeaksAndValleys(filteredSignal, timestamps);
+            peakIndices = detected.peaks;
+            valleyIndices = detected.valleys;
+            
+            // Calculate BPM from recent peaks
+            const recentPeaks = peakIndices.slice(-CONFIG.CONSISTENCY_WINDOW);
+            const bpm = calculateBPM(recentPeaks, timestamps);
+            
+            if (bpm !== null) {
+                currentBPM = bpm;
+                DOM.bpmDisplay.innerText = currentBPM;
+                stableBeatsCount++;
+                
+                // Trigger visual beat
+                triggerBeatAnimation();
+                
+                // Check state transitions
+                checkStateTransition();
+            }
+            
+            // Check for signal loss
+            const timeSinceLastBeat = Date.now() - lastPeakTime;
+            if (timeSinceLastBeat > CONFIG.SIGNAL_LOSS_TIMEOUT_MS && currentBPM > 0) {
+                DOM.statusMsg.innerText = "Señal perdida. Reajusta tu dedo.";
+                DOM.bpmDisplay.innerText = "--";
+                resetSignalBuffers();
+            }
+        }
+        
+        function checkStateTransition() {
+            if (currentState === STATE.MEASURING_INITIAL) {
+                DOM.statusMsg.innerText = `Calibrando: ${stableBeatsCount}/${CONFIG.INITIAL_CALIBRATION_BEATS} latidos`;
+                
+                if (stableBeatsCount >= CONFIG.INITIAL_CALIBRATION_BEATS) {
+                    setTimeout(() => enterState(STATE.RELAXING), 500);
+                }
+            } 
+            else if (currentState === STATE.MEASURING_UPDATE) {
+                DOM.statusMsg.innerText = `Actualizando: ${currentBPM} BPM (${stableBeatsCount}/${CONFIG.UPDATE_CALIBRATION_BEATS})`;
+                
+                if (stableBeatsCount >= CONFIG.UPDATE_CALIBRATION_BEATS) {
+                    // Update guided BPM based on new measurement
+                    updateGuidedBPM();
+                    setTimeout(() => enterState(STATE.RELAXING), 500);
+                }
+            }
+        }
+        
+        function updateGuidedBPM() {
+            // Calculate new target: reduce by 5 BPM but not below 50
+            const reduction = 5;
+            currentGuidedBPM = currentBPM;
+            targetGuidedBPM = Math.max(50, currentBPM - reduction);
+            
+            logDebug(`BPM Actualizado: ${currentBPM} → Target: ${targetGuidedBPM}`);
+        }
+
+        // ==================== UI UPDATES ====================
+        
+        function updateSignalQuality() {
+            const percentage = Math.min(100, signalQuality);
+            DOM.qualityIndicator.style.width = percentage + '%';
+            
+            let qualityLabel = '';
+            let color = '';
+            
+            if (percentage >= 70) {
+                qualityLabel = 'Excelente';
+                color = '#4CAF50';
+            } else if (percentage >= 40) {
+                qualityLabel = 'Buena';
+                color = '#FFC107';
+            } else if (percentage >= 20) {
+                qualityLabel = 'Regular';
+                color = '#FF9800';
+            } else {
+                qualityLabel = 'Pobre';
+                color = '#F44336';
+            }
+            
+            DOM.qualityIndicator.style.backgroundColor = color;
+            DOM.qualityText.innerText = `Calidad: ${qualityLabel} (${percentage}%)`;
+        }
+        
+        function drawSignalGraph() {
+            const canvas = DOM.signalCanvas;
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            signalCtx.clearRect(0, 0, width, height);
+            
+            if (currentState === STATE.RELAXING) {
+                // Don't show graph during relaxation
+                return;
+            }
+            
+            if (filteredSignal.length < 2) return;
+            
+            // Draw filtered signal
+            signalCtx.beginPath();
+            signalCtx.strokeStyle = '#ff3b30';
+            signalCtx.lineWidth = 2;
+            
+            const dataLength = filteredSignal.length;
+            const min = Math.min(...filteredSignal);
+            const max = Math.max(...filteredSignal);
+            const range = max - min || 1;
+            
+            for (let i = 0; i < dataLength; i++) {
+                const x = (i / CONFIG.HISTORY_SIZE) * width;
+                const normalized = (filteredSignal[i] - min) / range;
+                const y = height - (normalized * height);
+                
+                if (i === 0) {
+                    signalCtx.moveTo(x, y);
+                } else {
+                    signalCtx.lineTo(x, y);
+                }
+            }
+            signalCtx.stroke();
+            
+            // Draw detected peaks
+            signalCtx.fillStyle = '#4CAF50';
+            for (let peakIdx of peakIndices) {
+                if (peakIdx < dataLength) {
+                    const x = (peakIdx / CONFIG.HISTORY_SIZE) * width;
+                    const normalized = (filteredSignal[peakIdx] - min) / range;
+                    const y = height - (normalized * height);
+                    signalCtx.beginPath();
+                    signalCtx.arc(x, y, 3, 0, Math.PI * 2);
+                    signalCtx.fill();
+                }
+            }
+        }
+        
+        function triggerBeatAnimation() {
+            DOM.pulseCircle.classList.add('beating');
+            setTimeout(() => DOM.pulseCircle.classList.remove('beating'), 300);
+        }
+
+        // ==================== STATE MANAGEMENT ====================
+        
+        function enterState(newState) {
+            const prevState = currentState;
+            currentState = newState;
+            
+            logDebug(`Estado: ${prevState} → ${newState}`);
+            
+            switch (newState) {
+                case STATE.MEASURING_INITIAL:
+                    handleMeasuringInitialState();
+                    break;
+                    
+                case STATE.RELAXING:
+                    handleRelaxingState();
+                    break;
+                    
+                case STATE.MEASURING_UPDATE:
+                    handleMeasuringUpdateState();
+                    break;
+                    
+                case STATE.FINISHED:
+                    handleFinishedState();
+                    break;
+            }
+        }
+        
+        function handleMeasuringInitialState() {
+            DOM.statusMsg.innerText = "Midiendo ritmo cardíaco inicial...";
+            DOM.bpmDisplay.innerText = "--";
+            DOM.pulseCircle.classList.remove('relax-mode');
+            
+            // Remove breathing animation if exists
+            const breatheCircle = DOM.pulseCircle.querySelector('.relax-circle');
+            if (breatheCircle) breatheCircle.remove();
+            
+            startCamera();
+        }
+        
+        function handleRelaxingState() {
+            stopCamera();
+            
+            DOM.statusMsg.innerText = "Relájate... sigue el ritmo";
+            DOM.pulseCircle.classList.add('relax-mode');
+            
+            // Add breathing animation
+            if (!DOM.pulseCircle.querySelector('.relax-circle')) {
+                const breatheCircle = document.createElement('div');
+                breatheCircle.className = 'relax-circle breathing';
+                DOM.pulseCircle.appendChild(breatheCircle);
+            }
+            
+            // Initialize audio guidance
+            initializeAudioGuidance();
+            
+            // Schedule next measurement
+            nextCalibrationTime = Date.now() + CONFIG.RELAX_DURATION_MS;
+            
+            setTimeout(() => {
+                if (currentState === STATE.RELAXING && sessionTimeLeft > 10) {
+                    enterState(STATE.MEASURING_UPDATE);
+                }
+            }, CONFIG.RELAX_DURATION_MS);
+        }
+        
+        function handleMeasuringUpdateState() {
+            DOM.statusMsg.innerText = "Re-calibrando...";
+            DOM.pulseCircle.classList.remove('relax-mode');
+            
+            const breatheCircle = DOM.pulseCircle.querySelector('.relax-circle');
+            if (breatheCircle) breatheCircle.remove();
+            
+            resetSignalBuffers();
+            startCamera();
+        }
+        
+        function handleFinishedState() {
+            stopCamera();
+            stopAudioGuidance();
+            
+            DOM.statusMsg.innerText = "¡Sesión completada! Namasté 🙏";
+            DOM.bpmDisplay.innerText = "✓";
+            
+            if (sessionIntervalId) {
+                clearInterval(sessionIntervalId);
+                sessionIntervalId = null;
+            }
+        }
+
+        // ==================== AUDIO GUIDANCE ====================
+        
+        function initializeAudioGuidance() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            relaxPhaseStartTime = audioContext.currentTime;
+            nextNoteTime = audioContext.currentTime + 0.1;
+            
+            scheduleNextBeep();
+        }
+        
+        function scheduleNextBeep() {
+            if (currentState === STATE.FINISHED) {
+                stopAudioGuidance();
+                return;
+            }
+            
+            if (currentState !== STATE.RELAXING) {
+                return;
+            }
+            
+            // Calculate current BPM based on gradual reduction
+            const elapsed = audioContext.currentTime - relaxPhaseStartTime;
+            const duration = CONFIG.RELAX_DURATION_MS / 1000; // Convert to seconds
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Linear interpolation from current to target
+            const playBPM = currentGuidedBPM - (progress * (currentGuidedBPM - targetGuidedBPM));
+            const clampedBPM = Math.max(CONFIG.MIN_BPM, Math.min(CONFIG.MAX_BPM, playBPM));
+            
+            // Play tone
+            playTone(nextNoteTime, 400); // 400 Hz tone
+            
+            // Update display
+            DOM.bpmDisplay.innerText = Math.round(clampedBPM);
+            
+            // Trigger visual beat
+            const delay = (nextNoteTime - audioContext.currentTime) * 1000;
+            setTimeout(() => triggerBeatAnimation(), Math.max(0, delay));
+            
+            // Calculate next beat time
+            const secondsPerBeat = 60 / clampedBPM;
+            nextNoteTime += secondsPerBeat;
+            
+            // Schedule next
+            const scheduleDelay = (nextNoteTime - audioContext.currentTime) * 1000 - 50;
+            audioSchedulerId = setTimeout(scheduleNextBeep, Math.max(10, scheduleDelay));
+        }
+        
+        function playTone(time, frequency) {
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sine';
+                
+                // Envelope: attack - sustain - release
+                gainNode.gain.setValueAtTime(0, time);
+                gainNode.gain.linearRampToValueAtTime(0.3, time + 0.05);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.start(time);
+                oscillator.stop(time + 0.5);
+            } catch (error) {
+                console.error('Error reproduciendo tono:', error);
+            }
+        }
+        
+        function stopAudioGuidance() {
+            if (audioSchedulerId) {
+                clearTimeout(audioSchedulerId);
+                audioSchedulerId = null;
+            }
+        }
+
+        // ==================== SESSION TIMER ====================
+        
+        function startSessionTimer() {
+            updateTimerDisplay(sessionTimeLeft);
+            
+            sessionIntervalId = setInterval(() => {
+                sessionTimeLeft--;
+                updateTimerDisplay(sessionTimeLeft);
+                
+                if (sessionTimeLeft <= 0) {
+                    enterState(STATE.FINISHED);
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay(seconds) {
+            const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            DOM.sessionTimer.innerText = `${minutes}:${secs}`;
+        }
+
+        // ==================== DEBUG UTILITIES ====================
+        
+        function logDebug(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        function updateDebugPanel() {
+            if (!debugEnabled) return;
+            
+            const info = `
+                <div>Estado: ${currentState}</div>
+                <div>BPM: ${currentBPM}</div>
+                <div>Calidad Señal: ${signalQuality}%</div>
+                <div>Latidos Detectados: ${stableBeatsCount}</div>
+                <div>Buffer Size: ${rawSignal.length}/${CONFIG.HISTORY_SIZE}</div>
+                <div>Picos Detectados: ${peakIndices.length}</div>
+                <div>Intervalos RR: ${rrIntervals.length}</div>
+                <div>Último Latido: ${Math.round((Date.now() - lastPeakTime) / 100) / 10}s</div>
+            `;
+            
+            DOM.debugInfo.innerHTML = info;
+            
+            // Draw raw vs filtered signal
+            drawDebugSignals();
+        }
+        
+        function drawDebugSignals() {
+            const canvas = DOM.debugCanvas;
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            debugCtx.clearRect(0, 0, width, height);
+            
+            if (rawSignal.length < 2) return;
+            
+            // Draw raw signal (gray)
+            drawSignalOnDebugCanvas(rawSignal, '#888', 0, height / 2);
+            
+            // Draw filtered signal (blue)
+            drawSignalOnDebugCanvas(filteredSignal, '#30d1ff', height / 2, height / 2);
+        }
+        
+        function drawSignalOnDebugCanvas(signal, color, offsetY, plotHeight) {
+            if (signal.length < 2) return;
+            
+            const width = DOM.debugCanvas.width;
+            const min = Math.min(...signal);
+            const max = Math.max(...signal);
+            const range = max - min || 1;
+            
+            debugCtx.beginPath();
+            debugCtx.strokeStyle = color;
+            debugCtx.lineWidth = 1;
+            
+            for (let i = 0; i < signal.length; i++) {
+                const x = (i / CONFIG.HISTORY_SIZE) * width;
+                const normalized = (signal[i] - min) / range;
+                const y = offsetY + plotHeight - (normalized * plotHeight);
+                
+                if (i === 0) {
+                    debugCtx.moveTo(x, y);
+                } else {
+                    debugCtx.lineTo(x, y);
+                }
+            }
+            debugCtx.stroke();
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        
+        DOM.timeSlider.addEventListener('input', (e) => {
+            DOM.timeDisplay.innerText = e.target.value;
+        });
+        
+        DOM.debugMode.addEventListener('change', (e) => {
+            debugEnabled = e.target.checked;
+            if (debugEnabled) {
+                DOM.debugPanel.classList.remove('hidden');
+            } else {
+                DOM.debugPanel.classList.add('hidden');
+            }
+        });
+        
+        DOM.startBtn.addEventListener('click', async () => {
+            try {
+                // Initialize audio context (requires user interaction)
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+            } catch (error) {
+                console.error('Error inicializando audio:', error);
+            }
+            
+            // Set session duration
+            sessionTotalSeconds = parseInt(DOM.timeSlider.value) * 60;
+            sessionTimeLeft = sessionTotalSeconds;
+            
+            // Switch screens
+            DOM.startScreen.classList.add('hidden');
+            DOM.appInterface.classList.remove('hidden');
+            
+            // Start session
+            startSessionTimer();
+            enterState(STATE.MEASURING_INITIAL);
+        });
+
+        // ==================== INITIALIZATION ====================
+        
+        logDebug('App inicializada');
+        
+    </script>
+</body>
+
+</html>

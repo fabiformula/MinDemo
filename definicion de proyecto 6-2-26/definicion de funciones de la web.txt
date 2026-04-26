@@ -1,0 +1,117 @@
+Objetivo del Proyecto
+Desarrollar una plataforma web progresiva (PWA) de bienestar mental y neuronal que combine:
+
+Detección biométrica (PPG vía cámara + análisis de audio)
+IA generativa para experiencias personalizadas
+Sincronización grupal en tiempo real
+Módulos especializados: Meditación, Estrés, Sueño, Rendimiento, Sincronización Grupal
+Sistema de monetización completo
+Biblioteca de contenidos
+
+Objetivo: Competir con Calm, Headspace y superar mediante sincronización grupal con IA.
+Diferenciador único: Sistema de sincronización neuronal colectiva con narrativa IA adaptativa para equipos remotos.
+1. Especificaciones Generales
+
+
+Público objetivo (B2C, B2B, Creadores)
+Diferenciador vs competencia
+Individuos (B2C):
+Usuarios que buscan meditación, mejor sueño, reducción de estrés
+Edad: 25-55 años
+Dispuestos a pagar $2.00-$4.00/mes
+Empresas (B2B):
+Equipos remotos 10-50 personas
+Startups tech, consultoras, agencias creativas
+Budget: $99-$499/mes por equipo
+Creadores de contenido:
+Coaches, terapeutas, instructores de yoga
+Quieren ofrecer sesiones grupales online
+Modelo Patreon integrado
+
+2. Stack Tecnológico Completo
+
+Frontend: Next.js 14 + React + Tailwind
+Backend: tRPC + PostgreSQL + Prisma
+Real-time: Socket.io
+IA: Anthropic Claude + OpenAI* otras
+Pagos: Stripe + Patreon
+
+3. Los 7 Módulos Detallados
+🧘 Meditación:
+
+6 tipos de meditación
+Detección biométrica en tiempo real
+Audio adaptativo con binaurales
+Gamificación y badges
+
+😰 Reducción de Estrés:
+
+5 protocolos específicos
+Coherencia cardíaca
+EMDR auditivo bilateral
+Intervenciones IA automáticas
+
+😴 Sueño Profundo:
+
+Detección de 5 fases (Audio + PPG)
+Afirmaciones subliminales en Delta
+Inducción sueños lúcidos en REM
+Grabación y análisis completo
+
+🚀 Rendimiento:
+
+4 modos: Deep Work, Creative Flow, High Energy, Learning
+Detección de estado de flow
+Integración con calendario
+Pomodoro inteligente
+
+👥 Sincronización Grupal (EL DIFERENCIADOR):
+
+6 fases con narrativa IA adaptativa
+Coherencia grupal en tiempo real
+Theta → Alpha → Gamma progression
+Post-sesión insights automáticos
+
+💳 Pagos:
+
+4 tiers: Free, Pro ($3.99), Teams ($99), Enterprise (custom)
+Patreon para creadores
+Stripe completo con webhooks
+
+📚 Biblioteca:
+
+Artículos, eBooks, Audio, Video, Cursos
+Búsqueda semántica
+Recomendaciones IA
+
+4. Diseño UI/UX Completo
+
+Design system con colores, tipografía
+Componentes clave detallados
+Mobile-first responsive
+Dark theme por defecto
+
+5. Base de Datos
+
+Schema SQL completo (15+ tablas)
+Índices optimizados
+Relaciones claramente definidas
+
+6. Seguridad & Privacidad
+
+Encriptación AES-256
+GDPR compliance
+NextAuth.js configuración
+Rate limiting
+
+7. Plan de Implementación
+
+Fase 1 : MVP con 3 módulos + pagos
+Fase 2 : Group Sync completo
+Fase 3: Features avanzadas
+
+8. Presupuestos
+
+Desarrollo: $0 
+Operacional: $200/mes según escala
+

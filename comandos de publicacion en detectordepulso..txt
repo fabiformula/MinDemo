@@ -1,0 +1,8 @@
+CMD:
+cd "C:\Carpeta Comun\busines\MinDeploy\mindDeploy\out"
+
+git add .
+
+git commit -m "descripción del ultimo cambio hecho".
+
+git push origin master

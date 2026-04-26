@@ -1,0 +1,324 @@
+stack tecnologico.
+- React + Supabase ✓
+- rPPG funciona pero necesita pulido ✓
+- Micrófono indispensable (para detectar respiración por audio, supongo) ✓
+- Mapas = para mostrar el mapa mundial de "quién respira como vos" en el Discovery ✓
+- Tiempo real relajado, no necesitamos latencia de milisegundos ✓
+- Web mobile-first, laptop secundario ✓
+- Empezamos con funcionalidades 1 y 2 ✓
+- MinDeploy nombre interno ✓
+- MVP = conseguir inversión ✓
+
+
+# PROMPT PARA ANTIGRAVITY - MINDEPLOY MVP
+
+## CONTEXTO DEL PROYECTO
+
+MinDeploy es una aplicación web que permite a las personas experimentar las "7 Leyes de la Realidad" a través de sincronización respiratoria. No es una app de meditación genérica - es el único sistema que integra teoría profunda (libro) con experiencia somática (app).
+
+**Stack actual:**
+- Frontend: React
+- Backend: Supabase (auth ya implementado)
+- Deploy: Netlify
+- Detección biométrica: rPPG (cámara) + Audio (micrófono)
+
+**Objetivo del MVP:** 
+Construir 2 funcionalidades core que demuestren el valor único de la plataforma para conseguir inversión.
+
+---
+
+## FASE 1: FUNCIONALIDAD 1 - DISCOVERY ("¿Quién respira como vos ahora?")
+
+### Descripción de la Funcionalidad
+
+Cuando un usuario abre la app, coloca su dedo sobre la cámara (o su rostro frente a la cámara) durante 30 segundos. La app detecta su patrón respiratorio usando:
+1. rPPG (Remote Photoplethysmography) para ritmo cardíaco
+2. Audio del micrófono para detectar respiración
+
+Una vez detectado el patrón, la app muestra un mapa mundial con puntos que representan otros usuarios que están respirando en patrones similares EN ESTE MOMENTO. No es histórico - es tiempo real.
+
+El usuario puede:
+- Ver cuántas personas están respirando similar a él/ella ahora
+- Ver la ubicación geográfica aproximada (ciudad/país, no dirección exacta)
+- Ver qué tan similar es cada patrón (porcentaje de sincronía: 75%, 82%, 91%, etc.)
+- Opcionalmente, entrar en "sesión silenciosa" con alguien: ambos ven sus patrones superpuestos durante 3-5 minutos
+
+### Especificaciones Técnicas
+
+**Componentes a construir:**
+
+1. **BreathDetector.jsx**
+   - Accede a cámara y micrófono del dispositivo
+   - Implementa algoritmo rPPG básico (ya existente pero necesita pulirse):
+     - Captura video a 30fps
+     - Extrae valores RGB del dedo/rostro
+     - Usa FFT para detectar frecuencia cardíaca
+   - Implementa detección de respiración por audio:
+     - Analiza amplitud del micrófono
+     - Detecta picos correspondientes a inhalación/exhalación
+     - Calcula respiraciones por minuto
+   - Visualización en tiempo real: círculo que se expande/contrae al ritmo detectado
+   - Guarda el patrón en estado local para comparación
+
+2. **BreathPattern.js** (modelo de datos)
+   ```javascript
+   {
+     userId: string,
+     timestamp: timestamp,
+     heartRate: number, // bpm
+     breathRate: number, // respiraciones por minuto
+     variability: number, // variabilidad del patrón (más alto = menos estable)
+     location: { lat, lng, city, country }, // aproximado, no exacto
+     isActive: boolean // true si el usuario está online ahora
+   }
+   ```
+
+3. **DiscoveryMap.jsx**
+   - Usa Leaflet (gratis, no Google Maps para MVP)
+   - Muestra mapa mundial minimalista
+   - Puntos animados que pulsan al ritmo de cada usuario
+   - Al hacer click en un punto:
+     - Muestra tarjeta con: ciudad, país, % de similitud con tu patrón
+     - Botón "Respirar juntos" (si está disponible)
+
+4. **PatternMatcher.js** (algoritmo de matching)
+   - Compara tu patrón con patrones activos en Supabase
+   - Calcula similitud usando:
+     ```
+     similitud = 100 - (
+       abs(tuHeartRate - otroHeartRate) * 2 +
+       abs(tuBreathRate - otroBreathRate) * 5 +
+       abs(tuVariability - otroVariability) * 1
+     )
+     ```
+   - Retorna array de usuarios ordenados por similitud descendente
+   - Incluye solo usuarios activos en los últimos 5 minutos
+
+5. **Supabase Schema:**
+   ```sql
+   -- Tabla de patrones activos
+   CREATE TABLE active_patterns (
+     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+     user_id UUID REFERENCES auth.users(id),
+     heart_rate NUMERIC,
+     breath_rate NUMERIC,
+     variability NUMERIC,
+     location JSONB, -- {lat, lng, city, country}
+     created_at TIMESTAMP DEFAULT NOW(),
+     expires_at TIMESTAMP DEFAULT NOW() + INTERVAL '5 minutes'
+   );
+   
+   -- Index para búsquedas rápidas
+   CREATE INDEX idx_active_patterns_expires ON active_patterns(expires_at);
+   
+   -- Función que limpia patrones expirados automáticamente
+   CREATE OR REPLACE FUNCTION cleanup_expired_patterns()
+   RETURNS void AS $$
+   BEGIN
+     DELETE FROM active_patterns WHERE expires_at < NOW();
+   END;
+   $$ LANGUAGE plpgsql;
+   ```
+
+6. **Flujo UX completo:**
+   ```
+   1. Usuario llega a /discovery
+   2. Pantalla: "Coloca tu dedo sobre la cámara" + visualización del círculo pulsante
+   3. Después de 30 segundos: "Analizando tu patrón..." (spinner)
+   4. Transición a mapa mundial con animación
+   5. Puntos aparecen gradualmente (efecto de "descubrimiento")
+   6. Contador arriba: "23 personas respirando como vos ahora"
+   7. Usuario puede explorar el mapa, hacer zoom, click en puntos
+   ```
+
+**Consideraciones importantes:**
+- La detección rPPG es sensible a luz. Mostrar mensaje si la luz es muy baja/alta
+- Pedir permisos de cámara/micrófono con mensajes claros
+- Si el usuario rechaza permisos, mostrar fallback: "Sin acceso a cámara, no podemos detectar tu patrón"
+- Privacidad: guardar solo ciudad/país, no GPS exacto
+- Performance: limitar actualización del mapa a cada 10 segundos, no en tiempo real puro
+
+---
+
+## FASE 2: FUNCIONALIDAD 2 - SYNC DE PAREJA ("Respirá juntos")
+
+### Descripción de la Funcionalidad
+
+Dos personas (generalmente una pareja, pero puede ser cualquier dupla) abren la app simultáneamente. Cada uno ve:
+1. Su propio patrón respiratorio en tiempo real (círculo azul que pulsa)
+2. El patrón de la otra persona superpuesto (círculo rosa/naranja que pulsa)
+3. Métrica de sincronía: porcentaje que indica qué tan alineados están
+
+El objetivo es simple: respirar juntos. Cuando ambos patrones se alinean, los círculos se superponen perfectamente y la sincronía sube a 80-95%.
+
+Después de la sesión (3-10 minutos), la app muestra:
+- Gráfico de sincronía a lo largo del tiempo
+- Momentos de máxima sincronización
+- Estadísticas: tiempo total, sincronía promedio, mejor momento
+- Historial: todas las sesiones previas con esa pareja
+
+### Especificaciones Técnicas
+
+**Componentes a construir:**
+
+1. **PairInvite.jsx**
+   - Usuario crea una "sesión de pareja"
+   - Genera código único de 6 caracteres (ej: "XK49L2")
+   - Muestra código grande en pantalla + botón "Copiar link"
+   - Link: `mindeploy.app/sync/XK49L2`
+   - Cuando la otra persona entra con ese código, ambos se conectan
+
+2. **SyncSession.jsx** (componente principal)
+   - Muestra dos círculos superpuestos:
+     - Uno representa al usuario 1 (color fijo: azul)
+     - Otro representa al usuario 2 (color fijo: coral)
+   - Ambos círculos pulsan según el patrón respiratorio de cada persona
+   - Centro de la pantalla: porcentaje de sincronía grande (ej: "73%")
+   - Abajo: timer de sesión (cuenta hacia arriba desde 00:00)
+   - Botón "Terminar sesión" siempre visible
+
+3. **SyncCalculator.js**
+   - Calcula sincronía en tiempo real:
+     ```javascript
+     // Ejemplo simplificado
+     function calculateSync(pattern1, pattern2) {
+       const breathDiff = Math.abs(pattern1.breathRate - pattern2.breathRate);
+       const phaseDiff = calculatePhaseDifference(pattern1, pattern2); // qué tan alineados están en el ciclo
+       
+       const sync = 100 - (breathDiff * 10) - (phaseDiff * 50);
+       return Math.max(0, Math.min(100, sync));
+     }
+     ```
+   - Se ejecuta cada 2 segundos
+   - Guarda historial de sincronía para el gráfico post-sesión
+
+4. **SessionHistory.jsx**
+   - Muestra lista de sesiones pasadas con esta pareja
+   - Cada item muestra:
+     - Fecha y hora
+     - Duración
+     - Sincronía promedio
+     - Mini-gráfico de la evolución de sincronía
+   - Click en una sesión: expande detalles completos
+
+5. **Supabase Schema:**
+   ```sql
+   -- Tabla de sesiones de pareja
+   CREATE TABLE sync_sessions (
+     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+     session_code VARCHAR(6) UNIQUE NOT NULL,
+     user1_id UUID REFERENCES auth.users(id),
+     user2_id UUID REFERENCES auth.users(id),
+     created_at TIMESTAMP DEFAULT NOW(),
+     started_at TIMESTAMP,
+     ended_at TIMESTAMP,
+     duration_seconds INTEGER,
+     avg_sync_percentage NUMERIC,
+     sync_data JSONB -- array de {timestamp, user1_pattern, user2_pattern, sync_percentage}
+   );
+   
+   -- Tabla para datos en tiempo real durante la sesión
+   CREATE TABLE sync_realtime (
+     session_id UUID REFERENCES sync_sessions(id),
+     user_id UUID REFERENCES auth.users(id),
+     timestamp TIMESTAMP DEFAULT NOW(),
+     breath_rate NUMERIC,
+     heart_rate NUMERIC,
+     PRIMARY KEY (session_id, user_id, timestamp)
+   );
+   ```
+
+6. **Supabase Realtime:**
+   - Usar Supabase Realtime para sincronizar patrones entre usuarios
+   - Cada usuario publica su patrón cada 2 segundos
+   - Cada usuario se suscribe a los patrones del otro
+   - Latencia aceptable: 0.5-2 segundos (no crítico para respiración)
+
+7. **Flujo UX completo:**
+   ```
+   Usuario 1:
+   1. Click en "Respirar con alguien"
+   2. Pantalla: "Compartí este código con tu pareja: XK49L2" + botón copiar
+   3. Esperando que la otra persona se una... (spinner)
+   4. Cuando usuario 2 se une: "¡Conectados! Comenzando en 3... 2... 1..."
+   5. Inicia detección de ambos patrones
+   6. Pantalla de sincronización con círculos pulsantes
+   7. Cualquiera puede terminar sesión
+   8. Pantalla final con estadísticas
+   
+   Usuario 2:
+   1. Recibe link o ingresa código
+   2. Pantalla: "Conectando con tu pareja..."
+   3. Se une automáticamente a la sesión
+   4. Mismo flujo que usuario 1 desde paso 4
+   ```
+
+**Consideraciones importantes:**
+- Si uno de los usuarios pierde conexión: mostrar mensaje "Esperando reconexión..." por 30 segundos
+- Si reconexión falla: terminar sesión automáticamente
+- Guardar progreso incluso si la sesión se interrumpe
+- Permitir "pausar" la sesión (ambos deben confirmar)
+- Límite de sesión: 30 minutos máximo (para MVP)
+
+---
+
+## INSTRUCCIONES PARA ANTIGRAVITY
+
+Construye esta app en etapas:
+
+**Etapa 1:** Setup del proyecto
+- Clonar repo de detectordepulso.netlify.app
+- Mantener la autenticación actual
+- Añadir routing: `/discovery` y `/sync`
+- Instalar dependencias: react-leaflet, recharts (para gráficos)
+
+**Etapa 2:** Funcionalidad 1 (Discovery)
+- Componente BreathDetector con detección rPPG y audio
+- Schema de Supabase para active_patterns
+- DiscoveryMap con Leaflet
+- Algoritmo de matching de patrones
+
+**Etapa 3:** Funcionalidad 2 (Sync de Pareja)
+- Sistema de códigos de sesión
+- Componente SyncSession con círculos
+- Supabase Realtime para sincronización
+- Cálculo de sincronía en tiempo real
+- Pantalla de resultados post-sesión
+
+**Etapa 4:** Pulido
+- Animaciones suaves
+- Mensajes de error claros
+- Loading states
+- Responsive design para mobile
+- Privacidad: no guardar datos biométricos más de 24 horas
+
+---
+
+## DISEÑO UI/UX MINIMALISTA
+
+**Paleta de colores:**
+- Fondo: #0a0e27 (azul oscuro casi negro)
+- Acento 1: #00d9ff (cyan brillante) - para usuario principal
+- Acento 2: #ff6b9d (coral/rosa) - para pareja
+- Texto: #e8f4f8 (blanco azulado)
+- Secundario: #1e2a47 (azul gris oscuro)
+
+**Tipografía:**
+- Headings: Inter Bold
+- Body: Inter Regular
+- Monospace (para códigos): JetBrains Mono
+
+**Visualizaciones:**
+- Círculos respiratorios: borde grueso (4px), sin relleno, con blur sutil
+- Animaciones: ease-in-out, 600ms de duración
+- Mapa: estilo oscuro sin etiquetas excesivas
+
+---
+
+## PRIORIDADES TÉCNICAS
+
+1. **Funcionalidad sobre belleza:** El rPPG debe funcionar bien antes de hacer animaciones bonitas
+2. **Mobile-first:** Todo debe funcionar perfecto en teléfono, desktop es secundario
+3. **Privacidad:** No guardar ubicación exacta, solo ciudad/país
+4. **Performance:** La app debe funcionar en teléfonos de gama media (no solo flagship)
+5. **Costos:** Usar servicios gratuitos donde sea posible (Leaflet, no Google Maps; Supabase free tier suficiente para MVP)

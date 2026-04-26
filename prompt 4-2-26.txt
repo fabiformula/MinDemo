@@ -1,0 +1,2384 @@
+# 🧠 PROYECTO: PLATAFORMA DE BIENESTAR NEURONAL CON IA
+
+## PROMPT COMPLETO PARA DESARROLLADORES
+
+---
+
+# 📋 ESPECIFICACIONES GENERALES
+
+## Descripción del Proyecto
+
+Desarrollar una **plataforma web progresiva (PWA)** de bienestar mental y neuronal que combine:
+- Detección biométrica (PPG vía cámara + análisis de audio)
+- IA generativa para experiencias personalizadas
+- Sincronización grupal en tiempo real
+- Módulos especializados: Meditación, Estrés, Sueño, Rendimiento, Sincronización Grupal
+- Sistema de monetización completo
+- Biblioteca de contenidos
+
+**Objetivo**: Competir con Calm, Headspace y superar mediante sincronización grupal con IA.
+
+**Diferenciador único**: Sistema de sincronización neuronal colectiva con narrativa IA adaptativa para equipos remotos.
+
+---
+
+# 🎯 PÚBLICO OBJETIVO
+
+1. **Individuos** (B2C): 
+   - Usuarios que buscan meditación, mejor sueño, reducción de estrés
+   - Edad: 25-55 años
+   - Dispuestos a pagar $9.99-$14.99/mes
+
+2. **Empresas** (B2B):
+   - Equipos remotos 10-50 personas
+   - Startups tech, consultoras, agencias creativas
+   - Budget: $99-$499/mes por equipo
+
+3. **Creadores de contenido**:
+   - Coaches, terapeutas, instructores de yoga
+   - Quieren ofrecer sesiones grupales online
+   - Modelo Patreon integrado
+
+---
+
+# 📱 REQUISITOS TÉCNICOS
+
+## Stack Tecnológico Recomendado
+
+### Frontend
+```
+- Framework: React + Next.js 14+ (App Router)
+- UI Library: shadcn/ui + Tailwind CSS
+- State: Zustand o Jotai
+- Animaciones: Framer Motion
+- PWA: next-pwa
+- Audio: Tone.js
+- Video/PPG: MediaDevices API nativa
+- Charts: Recharts
+- Forms: React Hook Form + Zod
+```
+
+### Backend
+```
+- Runtime: Node.js 20+ con TypeScript
+- Framework: Next.js API Routes + tRPC (type-safe)
+- Database: PostgreSQL 15+ (Supabase o Neon)
+- Real-time: Socket.io o Supabase Realtime
+- Auth: NextAuth.js v5 (Google, Apple, Email)
+- File Storage: S3 compatible (Cloudflare R2, Supabase Storage)
+- Email: Resend o SendGrid
+- Analytics: Posthog o Mixpanel
+```
+
+### IA/ML
+```
+- LLM: Anthropic Claude 3.5 Sonnet (API)
+- TTS: ElevenLabs o Google Cloud TTS
+- Vector DB: Pinecone o Supabase Vector
+- Audio Analysis: Web Audio API + TensorFlow.js (opcional)
+```
+
+### Pagos
+```
+- Stripe (subscripciones, one-time)
+- Patreon API (creadores)
+- PayPal (alternativa)
+```
+
+### DevOps
+```
+- Hosting: Vercel (frontend + API)
+- CDN: Cloudflare
+- Monitoring: Sentry + Vercel Analytics
+- CI/CD: GitHub Actions
+```
+
+## Compatibilidad de Dispositivos
+
+### Prioridad 1 (Must Work):
+- ✅ iOS Safari 14.3+ (iPhone 11+)
+- ✅ Chrome Android 87+ (Android 10+)
+
+### Prioridad 2 (Should Work):
+- ✅ Desktop Chrome/Edge (limited features)
+- ✅ Firefox Android
+
+### Features por Dispositivo:
+```
+PPG (cámara + flash):
+  - iOS Safari: ✅ Full support
+  - Chrome Android: ✅ Full support
+  - Desktop: ❌ Flash no disponible (degradar gracefully)
+
+Audio Recording:
+  - Todos: ✅ MediaRecorder API
+
+Notificaciones Push:
+  - iOS: ⚠️ Limitado (PWA con Add to Home Screen)
+  - Android: ✅ Full support
+```
+
+---
+
+# 🏗️ ARQUITECTURA DE LA APLICACIÓN
+
+## Estructura de Carpetas
+
+```
+/app
+  /(auth)
+    /login
+    /signup
+    /reset-password
+  /(dashboard)
+    /home
+    /meditation
+    /stress
+    /sleep
+    /performance
+    /group-sync
+    /library
+    /settings
+    /subscription
+  /api
+    /auth
+    /biometric
+    /sessions
+    /ai
+    /payments
+    /library
+
+/components
+  /ui (shadcn components)
+  /modules
+    /ppg-monitor
+    /audio-analyzer
+    /meditation-engine
+    /stress-reducer
+    /sleep-tracker
+    /performance-optimizer
+    /group-sync-client
+  /layouts
+  /shared
+
+/lib
+  /db (Prisma client)
+  /ai (Claude API wrapper)
+  /audio (Tone.js utilities)
+  /biometric (PPG + Audio algorithms)
+  /utils
+
+/public
+  /audio
+    /ambient
+    /binaurals
+    /affirmations
+  /images
+  /icons
+
+/prisma
+  schema.prisma
+  /migrations
+
+/types
+  index.ts (TypeScript definitions)
+```
+
+---
+
+# 🧩 MÓDULOS A DESARROLLAR
+
+## 🧘 MÓDULO 1: MEDITACIÓN
+
+### Descripción
+Sesiones guiadas de meditación con detección de estado mediante PPG y ajuste dinámico de contenido.
+
+### Features Principales
+
+1. **Tipos de Meditación**:
+   - Mindfulness (atención plena)
+   - Respiración (box breathing, 4-7-8)
+   - Body scan (escaneo corporal)
+   - Visualización guiada
+   - Meditación transcendental
+   - Loving-kindness (metta)
+
+2. **Duración Configurable**:
+   - Express: 3-5 min
+   - Estándar: 10-15 min
+   - Profunda: 20-30 min
+   - Custom: usuario define
+
+3. **Detección Biométrica**:
+   - Monitor BPM en tiempo real
+   - Calcular coherencia cardíaca
+   - Objetivo: Alcanzar coherencia >70%
+   - Feedback visual cuando se alcanza
+
+4. **Audio Adaptativo**:
+   - Voz guía (TTS personalizable)
+   - Música ambiente (selección de 10+ tracks)
+   - Binaurales Alpha (8-12Hz) para foco
+   - Volumen auto-ajustable según fase
+
+5. **Gamificación**:
+   - Streak counter (días consecutivos)
+   - Badges por hitos (7 días, 30 días, 100 sesiones)
+   - Tiempo total meditado
+   - "Coherencia promedio" score
+
+6. **Visualización**:
+   - Círculo de respiración animado
+   - Onda de coherencia cardíaca en vivo
+   - Partículas ambient que reaccionan a BPM
+
+### UI/UX
+
+```
+[Header: Logo, Timer, Settings]
+
+[Centro de pantalla]
+  - Círculo grande animado (respira)
+  - BPM display central
+  - Barra de coherencia debajo
+
+[Bottom]
+  - Play/Pause
+  - Skip guide
+  - Volumen música/voz
+  - Terminar sesión
+
+[Post-sesión]
+  - Resumen: Duración, BPM avg, Coherencia max
+  - "Cómo te sientes?" (1-5 stars)
+  - Compartir en redes
+  - Siguiente sesión sugerida
+```
+
+### Endpoints API Necesarios
+
+```typescript
+POST /api/meditation/sessions/start
+  Body: { type, duration, userId }
+  Response: { sessionId, initialBPM }
+
+POST /api/meditation/sessions/:id/biometric
+  Body: { bpm, hrv, timestamp }
+  Response: { phase, audioAdjustments }
+
+POST /api/meditation/sessions/:id/complete
+  Body: { metrics, rating }
+  Response: { summary, badges, nextSuggestion }
+
+GET /api/meditation/progress/:userId
+  Response: { streak, totalMinutes, avgCoherence, badges }
+```
+
+---
+
+## 😰 MÓDULO 2: REDUCCIÓN DE ESTRÉS
+
+### Descripción
+Sesiones cortas e intensivas para reducir estrés agudo mediante técnicas de respiración, coherencia cardíaca y estímulos EMDR.
+
+### Features Principales
+
+1. **Protocolos de Estrés**:
+   - Quick Relief (3 min - emergencia)
+   - Anxiety Reset (7 min)
+   - Panic Recovery (10 min con EMDR)
+   - Work Break (5 min - entre reuniones)
+   - Pre-sleep Calm (15 min)
+
+2. **Detección de Nivel de Estrés**:
+   - Baseline BPM al inicio
+   - Calcular HRV (RMSSD, SDNN)
+   - Score de estrés (0-100):
+     ```
+     Estrés = 100 - HRV_coherence
+     Bajo: <30
+     Moderado: 30-60
+     Alto: 60-85
+     Severo: >85
+     ```
+
+3. **Técnicas Implementadas**:
+   
+   **A. Respiración Guiada**:
+   - Box Breathing (4-4-4-4)
+   - 4-7-8 Technique
+   - Resonant Breathing (5.5 breaths/min)
+   - Guía visual + conteo audio
+   
+   **B. Coherencia Cardíaca**:
+   - Objetivo: Sincronizar respiración con BPM
+   - Target: 6 respiraciones/min = coherencia óptima
+   - Feedback inmediato visual
+   
+   **C. EMDR Auditivo** (opcional):
+   - Estimulación bilateral L/R
+   - Beat frequency 4Hz (Theta)
+   - Para procesar trauma/ansiedad
+   
+   **D. Grounding 5-4-3-2-1**:
+   - Guía interactiva
+   - Input usuario (texto/voz)
+
+4. **Visualización de Progreso**:
+   - Gráfico BPM en tiempo real
+   - Barra de "Calma" que sube al mejorar HRV
+   - Confeti cuando alcanza objetivo
+
+5. **Intervenciones IA**:
+   - Si estrés no baja en 3 min → Cambiar técnica
+   - Si aumenta → Sugerir pausa o contactar ayuda profesional
+   - Mensajes de ánimo personalizados
+
+### UI/UX
+
+```
+[Pre-sesión]
+  "¿Cómo te sientes?"
+  [Muy estresado] [Moderado] [Poco]
+  
+  "¿Qué te causó estrés?"
+  [Trabajo] [Relaciones] [Salud] [Otro]
+
+[Durante sesión]
+  [Arriba]
+    Nivel de Estrés: 78 → 52 ↓
+    [█████████░░] Progreso
+  
+  [Centro]
+    [Guía respiración visual animada]
+    "Inhala... 1... 2... 3... 4"
+  
+  [Abajo]
+    BPM: 82 → 68
+    HRV: Mejorando ↑
+
+[Post-sesión]
+  "¡Estrés reducido en 34%!"
+  Antes: 78 | Después: 52
+  
+  [Recomienda]
+  "Para mejores resultados, practica 2x al día"
+  
+  [Botón] Agendar recordatorio
+```
+
+### Endpoints API
+
+```typescript
+POST /api/stress/assess
+  Body: { userId, selfReported, triggers }
+  Response: { stressLevel, recommendedProtocol }
+
+POST /api/stress/sessions/:id/intervene
+  Body: { currentMetrics, timeElapsed }
+  Response: { action: 'continue' | 'switch_technique' | 'alert' }
+
+GET /api/stress/trends/:userId
+  Query: { period: 'week' | 'month' }
+  Response: { dailyScores[], triggers[], improvements }
+```
+
+---
+
+## 😴 MÓDULO 3: SUEÑO PROFUNDO
+
+### Descripción
+Análisis de fases de sueño mediante audio (respiración) y PPG, con afirmaciones subliminales en sueño profundo e inducción de sueños lúcidos en REM.
+
+### Features Principales
+
+1. **Preparación para Dormir**:
+   - Rutina pre-sueño guiada (15-30 min)
+   - Técnicas de wind-down:
+     - Progressive muscle relaxation
+     - Visualización (lugar tranquilo)
+     - Gratitude journaling (voice-to-text)
+   - Música binaural Delta (0.5-4Hz)
+
+2. **Monitoreo Durante el Sueño**:
+   
+   **Detección de Fases** (vía respiración + PPG):
+   ```
+   AWAKE: 15-25 breaths/min, BPM >65
+   DROWSY: 12-18 breaths/min, BPM 60-70
+   LIGHT_SLEEP: 10-15 breaths/min, BPM 55-65
+   DEEP_SLEEP: 6-12 breaths/min, BPM 45-55 ← AFIRMACIONES
+   REM: 12-20 breaths/min irregular, BPM 55-70 ← LUCID TRIGGERS
+   ```
+   
+   **Validación Cruzada**:
+   - Audio + PPG = Mayor confiabilidad
+   - Mínimo 2 min en fase para confirmar
+
+3. **Afirmaciones Subliminales**:
+   
+   **Cuándo**:
+   - Solo en DEEP_SLEEP confirmado
+   - Mínimo 5 min en fase antes de primera afirmación
+   - Intervalo: 30-45 seg entre afirmaciones
+   
+   **Cómo**:
+   - Volumen ultra-bajo (3-5% volumen sistema)
+   - Pitch shift -200Hz (más subliminal)
+   - Duración: 8-12 seg c/u
+   - TTS con voz calma (usuario puede elegir)
+   
+   **Contenido**:
+   - Categorías:
+     - Sueño reparador
+     - Auto-confianza
+     - Procesamiento emocional
+     - Creatividad
+     - Salud física
+   - Usuario puede crear custom o usar biblioteca (200+)
+   
+   **Ejemplos**:
+   ```
+   "Mi cuerpo se regenera completamente"
+   "Despierto renovado y lleno de energía"
+   "Suelto el estrés del día"
+   "Mi mente procesa y aprende mientras duermo"
+   ```
+
+4. **Inducción de Sueños Lúcidos**:
+   
+   **Triggers en REM**:
+   - Pulso de 40Hz (Gamma) muy sutil
+   - Duración: 3-5 segundos
+   - Intervalo: 5-10 min
+   - Objetivo: Aumentar awareness sin despertar
+   
+   **Afirmaciones REM**:
+   - "Estoy soñando"
+   - "Reconozco este es un sueño"
+   - "Tengo control de mis sueños"
+   
+   **Reality Checks** (pre-sueño):
+   - App pregunta: "¿Estás soñando?" durante el día
+   - Crear hábito de verificar realidad
+
+5. **Despertar Inteligente**:
+   - Alarma en fase Light/REM (no Deep)
+   - Ventana de 30 min alrededor de hora objetivo
+   - Despertar gradual con luz + sonido
+   - Pregunta: "¿Recordás tus sueños?"
+
+6. **Análisis Post-Sueño**:
+   - Hipnograma (gráfico de fases)
+   - Tiempo en cada fase
+   - Número de despertares
+   - Calidad de sueño score (0-100)
+   - Comparación con noches previas
+
+7. **Grabación de Sesión**:
+   - Audio completo (opcional)
+   - Detección de ronquidos
+   - Detección de apnea (pausa >10s)
+   - Alertar si apnea frecuente
+
+### UI/UX
+
+```
+[Pre-Sueño]
+  "Rutina de 20 min para dormir mejor"
+  
+  [Steps]
+  1. Relajación muscular (5 min)
+  2. Respiración 4-7-8 (3 min)
+  3. Visualización (7 min)
+  4. Afirmaciones preparatorias (5 min)
+  
+  [Config]
+  ☑ Activar afirmaciones en Deep Sleep
+  ☑ Triggers para sueños lúcidos
+  ☐ Grabar sesión
+  ☑ Despertar inteligente: 7:00 AM (±30 min)
+
+[Durante Sueño - Minimal UI]
+  [Pantalla casi negra]
+  Fase: DEEP_SLEEP
+  [Ícono mínimo]
+  
+  [Si usuario toca pantalla]
+    Terminar sesión | Ver fase actual
+
+[Post-Sueño]
+  "¡Dormiste 7h 42min!"
+  
+  [Hipnograma visual]
+    11pm ━━━━━━━ 7am
+    Awake    ▁
+    Light    ▃▃▃  ▃▃
+    Deep        ▅▅▅
+    REM           ▇  ▇
+  
+  Calidad: 82/100 ⭐⭐⭐⭐
+  
+  Deep Sleep: 1h 24min (ideal: 1.5-2h)
+  REM: 1h 48min (ideal: 1.5-2h)
+  
+  Afirmaciones reproducidas: 18
+  ¿Recordás tus sueños? [Sí] [No]
+  
+  [Si Sí]
+    Escribe tu sueño (voice-to-text)
+    [Tags automáticos con IA]
+```
+
+### Endpoints API
+
+```typescript
+POST /api/sleep/sessions/start
+  Body: { userId, config: { affirmations, lucidTriggers, alarm } }
+  Response: { sessionId }
+
+POST /api/sleep/sessions/:id/biometric
+  Body: { breathRate, bpm, timestamp }
+  Response: { detectedPhase, actions: ['play_affirmation', 'trigger_lucid'] }
+
+POST /api/sleep/sessions/:id/complete
+  Body: { recording?, phases[], metrics }
+  Response: { summary, qualityScore, insights, trends }
+
+POST /api/sleep/dreams
+  Body: { sessionId, dreamText, remembered }
+  Response: { dreamId, aiTags, relatedDreams }
+```
+
+---
+
+## 🚀 MÓDULO 4: RENDIMIENTO / PEAK PERFORMANCE
+
+### Descripción
+Optimizar estados de flow, focus y energía para trabajo profundo, creatividad o ejercicio mediante sincronización de ondas cerebrales.
+
+### Features Principales
+
+1. **Modos de Rendimiento**:
+
+   **A. Deep Work (Trabajo Profundo)**:
+   - Duración: 25, 50, 90 min (Pomodoro)
+   - Objetivo: Beta bajo (12-15Hz) → Flow
+   - Binaurales: Beta + White noise
+   - Sin interrupciones (modo avión sugerido)
+   - Timer Pomodoro integrado
+   
+   **B. Creative Flow (Creatividad)**:
+   - Duración: 30-60 min
+   - Objetivo: Theta-Alpha (6-10Hz)
+   - Binaurales: Theta waves
+   - Prompts creativos cada 15 min (IA)
+   - Captura de ideas (voice-to-text)
+   
+   **C. High Energy (Pre-ejercicio/Presentación)**:
+   - Duración: 10-15 min
+   - Objetivo: Beta alto (15-30Hz) + Gamma
+   - Música energizante + Binaurales
+   - Afirmaciones de confianza
+   
+   **D. Learning Mode (Estudio)**:
+   - Duración: 45-120 min
+   - Objetivo: Alpha (8-12Hz)
+   - Binaurales + Música clásica (Mozart Effect)
+   - Quiz breaks cada 30 min
+
+2. **Detección de Estado**:
+   - BPM baseline al inicio
+   - Monitoring continuo HRV
+   - Detectar "salida de flow":
+     ```
+     Flow = HRV coherence >60% + BPM estable
+     Out of Flow = Coherence <40% por >2 min
+     ```
+   - Intervención si pierde focus
+
+3. **Intervenciones Inteligentes**:
+   - Si pierde flow → Micro-break (2 min respiración)
+   - Si energía baja → Sugerir movimiento (30 saltos)
+   - Si muy activado → Bajar binaurales
+   - Mensajes motivacionales (IA personalizada)
+
+4. **Integración con Calendario**:
+   - Conectar Google Calendar / Outlook
+   - Detectar bloques de "Deep Work"
+   - Auto-iniciar sesión si usuario acepta
+   - Silenciar notificaciones externas
+
+5. **Métricas de Productividad**:
+   - Tiempo en flow hoy/semana
+   - Mejor hora del día (pico performance)
+   - Correlación sueño ↔ rendimiento
+   - Insights IA semanales
+
+6. **Leaderboard (Opcional)**:
+   - Competir con amigos
+   - "Minutos de flow" esta semana
+   - Badges: "Flow Master", "Deep Worker", etc.
+
+### UI/UX
+
+```
+[Inicio]
+  "¿Qué vas a hacer?"
+  
+  [Opciones]
+  💻 Trabajo Profundo
+  🎨 Sesión Creativa
+  ⚡ Energizarme
+  📚 Estudiar
+  
+  [Config Rápida]
+  Duración: [25] [50] [90] min
+  Intensidad: ░░░░░▓▓▓▓▓ (baja-alta)
+  
+  [Conectar Calendar] (opcional)
+
+[Durante Sesión]
+  [Minimal UI - Foco máximo]
+  
+  [Timer circular grande]
+    42:18
+    "Deep Work Mode"
+  
+  [Abajo discreto]
+    Flow: ████████░░ 82%
+    BPM: 68
+  
+  [Si pierde flow]
+    💭 "Parece que perdiste el foco"
+    [Micro-break 2 min] [Continuar]
+
+[Post-Sesión]
+  "¡90 min de Deep Work!"
+  
+  Flow Quality: 87%
+  Tiempo en flow: 78 min
+  Interrupciones: 2
+  
+  Logro desbloqueado: 🏆
+  "Flow Master - 10 sesiones >80%"
+  
+  Insight IA:
+  "Tus mejores sesiones son a las 10am.
+   Agendá trabajo difícil en ese horario."
+```
+
+### Endpoints API
+
+```typescript
+POST /api/performance/sessions/start
+  Body: { mode, duration, userId }
+  Response: { sessionId, binauralFreq, targetMetrics }
+
+POST /api/performance/sessions/:id/monitor
+  Body: { bpm, hrv, timestamp }
+  Response: { 
+    inFlow: boolean, 
+    intervention?: { type, message, duration } 
+  }
+
+GET /api/performance/insights/:userId
+  Response: { 
+    peakHours[], 
+    avgFlowQuality, 
+    sleepCorrelation,
+    weeklyTrends 
+  }
+
+POST /api/performance/calendar/sync
+  Body: { provider: 'google' | 'outlook', token }
+  Response: { upcomingDeepWorkBlocks[] }
+```
+
+---
+
+## 👥 MÓDULO 5: SINCRONIZACIÓN GRUPAL
+
+### Descripción
+**El diferenciador clave de la plataforma**. Sistema de sincronización neuronal colectiva con narrativa IA adaptativa para equipos remotos.
+
+### Features Principales
+
+1. **Creación de Sesión Grupal**:
+
+   **Roles**:
+   - **Facilitador**: Crea sesión, controla fases, ve métricas detalladas
+   - **Participante**: Solo ve su BPM y coherencia grupal
+   - **Observador**: Solo mira (útil para managers)
+   
+   **Config Inicial**:
+   - Nombre de sesión
+   - Objetivo: [Brainstorming, Alineación, Resolución problemas, Team building]
+   - Duración: 20, 30, 45, 60 min
+   - Participantes: Hasta 8 gratis, hasta 50 en Pro, ilimitado en Enterprise
+   - Contexto corporativo (opcional):
+     - Upload docs (PDF, DOCX)
+     - Objetivos del equipo
+     - Jerga específica
+
+2. **Fases de la Sesión**:
+
+   **Estructura de 30 min típica**:
+   ```
+   1. LOBBY (0-2 min)
+      - Participantes se unen
+      - Test audio/video/PPG
+      - Introducción facilitador
+   
+   2. CALIBRACIÓN (2-5 min)
+      - Cada uno coloca dedo en cámara
+      - Obtener baseline BPM individual
+      - Objetivo: Todos >40% calidad señal
+   
+   3. SINCRONIZACIÓN (5-10 min)
+      - Respiración guiada grupal
+      - Binaurales Theta → Alpha (4→10Hz)
+      - Objetivo: Coherencia grupal >70%
+      - Visual: Círculos de cada persona sincronizándose
+   
+   4. NARRATIVA COMPARTIDA (10-20 min)
+      - IA genera metáfora/historia basada en:
+        * Objetivo de sesión
+        * Contexto corporativo
+        * Estado biométrico del grupo
+      - Audio TTS reproducido a todos simultáneamente
+      - Mantener Alpha (8-12Hz)
+      - Objetivo: "Espacio mental compartido"
+   
+   5. CREATIVIDAD EXPLOSIVA (20-25 min)
+      - Rampa a Gamma (40Hz)
+      - IA genera provocaciones/preguntas:
+        "¿Y si pensamos esto al revés?"
+        "¿Qué haría [empresa inspiradora]?"
+      - Participantes pueden escribir insights (anónimo)
+   
+   6. INTEGRACIÓN (25-30 min)
+      - Bajar a Beta (12-18Hz)
+      - Resumen de insights generados
+      - Action items sugeridos por IA
+      - Cierre
+   ```
+
+3. **Sincronización en Tiempo Real**:
+
+   **WebSocket Events**:
+   ```typescript
+   // Cada participante envía cada 2 seg
+   socket.emit('bio:update', {
+     sessionId,
+     userId,
+     bpm: 72,
+     hrv: 45.2,
+     signalQuality: 85
+   })
+   
+   // Servidor responde a todos
+   socket.emit('group:metrics', {
+     avgBPM: 68,
+     groupCoherence: 73, // 0-100
+     phase: 'ALPHA_NARRATIVE',
+     outliers: [userId3], // Fuera de rango
+     nextPhaseIn: 180 // segundos
+   })
+   ```
+   
+   **Agregación Biométrica**:
+   ```typescript
+   function calculateGroupCoherence(participants) {
+     const bpms = participants.map(p => p.bpm).filter(b => b > 0);
+     const mean = average(bpms);
+     const stdDev = standardDeviation(bpms);
+     
+     // Coherencia = qué tan cerca están todos
+     const coherence = Math.max(0, 100 - (stdDev / mean) * 100);
+     return coherence;
+   }
+   ```
+
+4. **Sistema de Narrativa IA**:
+
+   **Prompt Structure** (Anthropic Claude):
+   ```
+   Eres un facilitador de experiencias grupales de sincronización neuronal.
+   
+   CONTEXTO:
+   - Equipo: {teamName}
+   - Objetivo sesión: {goal}
+   - Contexto corporativo: {corporateContext}
+   - Fase actual: {phase}
+   - Métricas bio: BPM promedio {avgBPM}, Coherencia {coherence}%
+   
+   TAREA:
+   Genera una narrativa de 2 minutos para la fase {phase}.
+   
+   Si phase === ALPHA_NARRATIVE:
+     - Tono: Calmado, visual, metafórico
+     - Objetivo: Crear "espacio mental compartido"
+     - Conectar el objetivo con una imagen/metáfora universal
+     - Incluir nombres de participantes sutilmente
+     - Ejemplo: "Imaginen que son un río... cada uno es una corriente..."
+   
+   Si phase === GAMMA_PROVOCATION:
+     - Tono: Energético, desafiante, provocador
+     - Genera 3 preguntas que desafíen assumptions
+     - Perspectivas no obvias
+     - Conexiones inesperadas con el contexto corporativo
+   
+   RESTRICCIONES:
+   - Máximo 300 palabras
+   - No usar jerga de autoayuda cliché
+   - Ser específico al contexto del equipo
+   - Output solo el texto narrativo, sin meta-comentarios
+   ```
+   
+   **Caché de Narrativas**:
+   - Guardar narrativas generadas
+   - Reutilizar si contexto similar (ahorro API costs)
+   - Rating post-sesión para mejorar
+
+5. **Visualización Grupal**:
+
+   **Vista Facilitador**:
+   ```
+   [Header]
+   Sesión: Q1 Strategy Brainstorming
+   Código: ABC-123 | 6/8 participantes
+   
+   [Fase Actual]
+   🌊 ALPHA - Narrativa Compartida
+   ⏱️ 12:34 / 30:00
+   [████████░░] 67% completado
+   
+   [Coherencia Grupal - Gauge circular]
+         78%
+      ╱       ╲
+    ╱   Excelente  ╲
+    
+   [Participantes - Grid]
+   ┌────┬────┬────┬────┐
+   │Ana │Bob │Carl│Dani│
+   │ 68 │ 72 │ 65 │ 70 │ ← BPM
+   │ 🟢 │ 🟢 │ 🟡 │ 🟢 │ ← Estado
+   └────┴────┴────┴────┘
+   
+   [Controles]
+   [⏭️ Siguiente Fase] [⏸️ Pausar] [🎤 IA Manual]
+   ```
+   
+   **Vista Participante** (minimalista):
+   ```
+   [Pantalla casi completa con animación]
+   
+   Fase: Alpha
+   Tu BPM: 68
+   
+   Coherencia Grupal: 78%
+   [████████░░]
+   
+   🎧 Escuchando narrativa...
+   "Imaginen un bosque donde cada árbol..."
+   
+   👥 6 personas sincronizadas
+   ```
+
+6. **Post-Sesión**:
+
+   **Resumen Automático** (IA):
+   - Análisis de coherencia por fase
+   - Momentos de mayor sincronización
+   - Insights capturados durante Gamma
+   - Cluster de ideas con IA (agrupar similares)
+   - Action items sugeridos
+   
+   **Ejemplo Output**:
+   ```
+   📊 RESUMEN - Q1 Strategy Brainstorming
+   
+   Duración: 30 min
+   Participantes: 6
+   Coherencia promedio: 74%
+   Pico de sincronización: 18:42 (92% coherencia)
+   
+   💡 INSIGHTS CAPTURADOS (12):
+   
+   Cluster 1: "Expansión Latinoamérica"
+   - Abrir oficina en México (Ana, Carlos)
+   - Partnership con distribuidor local (Bob)
+   - Contratar sales rep bilingüe (Dani)
+   
+   Cluster 2: "Producto"
+   - Feature request: Dark mode (Ana, Elena)
+   - Integración con Slack (Bob, Carlos)
+   
+   ✅ ACTION ITEMS SUGERIDOS:
+   1. [ ] Investigar costos oficina CDMX - Owner: Carlos
+   2. [ ] Contactar 3 distribuidores - Owner: Bob
+   3. [ ] Postear job listing sales rep - Owner: Dani
+   
+   📥 Exportar: [PDF] [Notion] [Slack] [Email]
+   ```
+
+7. **Integraciones**:
+   - **Slack**: Post-resumen en canal
+   - **Notion**: Crear página con insights
+   - **Google Calendar**: Agendar siguiente sesión
+   - **Zoom**: Iniciar video call antes de sesión (opcional)
+
+### Tecnología Específica
+
+```typescript
+// Server-side (Node.js)
+import { Server } from 'socket.io';
+import Anthropic from '@anthropic-ai/sdk';
+
+interface Participant {
+  id: string;
+  name: string;
+  bpm: number;
+  hrv: number;
+  lastUpdate: number;
+  signalQuality: number;
+}
+
+interface Session {
+  id: string;
+  facilitatorId: string;
+  participants: Map<string, Participant>;
+  phase: 'LOBBY' | 'CALIBRATING' | 'SYNCING' | 'ALPHA_NARRATIVE' | 'GAMMA_PROVOCATION' | 'INTEGRATION';
+  startTime: number;
+  config: SessionConfig;
+  insights: string[];
+}
+
+class GroupSyncManager {
+  private sessions: Map<string, Session> = new Map();
+  private io: Server;
+  private anthropic: Anthropic;
+  
+  constructor(io: Server) {
+    this.io = io;
+    this.anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  }
+  
+  async handleBioUpdate(sessionId: string, userId: string, data: { bpm: number, hrv: number }) {
+    const session = this.sessions.get(sessionId);
+    if (!session) return;
+    
+    // Update participant
+    const participant = session.participants.get(userId);
+    if (participant) {
+      participant.bpm = data.bpm;
+      participant.hrv = data.hrv;
+      participant.lastUpdate = Date.now();
+    }
+    
+    // Calculate group metrics
+    const groupMetrics = this.calculateGroupMetrics(session);
+    
+    // Broadcast to all in room
+    this.io.to(sessionId).emit('group:metrics', groupMetrics);
+    
+    // Check if should transition phase
+    if (this.shouldTransitionPhase(session, groupMetrics)) {
+      await this.transitionPhase(session);
+    }
+  }
+  
+  calculateGroupMetrics(session: Session) {
+    const participants = Array.from(session.participants.values())
+      .filter(p => p.bpm > 0 && Date.now() - p.lastUpdate < 5000); // Active in last 5s
+    
+    if (participants.length === 0) {
+      return { avgBPM: 0, groupCoherence: 0, activeCount: 0 };
+    }
+    
+    const bpms = participants.map(p => p.bpm);
+    const avgBPM = bpms.reduce((a, b) => a + b, 0) / bpms.length;
+    
+    // Calculate coherence (inverse of coefficient of variation)
+    const stdDev = this.calculateStdDev(bpms);
+    const cv = stdDev / avgBPM;
+    const groupCoherence = Math.max(0, Math.min(100, (1 - cv) * 100));
+    
+    return {
+      avgBPM: Math.round(avgBPM),
+      groupCoherence: Math.round(groupCoherence),
+      activeCount: participants.length,
+      outliers: this.detectOutliers(participants, avgBPM, stdDev)
+    };
+  }
+  
+  async transitionPhase(session: Session) {
+    const nextPhase = this.getNextPhase(session.phase);
+    session.phase = nextPhase;
+    
+    // Generate AI narrative if needed
+    if (nextPhase === 'ALPHA_NARRATIVE' || nextPhase === 'GAMMA_PROVOCATION') {
+      const narrative = await this.generateNarrative(session);
+      const audioURL = await this.textToSpeech(narrative);
+      
+      this.io.to(session.id).emit('phase:change', {
+        phase: nextPhase,
+        narrative,
+        audioURL
+      });
+    } else {
+      this.io.to(session.id).emit('phase:change', { phase: nextPhase });
+    }
+  }
+  
+  async generateNarrative(session: Session): Promise<string> {
+    const prompt = this.buildNarrativePrompt(session);
+    
+    const message = await this.anthropic.messages.create({
+      model: 'claude-3-5-sonnet-20241022',
+      max_tokens: 1000,
+      messages: [{
+        role: 'user',
+        content: prompt
+      }]
+    });
+    
+    return message.content[0].type === 'text' ? message.content[0].text : '';
+  }
+}
+```
+
+### Endpoints API
+
+```typescript
+POST /api/group-sync/sessions/create
+  Body: { facilitatorId, goal, duration, contextDocs[] }
+  Response: { sessionId, joinCode, roomURL }
+
+POST /api/group-sync/sessions/:id/join
+  Body: { userId, role: 'participant' | 'observer' }
+  Response: { token, config }
+
+GET /api/group-sync/sessions/:id/summary
+  Response: { 
+    metrics, 
+    insights[], 
+    aiSummary, 
+    actionItems[], 
+    exportLinks 
+  }
+
+POST /api/group-sync/context/upload
+  Body: FormData with files
+  Response: { contextId, vectorized: boolean }
+```
+
+---
+
+## 💳 MÓDULO 6: PAGOS Y SUSCRIPCIONES
+
+### Descripción
+Sistema completo de monetización con múltiples tiers y modelos (B2C, B2B, Patreon).
+
+### Planes de Suscripción
+
+#### TIER 1: FREE (Freemium)
+```
+Precio: $0
+Límites:
+  - 3 sesiones individuales/día (Meditación, Estrés, Sueño)
+  - Duración máx: 15 min
+  - Sin Group Sync
+  - Sin Performance tracking avanzado
+  - Ads en biblioteca de contenidos
+  - Sin exportación de datos
+  - Grabación de sueño: No
+  - Afirmaciones: Solo 10 pre-grabadas
+
+CTA: "Actualiza a Pro para sesiones ilimitadas"
+```
+
+#### TIER 2: PRO (B2C)
+```
+Precio: $9.99/mes o $99/año (17% descuento)
+Incluye:
+  ✅ Sesiones ilimitadas
+  ✅ Duración ilimitada
+  ✅ Group Sync hasta 8 personas
+  ✅ Grabación de sesiones de sueño
+  ✅ Biblioteca completa de afirmaciones (500+)
+  ✅ TTS personalizado (5 voces)
+  ✅ Performance tracking detallado
+  ✅ Exportación de datos (CSV, PDF)
+  ✅ Sin ads
+  ✅ Integraciones básicas (Calendar, Notion)
+  ✅ Soporte prioritario
+
+Trial: 14 días gratis
+```
+
+#### TIER 3: TEAMS (B2B)
+```
+Precio: $99/mes (hasta 20 usuarios) o $299/mes (hasta 50)
+Incluye TODO de Pro +
+  ✅ Group Sync hasta 50 personas
+  ✅ Dashboard de equipo (admin)
+  ✅ Métricas agregadas de bienestar
+  ✅ SSO (Google Workspace, Microsoft)
+  ✅ Contexto corporativo ilimitado
+  ✅ IA fine-tuning con datos de empresa
+  ✅ Integraciones avanzadas (Slack, Teams)
+  ✅ Reportes mensuales (PDF/email)
+  ✅ Onboarding dedicado
+  ✅ SLA 99.5%
+
+Demo: Llamada con sales + sesión gratis
+```
+
+#### TIER 4: ENTERPRISE
+```
+Precio: Custom (desde $499/mes)
+Todo de Teams +
+  ✅ Usuarios ilimitados
+  ✅ White-label (tu branding)
+  ✅ API access
+  ✅ Deploy on-premise (opcional)
+  ✅ Account manager dedicado
+  ✅ Custom integraciones
+  ✅ SLA 99.9%
+  ✅ Contratos anuales/multi-año
+
+Contacto: Sales team
+```
+
+### Patreon Integration (Creadores)
+
+**Use Case**: Coaches, terapeutas, instructores que quieren monetizar contenido.
+
+```
+Modelo:
+  - Creador sube sesiones guiadas (audio)
+  - Conecta cuenta Patreon
+  - Define tiers:
+    * $5/mes: 2 sesiones exclusivas/mes
+    * $15/mes: Todas las sesiones + Q&A mensual
+    * $50/mes: 1-on-1 session/mes
+  
+Comisión plataforma: 15% de ingresos Patreon
+
+Features para Creadores:
+  - Analytics: Reproducciones, ratings, retención
+  - Community: Comentarios, foro privado
+  - Scheduling: Agendar sesiones grupales
+  - Payouts: Automático vía Patreon
+```
+
+### Proceso de Checkout (Stripe)
+
+```typescript
+// User clicks "Upgrade to Pro"
+POST /api/payments/create-checkout-session
+  Body: { 
+    userId, 
+    plan: 'pro_monthly',
+    successURL: '/dashboard?upgraded=true',
+    cancelURL: '/pricing'
+  }
+  Response: { checkoutURL }
+
+// User completes payment → Stripe webhook
+POST /api/webhooks/stripe
+  Body: Stripe event
+  
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    
+    // Update user in DB
+    await db.user.update({
+      where: { id: session.metadata.userId },
+      data: {
+        plan: 'PRO',
+        stripeCustomerId: session.customer,
+        subscriptionId: session.subscription,
+        subscriptionStatus: 'active',
+        billingCycle: 'monthly',
+        nextBillingDate: new Date(session.subscription.current_period_end * 1000)
+      }
+    });
+    
+    // Send welcome email
+    await sendEmail({
+      to: session.customer_email,
+      template: 'welcome-pro',
+      data: { name: user.name }
+    });
+  }
+```
+
+### Gestión de Suscripciones
+
+**User Portal** (Stripe Customer Portal):
+```
+Acciones disponibles:
+  - Ver plan actual
+  - Cambiar plan (upgrade/downgrade)
+  - Actualizar método de pago
+  - Ver historial de facturas
+  - Cancelar suscripción
+```
+
+**Cancelación**:
+```
+Opción 1: Inmediata
+  - Pierde acceso al finalizar período actual
+  - Ofrecer descuento para retener (20% OFF 3 meses)
+
+Opción 2: Al final del período
+  - Sigue teniendo acceso hasta que expire
+  - Email 7 días antes recordando
+
+Win-back:
+  - Email 30 días post-cancelación
+  - Oferta: "Vuelve por 50% OFF primer mes"
+```
+
+### Reportes Financieros
+
+Dashboard Admin:
+```
+Métricas clave:
+  - MRR (Monthly Recurring Revenue)
+  - ARR (Annual Recurring Revenue)
+  - Churn rate (% cancelaciones)
+  - LTV (Lifetime Value promedio)
+  - CAC (Customer Acquisition Cost)
+  - Distribución por plan (Free, Pro, Teams)
+  - Trial → Paid conversion %
+
+Exportar:
+  - CSV mensual para contabilidad
+  - Integración con QuickBooks (opcional)
+```
+
+---
+
+## 📚 MÓDULO 7: BIBLIOTECA DE CONTENIDOS
+
+### Descripción
+Repositorio curado de textos, audios, videos y cursos sobre mindfulness, neurociencia, sueño, productividad.
+
+### Estructura de Contenidos
+
+#### 1. Artículos / Blog
+```
+Categorías:
+  - Neurociencia del sueño
+  - Técnicas de meditación
+  - Ciencia de la coherencia cardíaca
+  - Productividad y flow
+  - Trabajo en equipo
+  - Trauma y sanación
+
+Features:
+  - Markdown rendering
+  - Tiempo de lectura estimado
+  - Audio TTS (escuchar artículo)
+  - Bookmark / Favoritos
+  - Compartir en redes
+  - Comentarios (solo Pro)
+  - Related articles (IA)
+```
+
+#### 2. eBooks
+```
+Formatos: PDF, ePub
+Acceso:
+  - Free: 3 libros introductorios
+  - Pro: Biblioteca completa (50+ libros)
+
+Ejemplos:
+  - "The Science of Sleep" (Dr. Matthew Walker style)
+  - "Coherencia Cardíaca en 30 Días"
+  - "Flow: Guía Práctica"
+  - "Meditación para Escépticos"
+
+Features:
+  - Lector integrado (PDF.js)
+  - Highlights + Notas
+  - Sincronización entre dispositivos
+  - Offline download (PWA)
+```
+
+#### 3. Audio Tracks
+```
+Categorías:
+  - Música ambiente (30+ tracks)
+  - Binaurales específicos (Delta, Theta, Alpha, Beta, Gamma)
+  - Afirmaciones pregrabadas (500+)
+  - Sesiones guiadas por expertos
+
+Metadata:
+  - Duración
+  - Frecuencia (Hz)
+  - Uso recomendado
+  - Rating (5 estrellas)
+  - Plays count
+
+Upload:
+  - Creadores pueden subir (con aprobación)
+  - Royalty-free o con licencia
+```
+
+#### 4. Video Cursos
+```
+Ejemplos:
+  - "Fundamentos de Meditación" (5 módulos)
+  - "Domina tu Sueño en 21 Días"
+  - "Coherencia Cardíaca Masterclass"
+
+Estructura:
+  - Módulos → Lecciones → Videos (5-15 min c/u)
+  - Quizzes al final de módulo
+  - Certificado al completar (PDF)
+  - Progreso guardado
+
+Acceso:
+  - Algunos cursos free
+  - Mayoría en Pro
+  - Cursos premium: Pago único $29-$99
+```
+
+#### 5. Recursos Descargables
+```
+Templates:
+  - Journal de sueño (PDF)
+  - Diario de meditación
+  - Tracker de coherencia
+  - Worksheets de mindfulness
+
+Guías:
+  - "Cómo configurar tu espacio de meditación"
+  - "Rutina matutina ideal"
+  - "Checklist para mejor sueño"
+```
+
+### Sistema de Búsqueda
+
+```typescript
+// Semantic search con embeddings
+POST /api/library/search
+  Body: { 
+    query: "técnicas para dormir mejor",
+    filters: { 
+      type: ['article', 'ebook'],
+      minRating: 4,
+      freeOnly: false
+    }
+  }
+  
+  // Backend:
+  // 1. Generate embedding del query (OpenAI/Cohere)
+  // 2. Vector similarity search en DB
+  // 3. Re-rank por relevancia + rating
+  
+  Response: {
+    results: [
+      {
+        id, title, type, excerpt,
+        relevanceScore, rating, isPro,
+        thumbnail, duration/pageCount
+      }
+    ],
+    total: 47
+  }
+```
+
+### Recomendaciones Personalizadas
+
+```typescript
+GET /api/library/recommendations/:userId
+
+// Lógica:
+// 1. Historial de consumo del usuario
+// 2. Rating dado a contenidos
+// 3. Sesiones completadas (tipo, duración)
+// 4. Collaborative filtering (usuarios similares)
+
+Response: {
+  forYou: [...],
+  becauseYouRead: [...],
+  trending: [...],
+  newReleases: [...]
+}
+```
+
+### UI de Biblioteca
+
+```
+[Hero Section]
+  "Aprende las mejores técnicas de mindfulness"
+  [Buscar...] 🔍
+
+[Tabs]
+  Todos | Artículos | Libros | Audio | Video | Cursos
+
+[Filters Sidebar]
+  Categoría:
+    ☐ Meditación
+    ☐ Sueño
+    ☐ Estrés
+    ☑ Productividad
+  
+  Nivel:
+    ☑ Principiante
+    ☐ Intermedio
+    ☐ Avanzado
+  
+  Acceso:
+    ☐ Solo Free
+    ☐ Solo Pro
+
+[Results Grid]
+  ┌────────┬────────┬────────┐
+  │ [img]  │ [img]  │ [img]  │
+  │ Title  │ Title  │ Title  │
+  │ ⭐4.8  │ ⭐4.9  │ ⭐4.7  │
+  │ [PRO]  │ [FREE] │ [PRO]  │
+  └────────┴────────┴────────┘
+
+[Pagination]
+  ← 1 2 3 4 ... 12 →
+```
+
+### Content Management (Admin)
+
+```
+Dashboard para moderadores:
+  - Aprobar/rechazar contenido subido por users
+  - Editar metadata
+  - Gestionar categorías
+  - Ver analytics (views, ratings)
+  - Bulk upload
+```
+
+---
+
+# 🎨 DISEÑO UI/UX
+
+## Principios de Diseño
+
+1. **Mobile-First**: 80% de uso será móvil
+2. **Minimalista**: UI no distrae de la experiencia
+3. **Accesible**: WCAG AA compliance
+4. **Rápido**: <2s carga inicial, <100ms interacciones
+5. **Oscuro por defecto**: Mejor para ojos, batería, ambiente relajado
+
+## Design System
+
+### Paleta de Colores
+
+```css
+/* Dark Theme (Default) */
+--bg-primary: #0a0a0a;
+--bg-secondary: #1a1a1a;
+--bg-tertiary: #2a2a2a;
+
+--text-primary: #ffffff;
+--text-secondary: #a0a0a0;
+--text-tertiary: #707070;
+
+--accent-meditation: #8B5CF6; /* Purple */
+--accent-stress: #EF4444;     /* Red */
+--accent-sleep: #3B82F6;      /* Blue */
+--accent-performance: #10B981; /* Green */
+--accent-group: #F59E0B;      /* Orange */
+
+--success: #22C55E;
+--warning: #F59E0B;
+--error: #EF4444;
+--info: #3B82F6;
+
+/* Light Theme (Optional) */
+--bg-primary-light: #ffffff;
+--bg-secondary-light: #f5f5f5;
+...
+```
+
+### Typography
+
+```css
+/* Fonts */
+--font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+/* Sizes */
+--text-xs: 0.75rem;   /* 12px */
+--text-sm: 0.875rem;  /* 14px */
+--text-base: 1rem;    /* 16px */
+--text-lg: 1.125rem;  /* 18px */
+--text-xl: 1.25rem;   /* 20px */
+--text-2xl: 1.5rem;   /* 24px */
+--text-3xl: 1.875rem; /* 30px */
+--text-4xl: 2.25rem;  /* 36px */
+--text-5xl: 3rem;     /* 48px */
+```
+
+### Spacing
+
+```css
+/* Tailwind-like scale */
+--space-1: 0.25rem;  /* 4px */
+--space-2: 0.5rem;   /* 8px */
+--space-3: 0.75rem;  /* 12px */
+--space-4: 1rem;     /* 16px */
+--space-6: 1.5rem;   /* 24px */
+--space-8: 2rem;     /* 32px */
+--space-12: 3rem;    /* 48px */
+--space-16: 4rem;    /* 64px */
+```
+
+## Componentes Clave
+
+### 1. Navigation
+
+```
+[Mobile - Bottom Tab Bar]
+┌─────┬─────┬─────┬─────┬─────┐
+│ 🏠  │ 🧘  │  +  │ 📚  │ 👤  │
+│Home │Mods │Start│ Lib │ Me  │
+└─────┴─────┴─────┴─────┴─────┘
+
+[Desktop - Sidebar]
+│ Logo
+│
+│ 🏠 Dashboard
+│ 🧘 Meditación
+│ 😰 Estrés
+│ 😴 Sueño
+│ 🚀 Rendimiento
+│ 👥 Grupo
+│ 📚 Biblioteca
+│ ⚙️ Settings
+│
+│ [Upgrade] ← Si Free
+```
+
+### 2. Módulo Card (Home)
+
+```
+┌─────────────────────────┐
+│ [Icon] 🧘               │
+│ Meditación              │
+│                          │
+│ Última: Hace 2 días     │
+│ Racha: 12 días 🔥       │
+│                          │
+│ [Comenzar] →            │
+└─────────────────────────┘
+```
+
+### 3. Biometric Display (Universal)
+
+```
+Usado en todos los módulos:
+
+┌───────────────────┐
+│                   │
+│      ◉  72        │ ← BPM grande
+│                   │
+│  ━━━━━━━━━━━     │ ← HRV/Coherencia
+│  Coherencia: 68%  │
+│                   │
+└───────────────────┘
+
+Con animación de pulso sincronizada
+```
+
+### 4. Session Summary Card
+
+```
+┌──────────────────────────────┐
+│ ✓ Sesión Completada          │
+│                               │
+│ 🧘 Meditación - 15 min        │
+│ 📅 Hoy, 10:30 AM             │
+│                               │
+│ Métricas:                     │
+│ BPM promedio: 68              │
+│ Coherencia: 82%               │
+│ Rating: ⭐⭐⭐⭐⭐            │
+│                               │
+│ [Compartir] [Ver detalles]    │
+└──────────────────────────────┘
+```
+
+### 5. Upgrade Prompts (Freemium → Pro)
+
+```
+[Bloqueado detrás de paywall]
+
+┌─────────────────────────────┐
+│ 🔒 Función Pro               │
+│                              │
+│ Desbloquea sesiones          │
+│ ilimitadas y más.            │
+│                              │
+│ [Ver planes] [Cerrar]        │
+└─────────────────────────────┘
+```
+
+## Animaciones
+
+### Micro-interacciones
+- Button hover: Scale 1.02 + shadow
+- Card hover: Lift (translateY: -2px)
+- Toggle: Smooth slide (200ms ease)
+- Loading: Pulse / Skeleton screens
+- Success: Checkmark animation (Lottie)
+
+### Transiciones de página
+- Next.js page transitions: Fade (150ms)
+- Modal: Scale + fade in (200ms)
+- Drawer: Slide from bottom (250ms)
+
+### Animación de Respiración
+```css
+@keyframes breathe {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: scale(1.3); 
+    opacity: 1; 
+  }
+}
+
+.breathe-circle {
+  animation: breathe 4s ease-in-out infinite;
+}
+```
+
+## Responsive Breakpoints
+
+```css
+/* Mobile First */
+@media (min-width: 640px)  { /* sm */ }
+@media (min-width: 768px)  { /* md */ }
+@media (min-width: 1024px) { /* lg */ }
+@media (min-width: 1280px) { /* xl */ }
+@media (min-width: 1536px) { /* 2xl */ }
+```
+
+### Layout Adaptativo
+
+```
+Mobile (<768px):
+  - Navegación: Bottom tab bar
+  - Cards: 1 columna
+  - Biometric display: Full width
+
+Tablet (768-1024px):
+  - Navegación: Side drawer
+  - Cards: 2 columnas
+  - Más spacing
+
+Desktop (>1024px):
+  - Navegación: Sidebar fija
+  - Cards: 3 columnas
+  - Contenido centrado max-width: 1440px
+```
+
+---
+
+# 🔐 SEGURIDAD Y PRIVACIDAD
+
+## Datos Sensibles
+
+### Biométricos
+```
+Política:
+  - BPM, HRV: Almacenados encriptados (AES-256)
+  - Grabaciones audio: Encriptadas en reposo (S3 + KMS)
+  - Acceso: Solo el usuario puede ver sus datos
+  - Retención: Máx 2 años, luego auto-delete
+  - Export: Usuario puede descargar todo (GDPR)
+  - Delete: Usuario puede eliminar cuenta + datos
+```
+
+### Contenido Generado
+```
+- Insights de sesiones grupales: Anónimos por defecto
+- Diarios de sueño: Privados (no compartidos con nadie)
+- Afirmaciones custom: Privadas
+```
+
+## Autenticación
+
+```typescript
+// NextAuth.js config
+providers: [
+  GoogleProvider({
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  }),
+  AppleProvider({
+    clientId: process.env.APPLE_CLIENT_ID,
+    clientSecret: process.env.APPLE_CLIENT_SECRET,
+  }),
+  EmailProvider({
+    server: process.env.EMAIL_SERVER,
+    from: 'noreply@tuapp.com'
+  }),
+]
+
+// Session strategy
+session: { strategy: 'jwt' }
+
+// JWT encryption
+jwt: {
+  secret: process.env.NEXTAUTH_SECRET,
+  encryption: true,
+}
+
+// Callbacks
+callbacks: {
+  async jwt({ token, user }) {
+    if (user) {
+      token.userId = user.id;
+      token.plan = user.plan;
+    }
+    return token;
+  },
+  async session({ session, token }) {
+    session.userId = token.userId;
+    session.plan = token.plan;
+    return session;
+  }
+}
+```
+
+## Rate Limiting
+
+```typescript
+// API routes (Vercel Edge)
+import { Ratelimit } from '@upstash/ratelimit';
+import { kv } from '@vercel/kv';
+
+const ratelimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.slidingWindow(10, '10 s'), // 10 req / 10 seg
+});
+
+export async function POST(req: Request) {
+  const ip = req.headers.get('x-forwarded-for');
+  const { success } = await ratelimit.limit(ip);
+  
+  if (!success) {
+    return new Response('Too many requests', { status: 429 });
+  }
+  
+  // Process request...
+}
+```
+
+---
+
+# 📊 ANALYTICS Y MÉTRICAS
+
+## Eventos a Trackear
+
+### User Engagement
+```javascript
+// Mixpanel / Posthog
+track('Session Started', {
+  module: 'meditation',
+  duration: 15,
+  userId,
+  plan: 'free'
+});
+
+track('Session Completed', {
+  module,
+  duration,
+  bpmAvg,
+  coherence,
+  rating
+});
+
+track('Feature Discovered', {
+  feature: 'biometric_display',
+  context: 'meditation_session'
+});
+
+track('Paywall Shown', {
+  trigger: 'exceeded_daily_limit',
+  plan: 'free'
+});
+
+track('Upgrade Clicked', {
+  from: 'paywall_modal',
+  targetPlan: 'pro'
+});
+
+track('Subscription Started', {
+  plan: 'pro',
+  billing: 'monthly',
+  amount: 9.99
+});
+```
+
+### Business Metrics
+```
+- DAU / MAU
+- Retention (D1, D7, D30)
+- Conversion Free → Pro
+- Churn rate
+- LTV by cohort
+- Referral rate
+```
+
+### Health Metrics
+```
+- Avg session duration
+- Avg BPM / HRV by module
+- Coherence achievement rate
+- Sleep quality scores trend
+- Stress reduction effectiveness
+```
+
+## Dashboards
+
+### User Dashboard
+```
+"Mi Progreso"
+
+Esta semana:
+  - 12 sesiones completadas
+  - 3h 42min total
+  - Coherencia promedio: 74%
+  - Racha actual: 18 días 🔥
+
+Mejor sesión:
+  - Meditación - Martes 10am
+  - Coherencia: 92%
+
+Mejora desde mes pasado:
+  - BPM en reposo: -8 ↓
+  - HRV: +12% ↑
+  - Calidad sueño: +18% ↑
+
+[Gráficos interactivos]
+```
+
+### Admin Dashboard (Business)
+```
+Revenue:
+  - MRR: $48,234
+  - New MRR: +$4,821
+  - Churn: -$1,234
+  - Net New: +$3,587
+
+Users:
+  - Total: 12,453
+  - Free: 10,234
+  - Pro: 1,892
+  - Teams: 24 (327 usuarios)
+
+Engagement:
+  - DAU: 3,421
+  - MAU: 8,934
+  - Sessions/user/week: 4.2
+
+Top Modules:
+  1. Sleep (42%)
+  2. Meditation (28%)
+  3. Stress (18%)
+  4. Performance (8%)
+  5. Group Sync (4%)
+```
+
+---
+
+# 🚀 PLAN DE IMPLEMENTACIÓN
+
+## Fase 1: MVP (8-12 semanas)
+
+### Sprint 1-2: Fundación
+```
+Semana 1-2:
+  - Setup proyecto Next.js + Tailwind
+  - Database schema (Prisma)
+  - Auth (NextAuth.js)
+  - Landing page + marketing site
+  - Pricing page
+
+Entregable: Homepage + Login funcional
+```
+
+### Sprint 3-4: Módulo Meditación
+```
+Semana 3-4:
+  - PPG monitor básico
+  - Audio engine (Tone.js)
+  - UI de sesión
+  - Timer + controles
+  - Post-sesión summary
+
+Entregable: 1 sesión meditación completa funcional
+```
+
+### Sprint 5-6: Módulo Estrés + Sueño (Básico)
+```
+Semana 5:
+  - Protocolos de estrés
+  - Visualización respiración
+  - Coherencia cardíaca
+
+Semana 6:
+  - Sleep tracker básico (sin afirmaciones aún)
+  - Detección fases simple
+  - Resumen matutino
+
+Entregable: 3 módulos básicos funcionales
+```
+
+### Sprint 7-8: Pagos + Biblioteca
+```
+Semana 7:
+  - Stripe integration
+  - Checkout flow
+  - Subscription management
+  - Webhooks
+
+Semana 8:
+  - Biblioteca de contenidos (CMS)
+  - Artículos + eBooks
+  - Búsqueda básica
+
+Entregable: Monetización + contenido funcional
+```
+
+### Sprint 9-10: Testing + Polish
+```
+Semana 9:
+  - Testing en dispositivos reales (iOS, Android)
+  - Bug fixes
+  - Performance optimization
+  - PWA setup
+
+Semana 10:
+  - Onboarding flow
+  - Email notifications (Resend)
+  - Analytics (Posthog)
+  - Final QA
+
+Entregable: MVP listo para beta
+```
+
+### Sprint 11-12: Beta Launch
+```
+Semana 11:
+  - Deploy a producción (Vercel)
+  - 50-100 beta users
+  - Feedback collection
+  - Iteración rápida
+
+Semana 12:
+  - Preparar marketing
+  - Content creation (blog, redes)
+  - Partnerships (influencers wellness)
+
+Entregable: Producto en el mercado
+```
+
+## Fase 2: Diferenciador (8 semanas post-MVP)
+
+### Sprint 13-16: Group Sync
+```
+Semana 13-14:
+  - WebSocket server (Socket.io)
+  - Room management
+  - Bio aggregation
+  - Facilitator dashboard
+
+Semana 15-16:
+  - IA narrativa (Claude API)
+  - Vector DB (Pinecone)
+  - Contexto corporativo
+  - Post-sesión insights
+
+Entregable: Group Sync funcional
+```
+
+### Sprint 17-20: Features Avanzadas
+```
+Semana 17:
+  - Afirmaciones subliminales (Sleep)
+  - EMDR auditivo
+  - Sueños lúcidos
+
+Semana 18:
+  - Performance module completo
+  - Calendar integration
+  - Pomodoro timer
+
+Semana 19-20:
+  - Patreon integration
+  - Creadores de contenido
+  - Community features
+
+Entregable: Plataforma completa v1.0
+```
+
+## Fase 3: Escala (Continuo)
+
+```
+- A/B testing continuo
+- Machine Learning para mejoras
+- Integraciones adicionales
+- Expansión internacional
+- Mobile apps nativas (React Native)
+```
+
+---
+
+# 📝 ESPECIFICACIONES TÉCNICAS ADICIONALES
+
+## Base de Datos (PostgreSQL)
+
+```sql
+-- Core tables
+
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email VARCHAR(255) UNIQUE NOT NULL,
+  name VARCHAR(255),
+  avatar_url TEXT,
+  plan VARCHAR(50) DEFAULT 'FREE',
+  stripe_customer_id VARCHAR(255),
+  subscription_id VARCHAR(255),
+  subscription_status VARCHAR(50),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  module VARCHAR(50) NOT NULL, -- meditation, stress, sleep, performance, group_sync
+  duration_seconds INT,
+  started_at TIMESTAMP NOT NULL,
+  completed_at TIMESTAMP,
+  rating INT CHECK (rating >= 1 AND rating <= 5),
+  metadata JSONB, -- Flexible data per module
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE biometric_data (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id UUID REFERENCES sessions(id) ON DELETE CASCADE,
+  timestamp TIMESTAMP NOT NULL,
+  bpm INT,
+  hrv_rmssd FLOAT,
+  hrv_sdnn FLOAT,
+  coherence FLOAT,
+  signal_quality INT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_biometric_session ON biometric_data(session_id);
+CREATE INDEX idx_biometric_timestamp ON biometric_data(timestamp);
+
+CREATE TABLE sleep_sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id UUID REFERENCES sessions(id) ON DELETE CASCADE,
+  phases JSONB, -- [{phase, startTime, duration}]
+  affirmations_played INT DEFAULT 0,
+  lucid_triggers INT DEFAULT 0,
+  quality_score INT,
+  recording_url TEXT,
+  dream_log TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE group_sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  facilitator_id UUID REFERENCES users(id),
+  join_code VARCHAR(10) UNIQUE,
+  goal TEXT,
+  status VARCHAR(50), -- lobby, active, completed
+  context_docs JSONB,
+  started_at TIMESTAMP,
+  completed_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE group_participants (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  group_session_id UUID REFERENCES group_sessions(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES users(id),
+  role VARCHAR(50), -- facilitator, participant, observer
+  joined_at TIMESTAMP DEFAULT NOW(),
+  left_at TIMESTAMP
+);
+
+CREATE TABLE ai_narratives (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  group_session_id UUID REFERENCES group_sessions(id),
+  phase VARCHAR(50),
+  prompt TEXT,
+  generated_text TEXT,
+  audio_url TEXT,
+  effectiveness_rating INT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE content (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  type VARCHAR(50), -- article, ebook, audio, video, course
+  title VARCHAR(500) NOT NULL,
+  slug VARCHAR(500) UNIQUE NOT NULL,
+  description TEXT,
+  content TEXT,
+  thumbnail_url TEXT,
+  file_url TEXT,
+  duration_seconds INT,
+  category VARCHAR(100),
+  tags JSONB,
+  access_level VARCHAR(50) DEFAULT 'FREE', -- FREE, PRO, PREMIUM
+  rating FLOAT,
+  views INT DEFAULT 0,
+  published BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_content_type ON content(type);
+CREATE INDEX idx_content_category ON content(category);
+CREATE INDEX idx_content_slug ON content(slug);
+
+CREATE TABLE user_favorites (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  content_id UUID REFERENCES content(id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(user_id, content_id)
+);
+
+CREATE TABLE subscriptions_log (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id),
+  event VARCHAR(100), -- created, updated, cancelled
+  plan VARCHAR(50),
+  amount DECIMAL(10,2),
+  stripe_event_id VARCHAR(255),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+## Environment Variables
+
+```bash
+# Database
+DATABASE_URL="postgresql://..."
+
+# Auth
+NEXTAUTH_URL="https://tuapp.com"
+NEXTAUTH_SECRET="..."
+GOOGLE_CLIENT_ID="..."
+GOOGLE_CLIENT_SECRET="..."
+APPLE_CLIENT_ID="..."
+APPLE_CLIENT_SECRET="..."
+
+# Payments
+STRIPE_SECRET_KEY="sk_live_..."
+STRIPE_PUBLISHABLE_KEY="pk_live_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+
+# AI
+ANTHROPIC_API_KEY="sk-ant-..."
+OPENAI_API_KEY="sk-..." # Para embeddings
+
+# Storage
+S3_BUCKET="tuapp-media"
+S3_ACCESS_KEY="..."
+S3_SECRET_KEY="..."
+S3_REGION="us-east-1"
+
+# Email
+RESEND_API_KEY="re_..."
+
+# Analytics
+POSTHOG_API_KEY="phc_..."
+
+# Patreon
+PATREON_CLIENT_ID="..."
+PATREON_CLIENT_SECRET="..."
+```
+
+---
+
+# 🎬 CONCLUSIÓN DEL PROMPT
+
+Este prompt contiene **TODAS** las especificaciones necesarias para que un equipo de desarrollo construya la plataforma completa desde cero.
+
+## Entregables Esperados
+
+1. **Aplicación Web (PWA)**:
+   - Next.js 14+ con App Router
+   - Responsive (mobile-first)
+   - Offline-capable
+   - Install to home screen
+
+2. **5 Módulos Core**:
+   - ✅ Meditación
+   - ✅ Reducción de Estrés
+   - ✅ Sueño Profundo
+   - ✅ Rendimiento/Flow
+   - ✅ Sincronización Grupal
+
+3. **Monetización**:
+   - 4 tiers de pricing
+   - Stripe integration
+   - Patreon para creadores
+
+4. **Biblioteca de Contenidos**:
+   - CMS completo
+   - Búsqueda semántica
+   - Multi-formato
+
+5. **Admin Dashboards**:
+   - User analytics
+   - Business metrics
+   - Content management
+
+## Stack Final
+
+```
+Frontend: Next.js 14 + React + TypeScript + Tailwind + shadcn/ui
+Backend: Next.js API Routes + tRPC + Prisma + PostgreSQL
+Real-time: Socket.io
+AI: Anthropic Claude + OpenAI (embeddings)
+Payments: Stripe
+Storage: S3 (Cloudflare R2 o AWS)
+Auth: NextAuth.js
+Email: Resend
+Analytics: Posthog
+Hosting: Vercel
+```
+
+## Cronograma Estimado
+
+- **MVP (3 módulos básicos + pagos)**: 12 semanas
+- **Group Sync (diferenciador)**: +8 semanas
+- **Features avanzadas**: +8 semanas
+- **Total para v1.0 completa**: ~7 meses
+
+## Presupuesto Estimado (Desarrollo)
+
+```
+Equipo mínimo:
+  - 1 Full-stack developer senior: $8k-$12k/mes
+  - 1 Frontend developer: $6k-$8k/mes
+  - 1 Designer UI/UX (part-time): $3k-$5k/mes
+  
+Costo 7 meses: ~$120k - $180k
+
+O freelancers/agencia: $80k - $150k
+```
+
+## Costos Operacionales (Post-launch)
+
+```
+Infra (primeros 1000 usuarios):
+  - Vercel Pro: $20/mes
+  - Supabase Pro: $25/mes
+  - Stripe: 2.9% + $0.30 por transacción
+  - Anthropic API: ~$100-$500/mes
+  - Resend: $20/mes
+  - Total: ~$200-$600/mes
+
+A 10k usuarios:
+  - Database: $50-$100/mes
+  - Storage: $50-$200/mes
+  - AI API: $500-$2k/mes
+  - Total: ~$1k-$3k/mes
+```
+
+---
+
+## ✅ CHECKLIST DE IMPLEMENTACIÓN
+
+Desarrolladores pueden usar esta checklist para validar completitud:
+
+### Infraestructura
+- [ ] Proyecto Next.js inicializado
+- [ ] Base de datos PostgreSQL setup
+- [ ] Prisma schema implementado
+- [ ] NextAuth configurado
+- [ ] Stripe account + webhooks
+- [ ] S3 bucket configurado
+- [ ] Anthropic API key obtenida
+- [ ] Vercel project creado
+
+### Core Features
+- [ ] PPG Monitor implementado
+- [ ] Audio Analyzer implementado
+- [ ] Módulo Meditación completo
+- [ ] Módulo Estrés completo
+- [ ] Módulo Sueño completo
+- [ ] Módulo Performance completo
+- [ ] Módulo Group Sync completo
+
+### Monetización
+- [ ] Checkout flow Stripe
+- [ ] Subscription management
+- [ ] Webhooks configurados
+- [ ] Customer portal
+- [ ] Patreon integration
+
+### Biblioteca
+- [ ] CMS para contenidos
+- [ ] Upload de archivos
+- [ ] Búsqueda implementada
+- [ ] Sistema de ratings
+- [ ] Recomendaciones IA
+
+### UX/UI
+- [ ] Design system completo
+- [ ] Responsive en mobile
+- [ ] PWA configurada
+- [ ] Animaciones implementadas
+- [ ] Onboarding flow
+- [ ] Accesibilidad (WCAG AA)
+
+### Analytics & Monitoring
+- [ ] Posthog integrado
+- [ ] Sentry para errores
+- [ ] User dashboards
+- [ ] Admin dashboards
+
+### Testing & QA
+- [ ] Unit tests críticos
+- [ ] E2E tests (Playwright)
+- [ ] Testing en iOS Safari
+- [ ] Testing en Chrome Android
+- [ ] Performance audit (Lighthouse)
+- [ ] Security audit
+
+### Launch
+- [ ] Marketing site live
+- [ ] Blog setup
+- [ ] Email templates
+- [ ] Legal pages (Terms, Privacy)
+- [ ] Beta user onboarding
+- [ ] Feedback mechanism
+
+---
+
+**Este prompt está listo para ser entregado a desarrolladores profesionales.**
+
+Si necesitas clarificaciones o ajustes, responde con preguntas específicas.

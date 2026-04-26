@@ -1,0 +1,243 @@
+MinDeploy MVP — Discovery + Sync de Pareja
+Construir las 2 funcionalidades core del MVP de MinDeploy sobre la base existente de Next.js 16 + Supabase.
+
+User Review Required
+IMPORTANT
+
+Falta NEXT_PUBLIC_SUPABASE_ANON_KEY en tu 
+.env
+. Sin esta clave el middleware y el cliente Supabase no funcionan. Necesito que la agregues o me la pases para continuar.
+
+IMPORTANT
+
+Tablas SQL en Supabase: Voy a crear las tablas active_patterns, sync_sessions y sync_realtime directamente en tu proyecto de Supabase. Necesito acceso o que ejecutes las sentencias SQL que te provea en el SQL Editor de Supabase Dashboard.
+
+WARNING
+
+El proyecto usa Tailwind v4 (import-based, sin tailwind.config.js). La paleta de colores personalizada (#0a0e27, #00d9ff, #ff6b9d) se inyectará como CSS custom properties en 
+globals.css
+.
+
+Proposed Changes
+1. Setup y Configuración
+[MODIFY] 
+.env
+Agregar NEXT_PUBLIC_SUPABASE_ANON_KEY
+[MODIFY] 
+package.json
+Instalar react-leaflet, leaflet, @types/leaflet, recharts
+[MODIFY] 
+globals.css
+Reemplazar paleta dark mode con colores MinDeploy:
+Background: #0a0e27 → oklch conversion
+Accent cyan: #00d9ff
+Accent coral: #ff6b9d
+Text: #e8f4f8
+Secondary: #1e2a47
+Agregar animaciones CSS para círculos respiratorios
+[MODIFY] 
+main-nav.tsx
+Reemplazar items de navegación: solo Discovery, Sync, Dashboard, Configuración
+Cambiar branding a "MinDeploy"
+[MODIFY] 
+layout.tsx
+Actualizar metadata title y description a MinDeploy
+Agregar JetBrains Mono como fuente monospace
+2. Módulos Core (TypeScript)
+[NEW] 
+ppg-monitor.ts
+Portar 
+PPGMonitor
+ del legacy JS a TypeScript con tipos estrictos
+Mantener toda la lógica de: extracción canal rojo, filtrado DC, detección de picos, cálculo BPM/HRV
+Adaptar para uso en React: funciones async con cleanup, compatible con hooks
+Quitar exports CommonJS, usar ES modules
+[NEW] 
+breath-audio-analyzer.ts
+Extraer lógica de detección de respiración del 
+SleepAudioAnalyzer
+ legacy
+Simplificar: solo detectar breath rate (respiraciones/minuto) y amplitud
+Quitar toda la lógica de sueño/subliminal/EMDR/grabación (no aplica al MVP)
+Web Audio API: AudioContext → AnalyserNode → FFT → detección de picos en rango de respiración
+[NEW] 
+breath-pattern.ts
+Definir interfaces TypeScript para BreathPattern, ActivePattern, UserLocation
+Funciones helper para serializar/deserializar patrones
+[NEW] 
+pattern-matcher.ts
+Algoritmo de similitud entre patrones:
+similitud = 100 - (|tuHR - otroHR| * 2 + |tuBR - otroBR| * 5 + |tuVar - otroVar| * 1)
+Función para comparar contra array de patrones activos
+Ordenamiento por similitud descendente
+3. Funcionalidad 1 — Discovery
+[NEW] 
+discovery/page.tsx
+Orquestador del flujo: DETECT → ANALYZE → MAP
+State machine: idle → detecting → analyzing → exploring
+Usa BreathDetector para captura, luego DiscoveryMap para visualización
+Guarda patrón en Supabase active_patterns
+[NEW] 
+breath-detector.tsx
+Solicita permisos cámara + micrófono con mensajes claros en español
+Círculo pulsante animado que se expande/contrae al ritmo detectado
+Progress bar de 30 segundos de captura
+Feedback visual: señal baja, luz insuficiente, etc.
+Usa ppg-monitor.ts para cámara y breath-audio-analyzer.ts para micrófono
+[NEW] 
+discovery-map.tsx
+React-Leaflet con tiles dark mode (CartoDB Dark Matter, gratis)
+Puntos animados que pulsan, CSS animation al ritmo del usuario
+Click en punto → tarjeta con ciudad, país, % similitud
+Botón "Respirar juntos" → redirige a /sync
+Contador superior: "X personas respirando como vos ahora"
+Actualización cada 10 segundos (query a Supabase)
+Supabase SQL Schema (ejecutar en Dashboard)
+sql
+CREATE TABLE active_patterns (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  heart_rate NUMERIC,
+  breath_rate NUMERIC,
+  variability NUMERIC,
+  location JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  expires_at TIMESTAMPTZ DEFAULT NOW() + INTERVAL '5 minutes'
+);
+CREATE INDEX idx_active_patterns_expires ON active_patterns(expires_at);
+CREATE INDEX idx_active_patterns_user ON active_patterns(user_id);
+4. Funcionalidad 2 — Sync de Pareja
+[NEW] 
+sync/page.tsx
+Vista principal: botón "Crear sesión" y campo "Ingresar código"
+Lista de sesiones anteriores (historial)
+[NEW] 
+sync/[code]/page.tsx
+Flujo dinámico por código de sesión
+Si sos el creador: esperar a que el otro se una
+Si sos invitado: unirse automáticamente
+Una vez conectados: iniciar SyncSession
+[NEW] 
+pair-invite.tsx
+Genera código de 6 caracteres alfanumérico
+Botón copiar al portapapeles + copiar link completo
+Estado de espera con animación
+[NEW] 
+sync-session.tsx
+Dos círculos superpuestos: azul (yo) y coral (pareja)
+Cada uno pulsa al ritmo del breath rate detectado
+Centro: porcentaje de sincronía grande y animado
+Timer cuenta arriba
+Botón terminar sesión
+Supabase Realtime: cada 2s publica su patrón, se suscribe al del otro
+[NEW] 
+session-results.tsx
+Gráfico de línea (recharts) mostrando evolución de sincronía
+Stats: duración, sincronía promedio, mejor momento
+Botón "Nueva sesión" y "Volver"
+[NEW] 
+session-history.tsx
+Lista de sesiones pasadas agrupadas por pareja
+Mini sparkline de sincronía en cada card
+Click expande detalles
+[NEW] 
+sync-calculator.ts
+calculateSync(pattern1, pattern2) → 0-100%
+Tiene en cuenta breath rate y phase alignment
+Se ejecuta cada 2 segundos
+Supabase SQL Schema
+sql
+CREATE TABLE sync_sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_code VARCHAR(6) UNIQUE NOT NULL,
+  user1_id UUID REFERENCES auth.users(id),
+  user2_id UUID REFERENCES auth.users(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  started_at TIMESTAMPTZ,
+  ended_at TIMESTAMPTZ,
+  duration_seconds INTEGER,
+  avg_sync_percentage NUMERIC,
+  sync_data JSONB
+);
+CREATE TABLE sync_realtime (
+  session_id UUID REFERENCES sync_sessions(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES auth.users(id),
+  timestamp TIMESTAMPTZ DEFAULT NOW(),
+  breath_rate NUMERIC,
+  heart_rate NUMERIC,
+  PRIMARY KEY (session_id, user_id, timestamp)
+);
+5. Ajustes Complementarios
+[MODIFY] 
+page.tsx
+Actualizar landing page con branding MinDeploy
+Hero apuntando a /discovery como CTA principal
+[MODIFY] 
+dashboard layout
+Actualizar branding
+Verification Plan
+Manual Verification (por el usuario)
+Auth completa: Registrarse, loguearse, ver que redirige a /home
+Discovery flow:
+Ir a /discovery → Debe pedir permisos de cámara y micrófono
+Colocar dedo sobre cámara → Ver círculo pulsante y detección de BPM/breath rate
+Después de 30s → Ver mapa mundial con puntos (al menos tu propio punto)
+Verificar en Supabase Dashboard que aparece un registro en active_patterns
+Sync flow:
+Ir a /sync → Crear sesión → Copiar código
+En otra pestaña/dispositivo → Ingresar código → Verificar que se conectan
+Verificar círculos pulsantes y porcentaje de sincronía en tiempo real
+Terminar sesión → Ver gráfico de resultados
+Verificar en Supabase que hay registros en sync_sessions
+Mobile: Abrir en Chrome del celular → Verificar que todo el layout es usable
+Deploy: npm run build sin errores → Deploy a Netlify
+Automated (build)
+Planning MinDeploy MVP
+Starting discovery of the existing Next.js + Supabase codebase to plan the MinDeploy MVP implementation.
+
+Progress Updates
+1
+Exploring existing project structure and key files
+
+continua la tarea, 
+
+Thought for 1s
+
+Planning MinDeploy MVP
+Completed full codebase analysis. Read all source files: 
+layout.tsx
+, 
+globals.css
+ (MinDeploy theme already configured), 
+main-nav.tsx
+ (already has Discovery/Sync/Dashboard/Settings), 
+middleware.ts
+, Supabase clients, 
+supabase-migrations.sql
+ (all 3 tables with RLS ready), legacy 
+ppg-monitor.js
+ (805 lines, full PPG class) and 
+sleep-audio-analyzer.js
+ (806 lines, full audio analyzer class). Dependencies are all installed. 
+.env
+ has placeholder NEXT_PUBLIC_SUPABASE_ANON_KEY.
+
+Files Edited
+Implementation Plan
+Task
+Progress Updates
+1
+Exploring existing project structure and key files
+
+2
+Reading existing source files: layout, globals.css, middleware, legacy modules
+
+3
+Reading dashboard layout, legacy modules, supabase client, and utils to complete understanding
+
+4
+Reading legacy JS modules, Supabase client, and existing migrations to finalize the plan
+
+5
+Writing implementation plan and task checklist based on full codebase analysis
+

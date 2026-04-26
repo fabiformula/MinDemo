@@ -1,0 +1,2630 @@
+PROPUESTA ÚNICA SUPERADORA
+Plataforma web de sincronización atencional colectiva asistida por IA
+1. Núcleo conceptual (síntesis dura)
+Qué ES el sistema
+
+Una plataforma web que diseña y facilita experiencias de sincronización atencional individual y grupal, usando:
+
+tiempo compartido
+
+ritmo guiado
+
+narrativa adaptativa por IA
+
+estados explícitos y observables
+
+Qué NO es (y no vuelve a ser)
+
+No es neurociencia clínica
+
+No es biometría dura
+
+No es “leer cerebros”
+
+No es meditación pasiva tradicional
+
+👉 Esto elimina el riesgo de pseudociencia sin perder profundidad.
+
+2. La síntesis clave (lo mejor de cada propuesta)
+
+Voy a marcar explícitamente qué se conserva de cada línea previa:
+
+De la propuesta original ambiciosa
+
+✅ Se conserva:
+
+La visión colectiva
+
+La idea de campo emergente
+
+La IA como agente activo, no decorativo
+
+El foco B2B + equipos remotos
+
+❌ Se elimina:
+
+PPG, HRV, ondas, gamma, theta como métricas explícitas
+
+De las propuestas realistas / MVP
+
+✅ Se conserva:
+
+Viabilidad técnica web
+
+Simplicidad de onboarding
+
+Modularidad
+
+❌ Se elimina:
+
+La dilución del diferencial
+
+El “otra app más”
+
+De las propuestas híbridas
+
+✅ Se conserva:
+
+Adaptatividad narrativa
+
+Feedback en tiempo real
+
+Sesiones estructuradas en fases
+
+❌ Se elimina:
+
+Lenguaje ambiguo
+
+Zona gris neuro-pseudo
+
+3. Modelo formal del sistema (la pieza que faltaba)
+3.1 Estado individual (explícito, no inferido)
+
+Cada usuario declara (rápido, casi lúdico):
+
+Activación: baja ↔ media ↔ alta
+
+Claridad: difusa ↔ estable ↔ enfocada
+
+Intención:
+
+descansar
+
+enfocarse
+
+crear
+
+descargar tensión
+
+sincronizar con otros
+
+Esto:
+
+es honesto
+
+es replicable
+
+genera agencia (clave para credibilidad)
+
+3.2 Estado grupal (emergente)
+
+El sistema calcula (no “mide”):
+
+Dispersión: qué tan alineados están los estados
+
+Estabilidad temporal: cuánto dura la coherencia
+
+Ritmo compartido: entradas, silencios, transiciones
+
+📌 El estado grupal no es la suma, es una forma.
+
+4. Sincronización grupal (el corazón, ya depurado)
+Qué hace realmente el sistema
+
+Marca un tiempo común
+
+Regula:
+
+respiración guiada
+
+silencios
+
+audio
+
+pausas
+
+Coordina transiciones simultáneas
+
+Cierra ciclos colectivos
+
+Qué siente el usuario
+
+“Entramos juntos”
+“Algo se ordenó”
+“Salimos alineados”
+
+Eso es sincronización real.
+No necesita sensores para ser verdadera.
+
+5. Rol definitivo de la IA (bien delimitado)
+❌ La IA NO:
+
+diagnostica
+
+interpreta emociones profundas
+
+infiere estados ocultos
+
+✅ La IA SÍ:
+
+dirige el ritmo
+
+ajusta la narrativa
+
+detecta desalineación temporal
+
+decide cuándo:
+
+sostener
+
+acelerar
+
+cerrar
+
+La IA es:
+
+facilitador automático de dinámica colectiva
+
+Esto es:
+
+creíble
+
+potente
+
+defendible
+
+6. Arquitectura técnica final (web real, no futurismo)
+MVP funcional (sin mentiras)
+
+Next.js + Tailwind
+
+Backend simple (Supabase / Postgres)
+
+WebSockets para tiempo compartido
+
+Audio sincronizado
+
+Estados compartidos visibles
+
+IA solo en momentos clave:
+
+apertura
+
+transición
+
+cierre
+
+Nada de:
+
+hardware
+
+permisos sensibles
+
+promesas médicas
+
+7. Módulos finales (redefinidos)
+🧘 Individual
+
+sesiones de regulación atencional
+
+transición de estados (ej: trabajo → descanso)
+
+👥 Grupal (core)
+
+sincronización para:
+
+equipos remotos
+
+apertura de reuniones
+
+cierre de ciclos
+
+foco compartido
+
+📊 Post-sesión
+
+insights simples:
+
+alineación
+
+estabilidad
+
+ritmo
+
+sin métricas falsas
+
+8. Monetización alineada al valor real
+B2C
+
+experiencias guiadas
+
+eventos colectivos
+
+membresía
+
+B2B
+
+no vendés bienestar
+
+vendés:
+
+alineación
+
+foco
+
+transición ordenada de estados
+
+Esto compite con:
+
+facilitadores humanos
+
+coaches
+
+rituales de equipo
+
+👉 El pricing sí escala sin justificarlo con humo.
+
+9. Frase de identidad (muy importante)
+
+No medimos cerebros. Diseñamos experiencias de sincronización atencional colectiva asistidas por IA.
+
+Eso:
+
+pasa el filtro técnico
+
+pasa el filtro ético
+
+pasa el filtro cultural
+
+10. Veredicto final
+
+Esta síntesis:
+
+conserva la ambición original
+
+elimina todo lo que la hacía frágil
+
+es construible hoy
+
+es creíble mañana
+
+abre puertas reales a futuro (biometría opcional, nunca central)
+
+Acá el sistema cristalizó.
+Ya no es una idea: es una forma estable.
+
+Si querés, el próximo paso natural es:
+
+escribir el documento fundacional (1–2 páginas)
+
+diseñar el flujo exacto de una sesión grupal
+
+o bajar esto a estructura de producto y roadmap
+------------------------------------
+Propuesta Final Unificada: Resonance - Cognitive Flow System
+
+Esta síntesis representa la versión definitiva del proyecto, integrando la visión ambiciosa original con una ejecución técnica viable, creíble y orientada a resultados inmediatos (B2B/B2C).
+
+1. El Concepto: De "Meditación" a "Sincronía Cognitiva"
+
+La plataforma deja de ser un clon de Calm para convertirse en una herramienta de rendimiento y salud mental colectiva. El valor no es "relajarse", sino "entrar en el mismo estado mental que tu equipo" (Flow, Enfoque o Calma).
+
+Diferenciador Único (USP)
+
+"The Resonance Engine": Un sistema que utiliza audio binaural adaptativo y narrativa generada por IA para sincronizar la frecuencia cerebral de un grupo en tiempo real.
+
+2. Arquitectura Técnica Simplificada y Robusta
+
+Para garantizar la funcionalidad desde el primer día, el stack se optimiza eliminando dependencias frágiles.
+
+Frontend: Next.js 14 (App Router) + Tailwind CSS + Framer Motion (para la interfaz "líquida").
+
+Audio Engine: Web Audio API con osciladores para tonos binaurales puros (generados localmente, no archivos estáticos).
+
+Sincronización: Ably o LiveKit (infraestructura gestionada para evitar latencia en WebSockets manuales).
+
+Biometría Híbrida: * Primaria: Auto-reporte visual (Slider de estado de ánimo).
+
+Secundaria: PPG por cámara (Opcional/Experimental) para usuarios Pro.
+
+IA Orquestadora: Claude 3.5 Sonnet (Estructura de narrativa) + OpenAI Whisper (Análisis de tono de voz post-sesión).
+
+3. Esquema de Datos Final (15+ Tablas)
+
+Diseñado para medir el impacto real en equipos y facilitar la monetización.
+
+-- Estructura Core (Prisma/PostgreSQL)
+Table User { id, email, role, tier, last_login }
+Table UserProfile { userId, baseline_hrv, preferred_frequency, focus_score_avg }
+Table Team { id, name, adminId, invite_code, subscription_id }
+Table TeamMember { teamId, userId, role_in_team }
+Table Session { id, type, startTime, endTime, creatorId } -- Grupal o Individual
+Table ParticipantSession { sessionId, userId, mood_pre, mood_post, coherence_score }
+Table BioMetricLog { id, sessionId, userId, heart_rate, hrv_estimated, confidence }
+Table NarrativeScript { id, session_type, base_prompt, emotional_target }
+Table ContentLibrary { id, title, type, file_url, frequency_hz }
+Table AudioLayer { id, name, frequency_type, base_volume } -- Binaural, Pink Noise, Ambient
+Table Achievement { id, userId, type, date_earned }
+Table Subscription { id, userId, stripe_status, tier_name, expires_at }
+Table TeamHealthIndex { id, teamId, date, psychology_safety_score, alignment_score }
+Table PaymentLog { id, userId, amount, status, transaction_id }
+Table FeedbackLoop { id, sessionId, userId, verbal_report_summary } -- Resumen de Whisper
+Table Configuration { id, key, value } -- Ajustes globales del sistema
+
+
+4. Lógica de Producto: Los 4 Modos Maestros
+
+Se reduce la dispersión de módulos a 4 estados claros y funcionales:
+
+Deep Focus (Beta/Alpha): Para trabajo individual o sprints de equipo.
+
+Creative Flow (Alpha/Theta): Sesiones de brainstorming grupal con narrativa abierta.
+
+Stress Reset (Delta): Protocolo de 5 minutos basado en coherencia cardíaca y audio 8D.
+
+Team Sync (Gamma/Alpha): El diferenciador. Sincroniza al equipo antes de una reunión importante.
+
+5. Diseño Visual y Sensorial (Cyber-Zen)
+
+Visuales: Un "Bio-Orbe" central que late y cambia de geometría según el promedio de calma del grupo.
+
+Modo Oscuro: Obligatorio. Uso de colores "profundos" (Indigo #0F172A, Esmeralda #059669).
+
+Minimalismo: Sin menús complejos. Una pantalla de inicio centrada en "Cómo quieres sentirte hoy".
+
+6. Plan de Implementación (MVP en 3 Etapas)
+
+Etapa 1: Infraestructura (Semanas 1-4)
+
+Landing page de captura y sistema de usuarios.
+
+Reproductor de audio binaural funcional (individual).
+
+Integración de Stripe para Tier Pro.
+
+Etapa 2: Inteligencia y Grupo (Semanas 5-8)
+
+Implementación de salas multiusuario (Sync).
+
+Narrativa IA básica (Claude) que personaliza el inicio de la sesión.
+
+Dashboard de métricas individuales.
+
+Etapa 3: B2B y Escala (Semanas 9-12)
+
+Panel de control para mánagers de equipos.
+
+Análisis de impacto del equipo (Team Health Index).
+
+Optimización de biometría por cámara.
+
+7. Estrategia de Monetización Superadora
+
+Freemium: Sesiones individuales limitadas.
+
+Pro ($4.99/mes): Acceso total a biometría, narrativa IA y sesiones ilimitadas.
+
+Teams ($199/mes hasta 15 pax): La "joya de la corona". Incluye reportes de alineación del equipo y sesiones grupales privadas.
+
+8. Conclusión: Por qué esta propuesta es superior
+
+A diferencia de las anteriores, esta no depende de que la biometría sea perfecta. El sistema funciona incluso si el usuario solo usa el audio y el auto-reporte, pero se vuelve "mágico" cuando se activa la cámara o se une un equipo. Es creíble porque usa tecnologías de audio probadas (entrenamiento de frecuencias) y las potencia con IA moderna.
+
+-----------------------------------
+# **SÍNTESIS FINAL: PLAN SUPERADOR PARA UNA PERSONA**
+
+## **VISIÓN REENMARCADA**
+
+**No es una app de meditación más, sino un sistema de regulación cognitiva colectiva.**  
+El núcleo es **sincronizar la atención y el ritmo grupal**, no medir ondas cerebrales. La IA actúa como **director de orquesta**, no como oráculo. La biometría es **complementaria**, no central.
+
+---
+
+## **PRINCIPIOS RECTORES**
+
+1. **Validar antes de construir** (Lean Startup).
+2. **Diferenciador primero** (sincronización grupal antes que meditación individual).
+3. **Usar IA para acelerar desarrollo** (Cursor, Claude, v0).
+4. **APIs de terceros para complejidad** (no reinventar rueda).
+5. **Contenido mínimo viable de calidad** (no cantidad).
+6. **Monetización temprana** (validar con dinero real).
+
+---
+
+## **FASE 0: VALIDACIÓN RÁPIDA (2 semanas)**
+
+**Objetivo:** Confirmar interés real en sincronización grupal pagada.
+
+**Acciones:**
+1. Landing page en Carrd ($19/año) con:
+   - Propuesta clara: "Meditación sincronizada para equipos remotos. IA adapta la experiencia al estado del grupo."
+   - Video explicativo de 60s (grabado con Loom).
+   - Formulario de lista de espera con pregunta: "¿Cuánto pagarías? $0/$4.99/$99/mes".
+2. Outreach:
+   - Publicar en IndieHackers, r/SideProject, LinkedIn (grupos de trabajo remoto).
+   - Contactar 10 líderes de equipos remotos para entrevistas.
+   - Ofrecer sesión grupal de prueba vía Zoom (guía manual + Spotify sincronizado).
+
+**Métrica de éxito:** 
+- 50+ emails en lista de espera.
+- 3+ personas dispuestas a pagar $5+.
+- 5+ entrevistas con feedback positivo.
+
+**Si no se cumple:** Pivotar a app individual o abandonar.
+
+---
+
+## **FASE 1: MVP CON HERRAMIENTAS NO-CODE/LOW-CODE (4 semanas)**
+
+**Objetivo:** Tener un producto funcional sin código complejo, para validar la experiencia.
+
+**Stack:**
+- **Frontend:** Softr o Stacker (conectado a Airtable).
+- **Base de datos:** Airtable.
+- **Video/audio:** Zoom + Spotify (sincronización manual) o Daily.co (embed).
+- **Pagos:** Stripe Payment Links (envío manual).
+- **Automatización:** Zapier/Make.
+
+**Características:**
+1. Perfiles de usuario (formulario en Softr -> Airtable).
+2. Biblioteca con 5 meditaciones (audios en SoundCloud privados).
+3. Sistema de reservas: Calendly para agendar sesiones grupales.
+4. Automatización post-sesión: Email con Google Form para feedback.
+5. Dashboard básico en Airtable.
+
+**Contenido inicial:**
+- 5 meditaciones guiadas por ti (auténticas, no profesionales) + música libre.
+- 3 "rituales grupales" diseñados para equipos (check-in, ejercicio, check-out).
+
+**Métrica de éxito:**
+- 10 usuarios activos (usan al menos 1 sesión grupal).
+- 3 sesiones grupales completadas.
+- 1 pago real (aunque sea manual).
+
+---
+
+## **FASE 2: TRANSICIÓN A STACK TÉCNICO SÓLIDO (8 semanas)**
+
+**Solo si Fase 1 tiene tracción.**
+
+**Stack definitivo (managed services):**
+- **Frontend:** Next.js 14 + Tailwind CSS + Shadcn/ui (usando Cursor AI y v0.dev).
+- **Backend:** Supabase (Auth, PostgreSQL, Realtime, Storage).
+- **Audio/video grupal:** Daily.co API (free tier hasta 10k minutos/mes).
+- **IA:** Vercel AI SDK + GPT-3.5 Turbo (para insights post-sesión, no tiempo real).
+- **Pagos:** Stripe Checkout + Billing Portal.
+- **Email:** Resend.
+- **Analytics:** PostHog (free tier).
+- **Dev tools:** Cursor AI ($20/mes) esencial.
+
+**Desarrollo con IA:**
+- Usar Cursor AI para escribir código con autocompletado avanzado.
+- Claude Artifacts para generar componentes y explicaciones.
+- v0.dev para interfaces rápidas.
+
+**Características MVP técnico:**
+1. **Salas grupales:**
+   - Host crea sala, invita por link (Daily.co embed).
+   - Audio sincronizado (todos escuchan lo mismo al mismo tiempo).
+   - Chat de texto simple.
+   - Límite: 10 personas (free tier de Daily.co).
+2. **Sistema de contenido:**
+   - 10 meditaciones pregrabadas (contratar en Fiverr, ~$50 cada una).
+   - Categorías: energía, foco, relajación.
+3. **IA narrativa simplificada:**
+   - Post-sesión: recoger feedback (escala 1-5) → enviar a GPT-3.5 → generar insight de 2 párrafos.
+   - No en tiempo real.
+4. **Monetización:**
+   - Solo 2 planes: Free (1 sesión/semana) y Team ($49/mes, sesiones ilimitadas, hasta 10 usuarios).
+   - Stripe Checkout integrado.
+
+**Métrica de éxito:**
+- 50 usuarios registrados.
+- 20% retención semanal.
+- $100 MRR (Monthly Recurring Revenue).
+
+---
+
+## **FASE 3: MEJORAS BASADAS EN FEEDBACK (4 semanas)**
+
+**Prioridades:**
+1. **Mejorar experiencia grupal:**
+   - Indicador visual de "presencia" (quién está conectado).
+   - Sincronización de reproducción más robusta.
+   - Timer grupal visible.
+2. **Contenido ampliado:**
+   - 20 meditaciones (licenciar contenido existente o contratar más creadores).
+   - Artículos de bienestar (Claude + edición humana).
+3. **Gamificación simple:**
+   - Streaks grupales (días consecutivos).
+   - Logros por participación.
+4. **Dashboard para líderes de equipo:**
+   - Ver asistencia, feedback promedio, actividad.
+
+**Métrica de éxito:**
+- $500 MRR.
+- NPS > 30.
+- Churn < 10%.
+
+---
+
+## **FASE 4: DECISIÓN DE ESCALADO (a los 6 meses)**
+
+**Evaluar:**
+- Financiero: ¿$500+ MRR? ¿Crecimiento >20% mensual?
+- Producto: ¿Usuarios usan 2+ veces/semana? ¿NPS > 30?
+- Técnico: ¿Infraestructura estable? ¿Menos de 5h/semana en bugs?
+
+**Caminos posibles:**
+- 🟢 **GO (éxito):** Buscar cofundador técnico o inversión pre-seed ($50k-100k). Agregar biométricos vía APIs de wearables (Oura, Whoop) y IA en tiempo real.
+- 🟡 **CONTINUAR (moderado):** Mantener como negocio lifestyle, optimizar adquisición orgánica.
+- 🔴 **PIVOTAR/CERRAR (fracaso):** Vender activos, aplicar aprendizajes en nuevo proyecto.
+
+---
+
+## **STACK TECNOLÓGICO Y COSTOS**
+
+**Costos mensuales iniciales (meses 1-3):**
+- Cursor AI: $20
+- Supabase: $0 (free tier)
+- Daily.co: $0 (free tier)
+- OpenAI: $10-20
+- Dominio: $1
+- **Total:** ~$50/mes
+
+**Costos meses 4-6 (con crecimiento):**
+- Supabase Pro: $25
+- Vercel Pro: $20
+- Daily.co: posiblemente $0 si se optimiza
+- **Total:** ~$100/mes
+
+---
+
+## **LO QUE SE DESCARTRA (al menos inicialmente)**
+
+1. **PPG por cámara:** Muy complejo, poco fiable, riesgos legales. Alternativa futura: integración con wearables.
+2. **IA generativa en tiempo real:** Costosa y compleja. Mejor: pre-generar variaciones o usar IA post-sesión.
+3. **EMDR bilateral:** Requiere certificación médica.
+4. **Detección de fases de sueño:** Necesita hardware.
+5. **Backend custom con tRPC:** Overkill para MVP. Next.js API Routes + Supabase son suficientes.
+6. **Planes Enterprise y Patreon:** Para cuando haya tracción sólida.
+
+---
+
+## **CRONOGRAMA CONSOLIDADO**
+
+| Fase | Duración | Entregable Clave | Métrica de Éxito | Go/No-Go |
+|------|----------|------------------|------------------|-----------|
+| **0. Validación** | 2 semanas | Landing page + 50 emails | 3+ personas pagarían | Si no: pivotar |
+| **1. No-code MVP** | 4 semanas | Producto funcional (Softr+Airtable) | 10 usuarios activos + 1 pago | Si no: revisar valor |
+| **2. Stack técnico** | 8 semanas | App Next.js + Daily.co + Stripe | 50 usuarios + $100 MRR | Si no: mantener no-code |
+| **3. Mejoras** | 4 semanas | Dashboard líderes + más contenido | $500 MRR + NPS > 30 | Si no: optimizar |
+| **4. Escalado** | 6 meses | Decisión: seguir solo/buscar inversión | Crecimiento >20% mensual | Tres caminos posibles |
+
+---
+
+## **LO MEJOR DE CADA PROPUESTA INTEGRADO**
+
+| Propuesta Original | Lo que Rescatamos | Cómo se Integra |
+|-------------------|-------------------|-----------------|
+| **Plan Conservador** | Validación temprana + presupuesto realista | Fase 0 obligatoria + costos transparentes |
+| **Plan Técnico Avanzado** | Visión del diferenciador (sync grupal) | Core del MVP, pero con APIs (Daily.co) no custom |
+| **Plan PWA Detallado** | Cronograma semana a semana + criterios | Fases con hitos claros y métricas |
+| **Propuesta Superadora** | Enfoque capas + herramientas managed | Stack progresivo (no-code → low-code → code) |
+| **Análisis Crítico** | Problemas comunes identificados | Soluciones específicas para cada problema |
+
+---
+
+## **PLAN DE ACCIÓN INMEDIATO (PRÓXIMOS 7 DÍAS)**
+
+**Día 1-2:** 
+- Comprar dominio ($12).
+- Crear landing en Carrd ($19).
+- Escribir copy: "Sincronización grupal para equipos remotos con IA adaptativa".
+
+**Día 3-4:**
+- Publicar en IndieHackers, Reddit (r/remotework), LinkedIn.
+- Contactar 5 líderes de equipos remotos para entrevista.
+
+**Día 5-7:**
+- Analizar resultados.
+- Si hay 50+ emails: programar 3 sesiones grupales de prueba (Zoom + Spotify).
+- Si no: reconsiderar propuesta de valor.
+
+---
+
+## **CONSEJO FINAL**
+
+**Haz la pregunta incómoda primero:**
+"¿Pagaría alguien por esto sin que exista?"
+
+Si la respuesta es **sí** (validado con emails/dinero), construye.
+Si es **no**, no importa cuán buena sea tu tecnología.
+
+**El producto no es el código, es la experiencia humana coordinada.**  
+La tecnología solo debe hacerla escalable.
+
+---
+
+**Este plan sintetiza lo viable de todas las propuestas:**
+- ✅ Mantiene el diferenciador (sync grupal desde el inicio)
+- ✅ Realista para una persona (usa herramientas modernas)
+- ✅ Valida antes de construir (evita pérdida de tiempo)
+- ✅ Costos controlados (<$100/mes inicial)
+- ✅ Timeline agresivo pero posible (6 meses a decisión)
+
+**Siguiente paso:** Comienza hoy con la landing de validación.
+--------------------------------
+# SÍNTESIS DEFINITIVA: PLAN MAESTRO INTEGRADO
+## Plataforma de Bienestar Mental y Neuronal - Versión Final Ejecutable
+
+---
+
+# PREÁMBULO: QUÉ HACE ESTA SÍNTESIS DIFERENTE
+
+**Las 6 propuestas anteriores tenían 3 problemas comunes:**
+
+1. **Oscilaban entre extremos**: O eran irrealmente ambiciosas o mataban el diferenciador
+2. **Confundían complejidad técnica con valor**: Asumían que más tecnología = mejor producto
+3. **Ignoraban la validación humana**: Ninguna empezaba probando si la gente realmente quiere esto
+
+**Esta síntesis toma:**
+- La **honestidad brutal** de las propuestas realistas
+- La **visión potente** de las propuestas ambiciosas  
+- El **reencuadre conceptual** de las propuestas críticas
+- El **pragmatismo técnico** de las propuestas híbridas
+
+**Y las convierte en UN SOLO PLAN que:**
+✅ Mantiene el diferenciador (sincronización grupal)
+✅ Es técnicamente viable para 1 persona
+✅ Tiene checkpoints de realidad cada 4 semanas
+✅ Se puede construir en 5 meses (no 18, no 3)
+✅ No promete neurociencia que no puede cumplir
+
+---
+
+# PARTE I: FUNDAMENTOS CONCEPTUALES
+
+## 1.1 EL REENCUADRE CRÍTICO (De la Propuesta Filosófica)
+
+### ❌ LO QUE NO VAMOS A PROMETER:
+
+- "Sincronización neuronal" (suena pseudocientífico)
+- "Detección de ondas cerebrales" (requiere EEG)
+- "Medición de estados mentales" (imposible sin hardware)
+- "Theta → Alpha → Gamma progression" (no verificable)
+
+### ✅ LO QUE SÍ VAMOS A OFRECER:
+
+> **"Coordinación de ritmo atencional y experiencia colectiva guiada por IA"**
+
+**Esto significa:**
+- Todos hacen la misma actividad al mismo tiempo
+- La IA ajusta el contenido según contexto grupal observable
+- El valor está en la **experiencia compartida**, no en mediciones cerebrales
+- Es honesto, vendible y no requiere hardware imposible
+
+**Por qué esto funciona:**
+- Es defendible frente a escépticos
+- No genera expectativas médicas/legales
+- Se puede sentir y validar experiencialmente
+- No requiere sensores biométricos
+
+---
+
+## 1.2 NUEVO MODELO DE ESTADO (Simple y Poderoso)
+
+### Estado Individual = 3 Dimensiones Auto-Declaradas
+
+**Pre-sesión, cada persona indica:**
+1. **Energía actual**: Bajo (1) ↔ Alto (5)
+2. **Claridad mental**: Difuso (1) ↔ Enfocado (5)  
+3. **Intención**: [Descansar | Enfocar | Descargar estrés | Crear]
+
+**Post-sesión, cada persona reporta:**
+1. **Cambio percibido**: Escala -3 a +3
+2. **Utilidad de la sesión**: 1-5 estrellas
+3. **Un adjetivo**: ¿Cómo te sientes? (análisis de sentimiento con IA)
+
+### Estado Grupal = Agregación Inteligente
+
+La IA calcula en tiempo real:
+- **Dispersión**: ¿Qué tan alineadas están las intenciones?
+- **Energía promedio**: Para ajustar ritmo narrativo
+- **Tamaño de grupo**: 2-5 personas = íntimo, 6-15 = dinámico, 16+ = masivo
+
+**Ninguno de estos datos es "neuronal", pero SÍ permiten:**
+- Personalización defendible
+- Narrativa adaptativa
+- Métricas de "coherencia grupal" (basada en dispersión, NO en ondas cerebrales)
+
+---
+
+## 1.3 DIFERENCIADOR REDEFINIDO (Creíble y Potente)
+
+### El Producto NO ES:
+- Una app de meditación con features grupales
+- Un clon de Calm/Headspace
+
+### El Producto SÍ ES:
+> **"Netflix Party para bienestar - Experiencias sincronizadas para equipos remotos con narrativa adaptativa por IA"**
+
+**Casos de uso específicos:**
+1. **Startups tech**: 15min de "reset colectivo" entre reuniones
+2. **Equipos remotos**: Ritual semanal de cohesión sin necesidad de Zoom
+3. **Comunidades wellness**: Sesiones guiadas por creadores, coordinadas automáticamente
+4. **Familias distribuidas**: Meditación familiar aunque estén en diferentes países
+
+**Por qué es diferente de Calm/Headspace:**
+- Ellos: Experiencia individual con audios pre-grabados
+- Nosotros: Experiencia colectiva con IA que adapta en función del grupo
+
+---
+
+# PARTE II: VALIDACIÓN PRE-DESARROLLO (4 SEMANAS)
+
+## FASE 0: LA PRUEBA DEL DOLOR (Semanas 1-2)
+
+**Objetivo**: Confirmar que el problema vale la pena resolver
+
+### Semana 1: Investigación Cualitativa
+
+**Entrevistar a 15-20 personas en 3 segmentos:**
+
+**Segmento 1: Líderes de equipos remotos (5-7 personas)**
+- Encontrar en: LinkedIn, Reddit r/remotework, Slack communities
+- Preguntas clave:
+  - ¿Hacen team building remoto? ¿Qué usan?
+  - ¿Han intentado meditación/mindfulness grupal?
+  - ¿Qué NO les gusta de Zoom para esto?
+  - ¿Pagarían $50-99/mes por solución dedicada?
+
+**Segmento 2: Individuos interesados en wellness (8-10 personas)**
+- Encontrar en: Calm/Headspace subreddits, grupos de Facebook
+- Preguntas clave:
+  - ¿Meditan solos o prefieren compañía?
+  - ¿Han probado meditaciones grupales online?
+  - ¿Qué les frustra de apps actuales?
+  - ¿Pagarían $4-10/mes por sesiones grupales?
+
+**Segmento 3: Creadores de contenido wellness (3-5 personas)**
+- Encontrar en: Instagram, YouTube (instructores pequeños)
+- Preguntas clave:
+  - ¿Cómo coordinan sesiones grupales?
+  - ¿Qué herramientas usan? (Zoom, Instagram Live, etc.)
+  - ¿Les interesaría plataforma dedicada?
+  - ¿Compartirían ingresos 70/30?
+
+### Semana 2: Landing Page de Validación
+
+**Crear con Carrd.co ($19/año):**
+
+**Estructura de la landing:**
+```
+Hero:
+"Meditación sincronizada para equipos remotos
+La IA adapta la experiencia al estado de tu grupo"
+
+[Video demo falso de 60 segundos]
+Mostrar: 6 personas en grid → countdown → audio sincronizado → feedback colectivo
+
+3 Planes Visibles:
+┌─────────────────────────────────────────────┐
+│ FREE: 1 sesión/semana, hasta 5 personas    │
+│ PRO: $3.99/mes - Sesiones ilimitadas       │
+│ TEAMS: $49/mes - Hasta 15 personas + IA    │
+└─────────────────────────────────────────────┘
+
+[Join Beta Waitlist]
+Capturar: Email + Segmento (Individual/Team/Creator)
+```
+
+**Tráfico inicial:**
+- $100 en Facebook Ads (target: remote work, wellness)
+- $50 en Reddit Ads (r/meditation, r/startups)
+- Postear orgánicamente en IndieHackers, Hacker News
+
+### Métricas Decisivas (Fin de Semana 2):
+
+**🚦 CHECKPOINT 1:**
+
+| Métrica | Umbral Mínimo | Acción |
+|---------|---------------|--------|
+| Emails captados | <20 | ❌ ABORTAR - No hay demanda |
+| Emails captados | 20-50 | 🟡 PIVOTAR - Refinar propuesta |
+| Emails captados | 50-100 | ✅ CONTINUAR - Hay tracción inicial |
+| Emails captados | >100 | ✅✅ ACELERAR - Demanda fuerte |
+
+**Preguntas adicionales en el form:**
+- ¿Cuánto pagarías? [Opciones: $0, $2-5, $5-10, $10+]
+- ¿Cuándo necesitas esto? [Ya, 1 mes, 3 meses, solo curiosidad]
+- ¿Con quién usarías esto? [Solo, amigos, equipo de trabajo, comunidad]
+
+---
+
+## FASE 0.5: VALIDACIÓN MANUAL (Semanas 3-4)
+
+**Objetivo**: Probar el concepto SIN escribir código
+
+### Semana 3: "Concierge MVP"
+
+**Con los primeros 10-15 del waitlist:**
+
+1. **Crear sesión manual con Zoom + Spotify:**
+   - Tú actúas como "la IA" (el facilitador)
+   - Envías Spotify playlist sincronizado
+   - Guías la experiencia manualmente
+   - Tomas notas de qué funciona/qué no
+
+2. **Probar 3 formatos:**
+   - Sesión corta (10 min): Entre reuniones
+   - Sesión media (20 min): Ritual de equipo
+   - Sesión larga (40 min): Experiencia profunda
+
+3. **Iterar narrativa:**
+   - Probar diferentes guiones
+   - Ver cuándo la gente desconecta
+   - Identificar momentos de alto engagement
+
+### Semana 4: "Wizard of Oz" con Herramientas
+
+**Simular la plataforma sin código:**
+
+**Stack temporal:**
+- **Calendly**: Para scheduling de sesiones
+- **Notion**: Para dashboard falso
+- **Discord/Slack**: Para comunicación grupal
+- **Spotify**: Para audio
+- **Google Forms**: Para pre/post feedback
+- **Claude API** (tu cuenta): Para generar insights post-sesión
+
+**Flujo completo simulado:**
+```
+1. Usuario agenda sesión en Calendly
+2. Recibe link de Discord/Slack 10min antes
+3. Entra a canal de voz, escuchan playlist juntos
+4. TÚ moderas manualmente (como si fueras la IA)
+5. Post-sesión: Completan form
+6. Claude genera insight basado en respuestas
+7. Envías insight por email (parece automático)
+```
+
+**Con 20-30 usuarios beta en esta semana:**
+- Cobra $0 pero pide feedback honesto
+- Observa: ¿Regresan? ¿Invitan a otros? ¿Expresan valor?
+
+### 🚦 CHECKPOINT 2 (Fin de Semana 4):
+
+**¿CONSTRUIMOS EL PRODUCTO REAL?**
+
+| Señal | Decisión |
+|-------|----------|
+| <5 personas regresan a 2da sesión | ❌ NO - El concepto no engancha |
+| 5-10 personas regresan | 🟡 PIVOTAR - Ajustar formato |
+| >10 personas regresan | ✅ CONSTRUIR MVP |
+| Alguien ofrece pagar adelantado | ✅✅ CONSTRUIR + Acelerar |
+
+**Si la respuesta es NO → Pivotar a:**
+- ¿Sesiones 1-on-1 con coach + IA?
+- ¿Meditación individual con comunidad asíncrona?
+- ¿Otra vertical? (ej: solo para empresas, solo para creadores)
+
+**Si la respuesta es SÍ → Proceder a Fase 1**
+
+---
+
+# PARTE III: MVP TÉCNICO (MESES 2-3)
+
+## FASE 1: CONSTRUCCIÓN ACELERADA CON IA
+
+### Mes 2, Semana 1-2: Aprendizaje "Just-in-Time"
+
+**Filosofía**: No hacer cursos completos. Aprender SOLO lo que necesitas CUANDO lo necesitas.
+
+**Setup del entorno de desarrollo supercargado:**
+
+```bash
+# Herramientas esenciales
+1. Instalar Cursor AI ($20/mes) - Editor con IA integrada
+2. Activar GitHub Copilot ($10/mes) - Autocompletado inteligente
+3. Crear cuenta v0.dev (gratis) - Generador de componentes
+4. Cuenta Claude.ai Pro ($20/mes) - Para arquitectura y debugging
+```
+
+**Currículo acelerado (2 semanas):**
+
+**Día 1-3: Next.js básico**
+- NO hacer tutorial completo
+- Clonar template: `npx create-next-app@latest --example with-supabase`
+- Pedirle a Cursor: "Explícame cómo funciona este proyecto"
+- Hacer 1 cambio pequeño → deploy en Vercel
+
+**Día 4-7: Supabase + Auth**
+- Integrar autenticación con Supabase Auth
+- Crear tabla `users` y `sessions`
+- Conectar con tu Next.js app
+- Usar Cursor para generar queries
+
+**Día 8-10: Audio sincronizado**
+- Integrar Daily.co (https://daily.co)
+- Seguir su tutorial de React
+- Hacer demo: 2 pestañas, mismo audio
+- Cursor te ayuda con debugging
+
+**Día 11-14: Componentes UI**
+- Usar v0.dev para generar:
+  - Landing page
+  - Dashboard
+  - Sala de sesión
+- Copiar código → pegar en tu proyecto
+- Ajustar colores/textos
+
+### Mes 2, Semana 3-4: Core del MVP
+
+**Stack Final Definido:**
+
+```yaml
+Frontend:
+  Framework: Next.js 14 (App Router)
+  Styling: Tailwind CSS
+  Componentes: Shadcn/ui + v0.dev
+  TypeScript: Sí (Copilot ayuda con tipos)
+
+Backend:
+  Base de datos: Supabase (PostgreSQL managed)
+  Auth: Supabase Auth (email + OAuth Google)
+  Realtime: Supabase Realtime (para estado de sala)
+  
+Audio/Video:
+  Provider: Daily.co (free: 10k minutos/mes)
+  Alternativa: Whereby (si Daily.co es complejo)
+  
+IA:
+  Modelo: Claude 3.5 Sonnet vía Anthropic API
+  Uso: Generar guiones, insights post-sesión
+  
+Pagos:
+  Procesador: Stripe Checkout
+  Portal: Stripe Customer Portal (auto-gestión)
+  
+Email:
+  Service: Resend.com (3k gratis/mes)
+  
+Hosting:
+  Frontend: Vercel (hobby gratis → $20/mes)
+  Backend: Supabase (free → $25/mes Pro)
+  
+Dev Tools:
+  AI: Cursor + Copilot + Claude
+  Version control: Git + GitHub
+  CI/CD: Vercel auto-deploy
+```
+
+**Features del MVP (priorización estricta):**
+
+### ✅ DEBE TENER (Critical Path):
+
+**1. Autenticación**
+```javascript
+// Con Supabase Auth es <50 líneas
+- Sign up con email
+- Login con email + Google OAuth
+- Logout
+- Perfil básico (nombre, avatar)
+```
+
+**2. Creación de Sala Grupal**
+```javascript
+// El core diferenciador
+- Host crea sala → recibe link
+- Define: nombre, duración, tipo de sesión
+- Selecciona audio pre-cargado (5 opciones)
+- Invita por link compartible
+```
+
+**3. Join de Participantes**
+```javascript
+// Experiencia simple
+- Click en link → entra directo (si tiene cuenta)
+- Ve otros participantes (avatares)
+- Countdown hasta inicio (30 segundos)
+```
+
+**4. Sesión Sincronizada**
+```javascript
+// Con Daily.co SDK
+- Audio reproducido para todos simultáneamente
+- Timer visible compartido
+- Control solo para host (pause/resume)
+- Chat de texto simple
+```
+
+**5. Feedback Post-Sesión**
+```javascript
+// Para alimentar la IA
+- Escala 1-5: Energía antes/después
+- Escala 1-5: Claridad antes/después
+- ¿Cómo te sientes? (texto libre)
+- ¿Regresarías? (Sí/No/Tal vez)
+```
+
+**6. Insight Generado por IA**
+```javascript
+// El "wow factor"
+Prompt a Claude:
+"Genera un insight de 3 párrafos para este grupo:
+- Tamaño: {count} personas
+- Tipo de sesión: {type}
+- Energía promedio antes: {avg_before}
+- Energía promedio después: {avg_after}
+- Comentarios: {comments}
+
+Hazlo personal, inspirador y accionable."
+
+→ Mostrar a todos los participantes
+```
+
+### ❌ NO INCLUIR (Scope Creep):
+
+- ❌ Biblioteca de contenidos (solo 5 audios pre-cargados)
+- ❌ Detección biométrica
+- ❌ Video (solo audio)
+- ❌ Grabación de sesiones
+- ❌ Calendario integrado
+- ❌ Notificaciones push
+- ❌ App móvil nativa
+- ❌ Analytics dashboard
+- ❌ Sistema de badges/gamificación
+- ❌ Multiple rooms simultáneas
+
+### Mes 3, Semana 1-2: Pagos + Landing
+
+**Integración de Stripe (3-5 días):**
+
+```javascript
+// 2 planes solamente
+const plans = [
+  {
+    name: "Free",
+    price: 0,
+    limits: {
+      sessions_per_week: 1,
+      max_participants: 5,
+      audio_library: 2 // Solo 2 audios
+    }
+  },
+  {
+    name: "Pro",
+    price: 3.99,
+    limits: {
+      sessions_per_week: 999,
+      max_participants: 15,
+      audio_library: 5 // Los 5 audios
+    }
+  }
+];
+```
+
+**Stripe Checkout flow:**
+1. Usuario click en "Upgrade"
+2. Redirect a Stripe Checkout (hosted)
+3. Webhook de Stripe → actualiza DB
+4. Redirect back → usuario ve features Pro
+
+**Landing page con v0.dev (2-3 días):**
+
+Prompt para v0:
+```
+"Crea una landing page para una app de meditación grupal sincronizada.
+Debe tener:
+- Hero con título potente y CTA
+- Sección de beneficios (para individuos, equipos, creadores)
+- Tabla de precios (Free vs Pro)
+- Testimonios (3 ficticios pero creíbles)
+- FAQ (5 preguntas comunes)
+- Footer con links
+
+Estilo: Moderno, dark theme, gradientes sutiles, profesional pero humano"
+```
+
+### Mes 3, Semana 3-4: Beta Privada
+
+**Invitar a los 50-100 del waitlist:**
+
+**Email de lanzamiento:**
+```
+Subject: Tu beta de [NombreApp] está lista 🎉
+
+Hola [Nombre],
+
+Hace X semanas te suscribiste para probar meditación sincronizada para equipos.
+
+Hoy lo abrimos para ti (y solo 50 personas más).
+
+¿Qué funciona hoy?
+✅ Sesiones grupales de audio sincronizado
+✅ IA que genera insights sobre tu grupo
+✅ Gratis mientras estés en beta
+
+¿Qué NO funciona todavía?
+❌ App móvil (usa el navegador)
+❌ Video (solo audio)
+❌ Biblioteca amplia (solo 5 sesiones por ahora)
+
+Link: [URL]
+Tu código: BETA2024
+
+Te pido 2 favores:
+1. Úsalo 2 veces esta semana
+2. Dime qué está roto (en serio, dime TODO)
+
+—
+[Tu nombre]
+```
+
+**KPIs a observar (4 semanas de beta):**
+
+| Métrica | Objetivo Mínimo | Objetivo Ideal |
+|---------|----------------|----------------|
+| Usuarios que completan 1ra sesión | 30 (60%) | 40 (80%) |
+| Usuarios que regresan (2da sesión) | 15 (30%) | 25 (50%) |
+| Usuarios que invitan a otros | 5 (10%) | 15 (30%) |
+| NPS (Net Promoter Score) | 20 | 40 |
+| Bugs críticos reportados | <5 | 0 |
+
+### 🚦 CHECKPOINT 3 (Fin de Mes 3):
+
+**¿LANZAMOS PÚBLICAMENTE?**
+
+| Condición | ¿Cumple? | Siguiente Paso |
+|-----------|----------|----------------|
+| >20 usuarios activos semanalmente | ✅ | Lanzar público |
+| >20 usuarios activos semanalmente | ❌ | Extender beta, iterar |
+| NPS >20 | ✅ | Lanzar público |
+| NPS <10 | ❌ | Replantear core value |
+| Alguien preguntó por pagar | ✅ | Lanzar con pagos |
+| Nadie preguntó por pagar | ❌ | Revisar propuesta de valor |
+
+---
+
+# PARTE IV: LANZAMIENTO Y MONETIZACIÓN (MES 4)
+
+## FASE 2: GO TO MARKET
+
+### Mes 4, Semana 1: Pre-lanzamiento
+
+**Estrategia de contenido (crear antes de lanzar):**
+
+**1. Product Hunt launch kit:**
+- Thumbnail llamativo (Canva)
+- Video demo de 60 segundos (Loom)
+- Copy del launch (100 palabras, pídeselas a Claude)
+- Primeros 10 comentarios pre-escritos
+
+**2. Contenido evergreen:**
+- Artículo: "Por qué la meditación individual no funciona para equipos remotos"
+- Post LinkedIn: "Construí esto en 3 meses para mi equipo remoto"
+- Thread Twitter: "5 lecciones de construir con IA en 2025"
+
+**3. Outreach lista:**
+- 50 influencers micro en wellness (1k-10k followers)
+- 30 newsletters de startups/remote work
+- 20 podcasts de wellness/productividad
+
+### Mes 4, Semana 2: Launch Day
+
+**Tácticas simultáneas:**
+
+**Product Hunt (jueves 8am PST):**
+- Post programado
+- Tag friends para upvotes tempranos
+- Responder TODOS los comentarios en 2 horas
+
+**Reddit (no-spam approach):**
+- r/meditation: "Hice una herramienta para meditar con mi equipo remoto, feedback?"
+- r/Entrepreneur: "Validé esta idea en 1 mes, construí en 2"
+- r/SideProject: Mostrar proceso, no solo producto
+
+**IndieHackers:**
+- Post detallado del journey
+- Ser transparente con números
+- Pedir crítica honesta
+
+**Hacker News (si tienes historia técnica):**
+- "Show HN: Meditation sync for remote teams"
+- Enfatizar el aspecto técnico (IA, realtime)
+
+**LinkedIn (tu red personal):**
+- Post personal, no corporativo
+- "Aprendí a programar hace 3 meses. Hoy lancé esto."
+- Tag a gente que te ayudó
+
+### Mes 4, Semana 3-4: Growth Inicial
+
+**Métricas objetivo (primeras 2 semanas públicas):**
+
+```
+Registros: 200-500 usuarios
+Activación (1 sesión): 30-50%
+Retención día 7: 20-30%
+Conversión a pago: 2-5%
+MRR: $50-200
+
+Realista, no optimista.
+```
+
+**Growth loops a activar:**
+
+**1. Invitación orgánica:**
+```javascript
+// Feature clave
+Al terminar sesión → prompt:
+"¿Invitas a 2 amigos para la próxima?"
+[Copiar link de invitación]
+
+Incentivo:
+"Si 2 amigos se unen → 1 mes Pro gratis"
+```
+
+**2. Contenido generado por usuarios:**
+```javascript
+// Post-sesión
+"Comparte tu insight en redes"
+[Pre-filled tweet con imagen + link]
+
+Ejemplo:
+"Hoy mi equipo hizo una pausa sincronizada.
+La IA nos dijo: '[insight]'
+Probalo → [link]"
+```
+
+**3. SEO de contenido:**
+- Crear 10 artículos con Claude:
+  - "Meditación para equipos remotos: Guía 2025"
+  - "Cómo sincronizar equipos sin Zoom"
+  - "IA para bienestar en startups"
+- Publicar en blog + Medium + Dev.to
+
+---
+
+# PARTE V: ITERACIÓN Y ESCALA (MESES 5-6)
+
+## FASE 3: PRODUCT-MARKET FIT
+
+### Mes 5: Expansión de Contenido
+
+**Objetivo**: Pasar de 5 audios a 20 audios de calidad
+
+**Estrategia de contenido (sin crear todo tú):**
+
+**Opción A: Licenciar contenido existente**
+```
+Buscar en:
+- Insight Timer (algunos instructores licencian)
+- YouTube Audio Library (free, curada)
+- Epidemic Sound ($15/mes, unlimited)
+
+Seleccionar:
+- 10 meditaciones guiadas (diferentes duraciones)
+- 5 soundscapes (naturaleza, lluvia, océano)
+- 5 músicas binaurales (prelicenciadas)
+```
+
+**Opción B: Crear con IA + voz humana**
+```
+1. Claude genera scripts (10 variaciones)
+2. ElevenLabs genera voz ($11/mes)
+3. TÚ editas para calidad
+4. Añades música de fondo (Epidemic Sound)
+
+Costo: ~$30/mes
+Tiempo: 2-3 horas por audio
+Resultado: 10 audios custom en 2 semanas
+```
+
+**Opción C: Colaborar con creadores**
+```
+- Ofrecer a 5 instructores pequeños (1k-5k followers)
+- Deal: Suben sus meditaciones → 70/30 split de suscripciones
+- Tu plataforma les da: Analytics, monetización, comunidad
+- Ellos te dan: Contenido de calidad + su audiencia
+```
+
+### Mes 5: Features Críticas (Basadas en Feedback)
+
+**Solo agregar lo que usuarios piden repetidamente:**
+
+**Si >30% pide "programar sesiones futuras":**
+```javascript
+// Agregar calendario simple
+- Crear sesión para fecha futura
+- Enviar reminder 10min antes (Resend)
+- Auto-start cuando todos están
+```
+
+**Si >30% pide "ver historial de sesiones":**
+```javascript
+// Dashboard personal
+- Lista de sesiones completadas
+- Insights anteriores
+- Gráfica simple: energía a lo largo del tiempo
+```
+
+**Si >20% pide "app móvil":**
+```javascript
+// NO construir app nativa
+// SÍ hacer PWA:
+- Add to home screen prompt
+- Offline mode básico
+- Push notifications con OneSignal
+```
+
+### Mes 6: Decisión Crítica de Escala
+
+### 🚦 CHECKPOINT FINAL (Fin de Mes 6):
+
+**Evaluar con estas métricas:**
+
+| Métrica | Resultado Actual | Interpretación |
+|---------|------------------|----------------|
+| **MRR** | $XXX | <$200 = Freemium no funciona |
+| | | $200-500 = Traction inicial |
+| | | $500+ = Validado, escalar |
+| **Usuarios activos semanales** | XXX | <50 = Engagement bajo |
+| | | 50-200 = Nicho pequeño |
+| | | 200+ = Mercado real |
+| **Churn mensual** | XX% | >20% = Producto no retiene |
+| | | 10-20% = Normal para early stage |
+| | | <10% = Excelente, escalar |
+| **NPS** | XX | <20 = No están enamorados |
+| | | 20-40 = Les gusta pero no aman |
+| | | >40 = Product-market fit |
+| **CAC** | $XX | >$20 = Marketing no sustainable |
+| | | $10-20 = Evaluable |
+| | | <$10 = Growth engine funciona |
+
+---
+
+## CAMINOS POSIBLES (Fin de Mes 6):
+
+### 🟢 CAMINO A: ESCALAR (Si MRR >$500, Churn <15%, NPS >30)
+
+**Acciones:**
+1. **Contratar:**
+   - Dev part-time ($2k/mes) para velocidad
+   - Designer (Fiverr, $500 one-time) para UI polish
+   - Community manager (tú, 5h/semana)
+
+2. **Fundraising ligero:**
+   - Buscar $25k-50k (friends & family, AngelList)
+   - O bootstrap si gastos son bajos
+
+3. **Features B2B:**
+   - Dashboard para managers
+   - SSO con Google Workspace
+   - Facturación para empresas
+   - Plan Team ($99/mes, 20 personas)
+
+4. **Marketing agresivo:**
+   - $500/mes en ads (Facebook, LinkedIn)
+   - 2 artículos/semana (SEO)
+   - 1 partnership/mes con empresas
+
+### 🟡 CAMINO B: OPTIMIZAR (Si MRR $200-500, Métricas medianas)
+
+**Acciones:**
+1. **Enfocarse en retention:**
+   - Hablar con 20 usuarios activos
+   - ¿Por qué regresan?
+   - Doblar down en eso
+
+2. **Mejorar conversión Free → Pro:**
+   - A/B test precios ($2.99, $3.99, $4.99)
+   - A/B test mensajes
+   - Reducir fricción en upgrade
+
+3. **Growth orgánico:**
+   - Programa de referidos agresivo
+   - Contenido SEO constante
+   - Partnerships con influencers micro
+
+4. **Re-evaluar en mes 9:**
+   - ¿Llegaste a $500 MRR?
+   - ¿Churn bajó?
+   - Si sí → Camino A. Si no → Camino C.
+
+### 🔴 CAMINO C: PIVOTAR O CERRAR (Si MRR <$200, Churn >20%)
+
+**Opciones:**
+
+**Opción 1: Pivotar a nicho específico**
+```
+Síntomas:
+- "Me gusta pero no lo uso mucho"
+- Alta satisfacción pero bajo engagement
+
+Pivots posibles:
+- Solo para empresas (eliminar B2C)
+- Solo para creadores (marketplace)
+- Solo para terapia (necesita licencias)
+```
+
+**Opción 2: Vender la IP**
+```
+Si construiste bien, vale $2k-10k:
+- Código base
+- Base de usuarios (aunque pequeña)
+- Brand + dominio
+- Learnings documentados
+
+Mercados:
+- Flippa.com
+- Microacquire
+- Indie Hackers forum
+```
+
+**Opción 3: Open source + portfolio**
+```
+- Liberar código en GitHub
+- Escribir case study detallado
+- Usar como portfolio para:
+  - Conseguir trabajo remoto ($60k-100k/año)
+  - Conseguir clientes freelance
+  - Siguiente startup
+```
+
+**Opción 4: Cerrar con aprendizajes**
+```
+Documentar:
+- ¿Qué funcionó?
+- ¿Qué no?
+- ¿Qué harías diferente?
+
+Publicar:
+- Post en IndieHackers
+- Thread en Twitter
+- Artículo en Medium
+
+Valor: La comunidad aprende, tú ganas credibilidad
+```
+
+---
+
+# PARTE VI: ANTI-PATRONES Y TRAMPAS COMUNES
+
+## 6.1 ERRORES TÉCNICOS A EVITAR
+
+### ❌ Trampa 1: "Primero lo hago perfecto, después lanzo"
+
+**Síntoma:**
+- Semana 8 y sigues en desarrollo
+- "Solo falta pulir la UI"
+- "Quiero agregar X feature antes de mostrar"
+
+**Realidad:**
+- Perfección = procrastinación con máscara
+- Usuarios perdonan bugs si el core value es claro
+- Cada semana sin usuarios = semana perdida de aprendizaje
+
+**Antídoto:**
+- Lanzar beta privada en semana 6 (mes 2)
+- Lanzar público en semana 12 (mes 3)
+- "Perfeccionar" solo lo que usuarios digan que importa
+
+### ❌ Trampa 2: "Necesito esta tecnología específica"
+
+**Síntoma:**
+- "WebRTC no es suficiente, necesito construir mi propio protocolo"
+- "Supabase es limitado, mejor PostgreSQL + Docker custom"
+- "Voy a usar tRPC porque es mejor que REST"
+
+**Realidad:**
+- Managed services te ahorran 100+ horas
+- "Mejor" tecnología no significa "más apropiada"
+- Tu ventaja NO está en infraestructura custom
+
+**Antídoto:**
+- Usa servicios managed hasta tener >1000 usuarios
+- Optimización prematura = raíz de todo mal
+- Pregunta: "¿Esto me acerca a usuarios pagando?"
+
+### ❌ Trampa 3: "Puedo construir todo yo mismo"
+
+**Síntoma:**
+- "No voy a pagar $20/mes por Daily.co"
+- "Voy a construir mi propio sistema de auth"
+- "Las voiceovers las grabo yo"
+
+**Realidad:**
+- Tu tiempo vale >$20/hora (aunque no lo creas)
+- Construir infra = distraerte del core value
+- Usuarios no les importa si es custom o API
+
+**Antídoto:**
+- Pagar $50-100/mes en tools es INVERSIÓN, no gasto
+- Tu valor está en: modelo de negocio, UX, marketing
+- Construye solo el diferenciador, terceriza el resto
+
+---
+
+## 6.2 ERRORES DE PRODUCTO
+
+### ❌ Trampa 4: "Agregar features hasta que despegue"
+
+**Síntoma:**
+- Mes 5: calendario, notificaciones, app móvil, integración Slack
+- "Si agrego X, seguro despega"
+- Features crecen, usuarios no
+
+**Realidad:**
+- Más features = más complejidad = más bugs
+- Si el core no funciona, más features no lo arreglan
+- "Feature creep" mata el enfoque
+
+**Antídoto:**
+- Solo agregar features que >30% de usuarios piden
+- Cada feature nueva debe incrementar MRR directamente
+- Mejor: 3 features excelentes que 30 mediocres
+
+### ❌ Trampa 5: "No puedo cobrar hasta que sea perfecto"
+
+**Síntoma:**
+- Mes 4 y todo sigue gratis
+- "Cuando tenga X features voy a cobrar"
+- "Los usuarios se van a molestar si cobro"
+
+**Realidad:**
+- Si no pagan en beta, no van a pagar después
+- Gratis atrae turistas, pago atrae clientes
+- Mejor 10 usuarios pagando $4 que 100 gratis
+
+**Antídoto:**
+- Cobrar desde semana 12 (mes 3)
+- Ofrecer "lifetime deal" a primeros 50: $99 one-time
+- Precio comunica valor, no es castigo
+
+---
+
+## 6.3 ERRORES DE NEGOCIO
+
+### ❌ Trampa 6: "Primero el producto, después el marketing"
+
+**Síntoma:**
+- Mes 4, producto listo, 0 usuarios
+- "Ahora voy a hacer marketing"
+- No sabes cómo conseguir primeros 100 usuarios
+
+**Realidad:**
+- Marketing empieza en día 1 (validación)
+- Sin audiencia, lanzas al vacío
+- "Build and they will come" es un mito
+
+**Antídoto:**
+- Contenido desde semana 1 (Twitter, blog, YouTube)
+- Building in public (documentar journey)
+- 50% tiempo producto, 50% tiempo marketing
+
+### ❌ Trampa 7: "Si es bueno, se venderá solo"
+
+**Síntoma:**
+- "No necesito ventas, es B2C"
+- Esperas tráfico orgánico
+- No tienes plan de adquisición
+
+**Realidad:**
+- Competencia tiene presupuesto de marketing de millones
+- Tráfico orgánico toma 6-12 meses
+- Sin adquisición activa, mueres
+
+**Antídoto:**
+- Budget de $200/mes en ads desde mes 4
+- 1 outreach email/día a influencers
+- 2 posts/semana en redes
+
+---
+
+# PARTE VII: RECURSOS Y HERRAMIENTAS DEFINITIVAS
+
+## 7.1 STACK TECNOLÓGICO COMPLETO Y FINAL
+
+```yaml
+DESARROLLO:
+  Editor: Cursor AI ($20/mes) - ESENCIAL
+  AI Coding: GitHub Copilot ($10/mes)
+  Design: v0.dev (gratis con límites) + Figma (gratis)
+  Version Control: GitHub (gratis)
+
+FRONTEND:
+  Framework: Next.js 14 (App Router)
+  Styling: Tailwind CSS
+  Components: Shadcn/ui
+  Language: TypeScript
+  
+BACKEND:
+  Database: Supabase (PostgreSQL managed)
+    - Free: 500MB DB, 2GB bandwidth
+    - Pro: $25/mes - 8GB DB, 250GB bandwidth
+  Auth: Supabase Auth
+  Storage: Supabase Storage (1GB gratis)
+  Realtime: Supabase Realtime (estado de sala)
+
+AUDIO SYNC:
+  Provider: Daily.co
+    - Free: 10,000 minutos/mes
+    - Scale: $0.015/min después
+  Alternative: Whereby Embedded (si Daily complejo)
+
+INTELIGENCIA ARTIFICIAL:
+  API: Anthropic Claude (claude-3-5-sonnet)
+    - Costo: ~$15-30/mes en MVP
+    - Uso: Scripts, insights, recomendaciones
+  Alternative: OpenAI GPT-3.5 (más barato)
+
+PAGOS:
+  Processor: Stripe
+    - 2.9% + $0.30 por transacción
+    - Portal del cliente incluido
+  Alternative: LemonSqueezy (5% + $0.50, más simple)
+
+EMAILS:
+  Service: Resend.com
+    - Free: 3,000 emails/mes
+    - Pro: $20/mes - 50,000 emails/mes
+
+HOSTING:
+  Frontend: Vercel
+    - Hobby: Gratis (limites generosos)
+    - Pro: $20/mes (cuando creces)
+  CDN: Cloudflare (gratis)
+
+ANALYTICS:
+  Product: PostHog (free tier)
+  Web: Vercel Analytics (incluido)
+  Alternative: Plausible ($9/mes, privacy-first)
+
+MONITORING:
+  Errors: Sentry (free: 5k eventos/mes)
+  Uptime: BetterUptime (free hasta 10 monitors)
+
+COMUNICACIÓN:
+  Customer support: Plain.com (gratis hasta 1000 msgs)
+  Community: Discord (gratis)
+
+CONTENIDO:
+  Audio library: Epidemic Sound ($15/mes)
+  TTS: ElevenLabs ($11/mes, 30k caracteres)
+  Music: Soundstripe ($15/mes) o YouTube Audio Library (gratis)
+```
+
+**COSTO MENSUAL TOTAL:**
+
+```
+MES 1-3 (DESARROLLO):
+  Cursor: $20
+  Copilot: $10
+  Claude API: $15
+  Total: $45/mes
+
+MES 4-6 (MVP CON <100 USUARIOS):
+  Desarrollo: $45
+  Supabase: $0 (free tier suficiente)
+  Daily.co: $0 (free tier)
+  Vercel: $0 (hobby)
+  Stripe fees: ~$20 (en $200 MRR)
+  Resend: $0 (free tier)
+  Epidemic Sound: $15
+  Total: $80/mes
+
+MES 6+ (ESCALANDO 100-500 USUARIOS):
+  Desarrollo: $45
+  Supabase Pro: $25
+  Daily.co: ~$30 (uso moderado)
+  Vercel Pro: $20
+  Stripe fees: ~$100 (en $1k MRR)
+  Resend: $20
+  Contenido: $30
+  Ads: $200
+  Total: $470/mes
+
+Pero con $1k MRR → margen de $530/mes
+```
+
+---
+
+## 7.2 RECURSOS DE APRENDIZAJE ESPECÍFICOS
+
+**Para Next.js (Semana 1):**
+- Tutorial oficial: https://nextjs.org/learn
+- Clone este starter: https://github.com/vercel/next.js/tree/canary/examples/with-supabase
+- Video: "Next.js 14 Full Course" (freeCodeCamp, YouTube, 5 horas)
+  **NO ver todo**, solo secciones:
+  - App Router
+  - Server Components
+  - API Routes
+
+**Para Supabase (Semana 1-2):**
+- Docs oficiales: https://supabase.com/docs
+- Tutorial: "Supabase Crash Course" (Fireship, YouTube, 15min)
+- Ejemplo: Authentication + Database CRUD (docs de Supabase)
+
+**Para Daily.co (Semana 2):**
+- Getting Started: https://docs.daily.co/guides/products/room-based-architecture
+- React tutorial: https://docs.daily.co/reference/daily-react
+- Demo básico: Clonar su "basic call" example
+
+**Para IA con Claude (Semana 3):**
+- Docs: https://docs.anthropic.com/claude/docs
+- SDK: https://github.com/anthropics/anthropic-sdk-typescript
+- Ejemplo simple:
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
+
+const message = await client.messages.create({
+  model: 'claude-3-5-sonnet-20241022',
+  max_tokens: 1024,
+  messages: [
+    { role: 'user', content: 'Genera un insight para esta sesión...' }
+  ],
+});
+```
+
+**Para Stripe (Semana 3-4):**
+- Stripe Checkout: https://stripe.com/docs/checkout/quickstart
+- Webhooks: https://stripe.com/docs/webhooks
+- Video: "Stripe + Next.js" (vercel/stripe, YouTube)
+
+**Para TypeScript (aprender haciendo):**
+- NO hacer curso separado
+- Dejar que Cursor + Copilot te enseñen tipos
+- Cuando tengas error: preguntarle a Claude
+
+---
+
+## 7.3 TEMPLATES Y BOILERPLATES
+
+**Para empezar MÁS rápido, usar:**
+
+**1. Next.js SaaS Starter (gratis):**
+- https://github.com/vercel/nextjs-subscription-payments
+- Incluye: Next.js + Supabase + Stripe + Auth
+- Solo modificar para tu caso de uso
+
+**2. Shadcn Admin (gratis):**
+- https://github.com/satnaing/shadcn-admin
+- Dashboard pre-construido
+- Solo añadir tu lógica de negocio
+
+**3. Supabase Auth Helpers:**
+- https://github.com/supabase/auth-helpers
+- Autenticación lista
+- Integración Next.js perfecta
+
+---
+
+# PARTE VIII: PLAN DE CONTINGENCIA
+
+## 8.1 ¿QUÉ PASA SI...?
+
+### Escenario 1: "No puedo aprender lo técnico"
+
+**Señales:**
+- Semana 4, sigues sin entender Next.js
+- Cursor/Copilot no te ayudan suficiente
+- Te frustras constantemente
+
+**Soluciones:**
+
+**A. Contratar freelancer para MVP ($3k-5k):**
+- Fiverr, Upwork: Buscar "Next.js + Supabase MVP"
+- Mostrar tu validación (Fase 0)
+- Pedir que te enseñen mientras construyen
+
+**B. Encontrar co-founder técnico:**
+- YC Co-Founder matching
+- Indie Hackers forum
+- Ofrecer: 50% equity + tu validación de mercado
+
+**C. Ir full No-Code:**
+- Bubble.io para app
+- Zapier + Airtable para backend
+- Stripe + Memberstack para pagos
+- No es "inferior", es pragmático
+
+### Escenario 2: "No tengo dinero para herramientas"
+
+**Señales:**
+- $80-100/mes es mucho para tu situación
+- No puedes invertir en esto
+
+**Soluciones:**
+
+**A. Stack 100% gratuito:**
+```
+Editor: VS Code (gratis)
+AI: Claude free tier + Copilot trial
+Frontend: Next.js en Vercel free
+Backend: Supabase free (500MB suficiente para MVP)
+Audio: Jitsi Meet (open source WebRTC)
+Pagos: Esperar a mes 4, usar Gumroad (más simple)
+```
+
+**B. Conseguir $500 inicial:**
+- Pre-vender "lifetime deals" ($99 × 5 = $495)
+- Freelance 1 proyecto (Upwork, $500)
+- Friends & family (pedir prestado)
+
+**C. Aumentar timeline:**
+- En vez de 5 meses → 8 meses
+- Trabajar part-time en esto
+- Usar herramientas free hasta tener MRR
+
+### Escenario 3: "Nadie quiere esto" (Post-validación)
+
+**Señales:**
+- Fase 0: <20 emails captados
+- Fase 0.5: Nadie regresa a 2da sesión
+- "Interesante" pero nadie paga
+
+**Soluciones:**
+
+**A. Pivotar el ángulo:**
+- De "meditación grupal" → "team building remoto"
+- De "B2C" → "Solo B2B"
+- De "sincronización" → "facilitación automatizada"
+
+**B. Cambiar el público:**
+- De "startups" → "comunidades religiosas"
+- De "individuos" → "terapeutas grupales"
+- De "general" → "atletas de alto rendimiento"
+
+**C. Abortar y documentar:**
+- Escribir post-mortem detallado
+- Compartir aprendizajes
+- Usar código como portfolio
+- Aplicar aprendizaje a siguiente idea
+
+### Escenario 4: "Funciona pero no escala"
+
+**Señales:**
+- Mes 6: $200-300 MRR estancado
+- Churn >15%
+- Usuarios satisfechos pero pocos
+
+**Soluciones:**
+
+**A. Enfocarte en nicho ultra-específico:**
+- Eliminar B2C, solo B2B
+- Solo startups tech 20-50 personas
+- Cobrar $299/mes, vender con outreach directo
+
+**B. Convertirlo en lifestyle business:**
+- $300/mes × 12 = $3600/año
+- No es unicornio pero es ingreso pasivo
+- Mantenerlo con 2-3h/semana
+
+**C. Venderlo:**
+- En Microacquire: $5k-15k (1-2x revenue anual)
+- A competidor más grande
+- A fondo de micro-SaaS
+
+---
+
+# PARTE IX: CONCLUSIÓN Y SIGUIENTE PASO
+
+## 9.1 RESUMEN DEL PLAN MAESTRO
+
+**Este plan integra lo mejor de 6 propuestas en:**
+
+### ✅ LO QUE SÍ HACE ESTE PLAN:
+
+1. **Mantiene el diferenciador** (sincronización grupal con IA)
+2. **Es técnicamente viable** para 1 persona con conocimientos mínimos
+3. **Tiene validación temprana** (Fase 0 antes de escribir código)
+4. **Usa IA para acelerar** (Cursor + Copilot + Claude)
+5. **Timeline realista**: 5 meses a decisión GO/NO-GO
+6. **Checkpoints claros**: 3 momentos de "continuar o parar"
+7. **Presupuesto honesto**: $50-100/mes en desarrollo, $470/mes escalando
+8. **No promete pseudociencia** (sincronización ≠ neurociencia)
+9. **Enfocado en valor real** (coordinación humana, no hardware mágico)
+10. **Tiene plan B, C, D** (contingencias para cada escenario)
+
+### ❌ LO QUE NO HACE:
+
+1. ❌ Prometer "18 meses de desarrollo" (demasiado)
+2. ❌ Prometer "3 meses a producto completo" (muy poco)
+3. ❌ Eliminar el diferenciador por simplificar
+4. ❌ Agregar complejidad técnica innecesaria
+5. ❌ Asumir que "código perfecto" = éxito
+6. ❌ Ignorar validación de mercado
+7. ❌ Subestimar costos y esfuerzo
+8. ❌ Vender neurociencia sin respaldo
+
+---
+
+## 9.2 CRONOGRAMA VISUAL FINAL
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ SEMANA 1-2: Validación cualitativa (entrevistas)           │
+│ SEMANA 3-4: Landing + Validación cuantitativa              │
+│             [CHECKPOINT 1: ¿>50 emails? → SÍ/NO]           │
+├─────────────────────────────────────────────────────────────┤
+│ SEMANA 5-8: Validación manual (Zoom + Spotify + Forms)     │
+│             [CHECKPOINT 2: ¿>10 regresan? → SÍ/NO]         │
+├─────────────────────────────────────────────────────────────┤
+│ SEMANA 9-12: Aprendizaje acelerado + Primer código         │
+│ SEMANA 13-16: MVP funcional (salas + audio + IA básica)    │
+│              [CHECKPOINT 3: Beta con 50 usuarios]           │
+├─────────────────────────────────────────────────────────────┤
+│ SEMANA 17-20: Lanzamiento público + Growth inicial         │
+│ SEMANA 21-24: Iteración + Contenido + Monetización         │
+│              [CHECKPOINT FINAL: MRR, Churn, NPS]           │
+├─────────────────────────────────────────────────────────────┤
+│ POST-SEMANA 24: Decisión → Escalar/Optimizar/Pivotar       │
+└─────────────────────────────────────────────────────────────┘
+
+TOTAL: 24 semanas (6 meses)
+       vs 18 meses (propuesta conservadora)
+       vs 3 meses (propuesta irreal)
+```
+
+---
+
+## 9.3 MÉTRICAS DE ÉXITO CONSOLIDADAS
+
+| Fase | Métrica Crítica | Objetivo Mínimo | Objetivo Ideal | Consecuencia |
+|------|-----------------|----------------|----------------|--------------|
+| **Fase 0** | Emails captados | 50 | 100 | <50 = Abortar |
+| **Fase 0.5** | Usuarios regresan 2da vez | 10 | 20 | <5 = Pivotar |
+| **Fase 1** | Beta users activos/semana | 20 | 40 | <10 = Iterar |
+| **Fase 2** | Registros en launch | 200 | 500 | <100 = Marketing insuficiente |
+| **Fase 3** | MRR en mes 6 | $500 | $1000 | <$200 = Problema de producto |
+| **Fase 3** | Churn mensual | <15% | <10% | >20% = No retiene |
+| **Fase 3** | NPS | >20 | >40 | <10 = Replantear value |
+
+---
+
+## 9.4 TU SIGUIENTE PASO (LITERAL, HOY)
+
+### ¿Qué hacer en las próximas 2 horas?
+
+**Opción 1: Si estás convencido →**
+
+```
+Hora 1:
+✅ Crear cuenta Carrd.co ($19/año)
+✅ Usar esta plantilla de landing:
+   - Headline: "Meditación sincronizada para equipos remotos"
+   - Subhead: "La IA adapta la experiencia al estado de tu grupo"
+   - CTA: "Join Beta Waitlist"
+✅ Configurar Typeform para capturar:
+   - Email
+   - ¿Individual o Team?
+   - ¿Cuánto pagarías?
+
+Hora 2:
+✅ Escribir 5 posts LinkedIn/Twitter:
+   - "Estoy construyendo X porque..."
+✅ Enviar link a 10 amigos pidiendo feedback
+✅ Postear en r/SideProject (reglas permiten)
+```
+
+**Opción 2: Si aún no estás seguro →**
+
+```
+Próximos 7 días:
+✅ Entrevistar a 5 personas (3 usuarios potenciales, 2 competidores)
+✅ Leer post-mortems de apps similares (Calm, Headspace, etc.)
+✅ Usar Calm/Headspace/Insight Timer por 1 semana
+✅ Identificar: ¿Qué les falta que TÚ podrías ofrecer?
+
+Día 8:
+✅ Decisión: Construir, pivotar, o abortar
+```
+
+---
+
+## 9.5 ÚLTIMA REFLEXIÓN
+
+**Este plan NO garantiza éxito.**
+
+Garantiza:
+- ✅ Que no perderás 18 meses en algo que no funciona
+- ✅ Que aprenderás skills valiosos (código, producto, marketing)
+- ✅ Que tendrás 4 oportunidades de parar antes de hundir tiempo
+- ✅ Que si falla, falla rápido y con aprendizajes
+
+**La diferencia entre este plan y los otros 6:**
+
+| Propuesta Original | Problema | Este Plan |
+|--------------------|----------|-----------|
+| Ambiciosa (3 meses, todo) | Irreal para 1 persona | 5 meses, core diferenciador |
+| Conservadora (18 meses, eliminó diferenciador) | Mata el valor único | 5 meses, mantiene diferenciador |
+| Híbrida (6-9 meses, confusa) | No define qué sincronizar | Define: coordinación humana |
+| Técnica (PPG, EEG, etc.) | Hardware imposible | APIs de terceros |
+| No-Code (Bubble, Zapier) | Limita escalabilidad | Código real pero asistido por IA |
+| Validación tardía | Construye antes de saber | Valida en semana 2 |
+
+**La verdad incómoda:**
+
+El 90% de productos fallan no por mala ejecución técnica, sino porque resuelven un problema que nadie tiene o nadie pagaría por resolver.
+
+Por eso este plan empieza con validación, no con código.
+
+---
+
+## 9.6 COMPROMISO FINAL
+
+**Si vas a hacer esto, comprométete a:**
+
+1. ✅ Completar Fase 0 (validación) antes de escribir 1 línea de código
+2. ✅ Respetar los checkpoints (no moverte a siguiente fase si no cumples mínimos)
+3. ✅ Documentar todo el proceso (blog, Twitter, o al menos notas privadas)
+4. ✅ Pedir ayuda cuando te atores (no sufrir en silencio 3 semanas)
+5. ✅ Ser honesto contigo mismo sobre progreso vs excusas
+6. ✅ Si decides parar, parar con gracia (post-mortem, no simplemente desaparecer)
+
+**Si NO puedes comprometerte a esto:**
+- Está bien. No todos los proyectos son para todos.
+- Mejor darse cuenta ahora que en mes 12.
+
+---
+
+## 9.7 RECURSOS DE CONTACTO
+
+**Comunidades donde pedir ayuda:**
+
+- **IndieHackers**: https://indiehackers.com
+- **r/SideProject**: https://reddit.com/r/SideProject
+- **Makerlog**: https://getmakerlog.com
+- **WIP.co**: https://wip.co
+
+**Personas que han construido similares:**
+- Calm: Buscar entrevistas de founders
+- Headspace: Andy Puddicombe (charlas en YouTube)
+- Insight Timer: Chris Plowman (artículos en Medium)
+
+**Freelancers si necesitas ayuda:**
+- **Upwork**: Filtrar por "Next.js + Supabase"
+- **Fiverr**: Para diseño UI/UX
+- **Toptal**: Si tienes presupuesto ($100/hora+)
+
+---
+Analizaré todas las propuestas, identificaré los elementos valiosos de cada una y sintetizaré un plan único, superador y viable.
+
+---
+
+# 🔬 ANÁLISIS DE VALOR POR PROPUESTA
+
+## **Propuesta 1: Plan Conservador (18 meses)**
+| Aporte | Valor | Por qué importa |
+|--------|-------|---------------|
+| Fase de aprendizaje explícita | ⭐⭐⭐ | Evita frustración por gap de conocimientos |
+| Señales de alerta tempranas | ⭐⭐⭐ | Previene sunk cost fallacy |
+| Opción No-Code (Bubble) | ⭐⭐ | Vía de escape realista |
+| Presupuesto honesto ($80-100/mes) | ⭐⭐⭐ | Base financiera sólida |
+| **Defecto fatal** | | Elimina el diferenciador, mata la motivación |
+
+## **Propuesta 2: Plan PWA Semana-a-Semana**
+| Aporte | Valor | Por qué importa |
+|--------|-------|---------------|
+| Cronograma granular | ⭐⭐⭐ | Permite tracking preciso |
+| Stack Antigravity + Supabase | ⭐⭐ | Low-code viable |
+| Criterios de éxito medibles | ⭐⭐⭐ | Accountability clara |
+| PPG "simplificado" | ⭐ | Intención buena, ejecución dudosa |
+| **Defecto fatal** | | Subestima curva de aprendizaje, optimista |
+
+## **Propuesta 3: Especificación Técnica Detallada**
+| Aporte | Valor | Por qué importa |
+|--------|-------|---------------|
+| Visión del diferenciador | ⭐⭐⭐⭐⭐ | Mantiene el alma del proyecto |
+| Arquitectura de estados | ⭐⭐⭐ | Modelo conceptual sólido |
+| Schema de BD completo | ⭐⭐ | Base para escalabilidad |
+| UI/UX específico | ⭐⭐ | Dirección visual clara |
+| **Defecto fatal** | | Irreal para 1 persona, ignora limitaciones |
+
+## **Propuesta 4: Enfoque Validador (No-Code → Código)**
+| Aporte | Valor | Por qué importa |
+|--------|-------|---------------|
+| Validación antes de código | ⭐⭐⭐⭐⭐ | Elimina riesgo de producto sin mercado |
+| Fases de "glue" tools | ⭐⭐⭐ | Reduce tiempo al MVP funcional |
+| Biométricos diferidos | ⭐⭐⭐ | Prioriza valor sobre tecnología |
+| Sincronización "suficientemente buena" | ⭐⭐⭐ | Pragmatismo técnico |
+| **Defecto fatal** | | Puede quedarse en No-Code sin escalabilidad real |
+
+## **Propuesta 5: Plan Híbrido Inteligente (6 meses)**
+| Aporte | Valor | Por qué importa |
+|--------|-------|---------------|
+| Uso intensivo de IA para desarrollo | ⭐⭐⭐⭐⭐ | Multiplicador de productividad 5x |
+| Daily.co para real-time | ⭐⭐⭐⭐ | Solución managed, no custom |
+| Enfoque en diferenciador primero | ⭐⭐⭐⭐⭐ | Estrategia correcta |
+| Monetización mes 4 | ⭐⭐⭐ | Validación con dinero real |
+| **Defecto fatal** | | Aún asume cierta base técnica inicial |
+
+## **Propuesta 6: Enfoque de Capas**
+| Aporte | Valor | Por qué importa |
+|--------|-------|---------------|
+| Reemplazo, no eliminación | ⭐⭐⭐⭐⭐ | Mantiene visión con medios alternativos |
+| Medición indirecta de biometría | ⭐⭐⭐ | Solución pragmática |
+| Pre-generación IA + selección | ⭐⭐⭐⭐ | Balance costo/beneficio |
+| Plan de aprendizaje acelerado | ⭐⭐⭐ | Realista con herramientas modernas |
+| **Defecto fatal** | | Puede ser ambicioso para "conocimientos mínimos" |
+
+---
+
+# 🏆 PROPUESTA SUPERADORA: "ORBITA WELLNESS"
+
+## **Filosofía Unificadora:**
+
+> **"Validar con humo, construir con glue, escalar con código"**
+
+No es No-Code vs. Código. Es **evolución orquestada** donde cada fase alimenta la siguiente con evidencia, no con fe.
+
+---
+
+## **Los 5 Principios No Negociables:**
+
+1. **El diferenciador es sagrado**: Sin sincronización grupal, no hay producto.
+2. **La biometría es opcional, la percepción de conexión es obligatoria**.
+3. **IA como multiplicador, no como reemplazo**: Cursor + Claude aceleran, no hacen magia.
+4. **Dinero real en mes 4 o pivot**: No hay "fase de crecimiento" sin monetización temprana.
+5. **Stack unificado, no disperso**: Mínima cantidad de servicios, máxima profundidad en cada uno.
+
+---
+
+## **LA ARQUITECTURA DE 4 CAPAS**
+
+```
+┌─────────────────────────────────────────┐
+│  CAPA 4: PLATAFORMA (Mes 7+)           │
+│  Next.js + Supabase + WebRTC nativo     │
+│  Biométricos wearables, IA en tiempo    │
+│  real, múltiples tipos de sesiones      │
+├─────────────────────────────────────────┤
+│  CAPA 3: PRODUCTO (Mes 4-6)            │
+│  Next.js + Supabase + Daily.co          │
+│  Sincronización real, IA post-sesión,   │
+│  pagos automáticos, contenido expandido │
+├─────────────────────────────────────────┤
+│  CAPA 2: GLUE (Mes 2-3)                │
+│  Softr/FlutterFlow + Airtable/Supabase  │
+│  + Daily.co + Zapier                    │
+│  Validación de UX, primeros pagos       │
+│  manuales, contenido inicial            │
+├─────────────────────────────────────────┤
+│  CAPA 1: VALIDACIÓN (Mes 1)            │
+│  Carrd + Calendly + Zoom + Spotify      │
+│  Fake door test, 5 sesiones manuales,   │
+│  lista de espera, precios validados     │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## **CRONOGRAMA DETALLADO: 6 MESES A PRODUCTO VIABLE**
+
+### **MES 1: VALIDACIÓN EXTREMA (Semanas 1-4)**
+
+**Objetivo:** Tener 50 emails de personas dispuestas a pagar, o abortar.
+
+**Semana 1: Setup y Landing**
+- **Herramientas:** Carrd.co ($19/año), Canva (gratis), Loom (gratis)
+- **Tareas:**
+  - Comprar dominio simple (orbitalwellness.com o similar)
+  - Crear landing de UNA sola página con:
+    - Headline: "Meditación sincronizada para equipos remotos que no pueden hacer team building"
+    - Subheadline: "Entra en sintonía con tu equipo en 10 minutos, sin salir de Zoom"
+    - Video de 60 segundos (grabado con Loom, tú hablando, fondo limpio)
+    - 3 planes de precio: Free (beta), Pro ($4/mes), Team ($49/mes)
+    - Formulario: email + "¿Cuánto pagarías por esto?" (selector)
+  - Deploy en Carrd (30 minutos)
+
+**Semana 2: Traffico y Conversaciones**
+- **Acciones:**
+  - Post en LinkedIn personal (3 posts contando el problema que resuelves)
+  - 20 mensajes directos a founders/HR de startups remotas (indiehackers, bienestarfamiliar, etc.)
+  - Comentar en posts de "remote work challenges" con tu solución
+  - $50 en ads de Facebook dirigidos a "remote team managers"
+- **Métrica:** 20 emails mínimo
+
+**Semana 3: Sesiones Manuales (El Test Real)**
+- **Setup:**
+  - Calendly gratuito para scheduling
+  - Zoom Pro (gratis 40 min, o pagar $15 si necesitas más)
+  - Spotify playlist de meditación (5 tracks instrumentales)
+  - Script simple de guía (tú hablando, no grabado)
+
+- **Ejecutar 5 sesiones:**
+  - 3 con equipos reales (conocidos, amigos, contactos de LinkedIn)
+  - 2 con individuos que se unen a grupo mixto
+  - Duración: 15 minutos cada una
+  - Estructura: Check-in (2 min) → Meditación guiada (10 min) → Check-out + feedback (3 min)
+
+- **Recopilar:**
+  - Grabación de pantalla (para ver comportamiento)
+  - Feedback escrito (Google Form): ¿Lo sentiste útil? ¿Pagarías? ¿Qué mejorarías?
+  - Testimonio en video (si están cómodos)
+
+**Semana 4: Análisis y Decisión**
+- **CHECKPOINT GO/NO-GO:**
+  - ✅ **CONTINUAR SI:** ≥50 emails + ≥3 personas dijeron "sí pagaría" + NPS de sesiones ≥7/10
+  - ❌ **PIVOTAR SI:** <30 emails o feedback es "esto no resuelve mi problema"
+  - 🟡 **REPLANTEAR SI:** Interés pero en modelo diferente (ej: quieren solo individual, no grupal)
+
+**Entregables mes 1:**
+- Landing validada con tráfico real
+- 5 sesiones manuales ejecutadas
+- Decision fundamentada de continuar o no
+- **Costo acumulado:** ~$70
+
+---
+
+### **MES 2: GLUE FUNCIONAL (Semanas 5-8)**
+
+**Objetivo:** Producto automatizado sin escribir código, primeros pagos reales.
+
+**Semana 5-6: Stack de Glue**
+- **Herramientas:**
+  - **Frontend:** Softr (gratis hasta 100 usuarios) o Stacker
+  - **Base de datos:** Airtable (gratis) → migrar a Supabase al final del mes
+  - **Automatización:** Make.com (gratis hasta 1,000 ops) o Zapier ($20)
+  - **Video/Audio:** Daily.co (gratis 10,000 minutos/mes)
+  - **Pagos:** Stripe Payment Links (sin código)
+  - **Email:** MailerLite (gratis hasta 1,000 suscriptores)
+
+- **Funcionalidades a construir (arrastrar y soltar):**
+  1. **Registro/login:** Formulario Softr → crea registro en Airtable
+  2. **Dashboard:** Grid de próximas sesiones grupales (tabla Airtable filtrada)
+  3. **Reserva:** Botón "Unirme" → crea registro en tabla "Participants" → trigger de confirmación por email
+  4. **Sala de sesión:** Link de Daily.co generado automáticamente → enviado por email 10 min antes
+  5. **Contenido:** 5 meditaciones subidas a SoundCloud privado → embebidas en Softr
+
+**Semana 7: Contenido y UX**
+- **Grabar contenido:**
+  - 5 meditaciones de 10 minutos (tu voz + música de YouTube Audio Library)
+  - Estructura: Intro (1 min) → Cuerpo (7 min) → Cierre (2 min)
+  - No necesitan ser perfectas, necesitan ser **consistentes**
+
+- **Flujo de usuario:**
+  1. Usuario llega a landing
+  2. Se registra (Free o Pro)
+  3. Ve calendario de sesiones grupales
+  4. Reserva slot (máx 8 personas por sesión)
+  5. Recibe email con link Daily.co
+  6. Entra a sesión (host eres TÚ todavía, pero todo está automatizado)
+  7. Post-sesión: email con formulario de feedback
+
+**Semana 8: Primeros Pagos Manuales**
+- **Estrategía:**
+  - Los 50 de la lista de espera reciben email: "Estamos en beta privada, $4/mes para acceso ilimitado"
+  - Stripe Payment Link personalizado por usuario (sí, manual)
+  - Meta: 3-5 pagos reales
+
+- **Métrica de éxito:** ≥10 usuarios activos, ≥1 pago real, ≥3 sesiones completadas esta semana
+
+**Entregables mes 2:**
+- App funcional en Softr (no-code)
+- 5 meditaciones grabadas
+- Sistema de reservas automatizado
+- Primeros ingresos ($4-20)
+- **Costo acumulado:** ~$110
+
+---
+
+### **MES 3: TRANSICIÓN A LOW-CODE (Semanas 9-12)**
+
+**Objetivo:** Mejorar UX, reducir fricción, preparar terreno para código propio.
+
+**Semana 9-10: Migración a FlutterFlow + Supabase**
+- **Por qué FlutterFlow:** Exporta código Flutter (Dart) que puede convertirse a web, pero más importante: te enseña lógica de componentes, estados, y APIs sin escribir código inicialmente.
+
+- **Tareas:**
+  - Reconstruir UI en FlutterFlow (arrastrar y soltar)
+  - Conectar a Supabase (ya migrado desde Airtable)
+  - Replicar funcionalidades: auth, calendario, reservas, perfil
+  - Integrar Daily.co nativo (widget embebido, no link externo)
+
+- **Aprendizaje clave:** Entender cómo funciona una API, qué es una query, cómo se estructuran datos
+
+**Semana 11: "Sincronización" Simulada**
+- **Feature clave:** Host presiona "Iniciar sesión" → Todos los participantes ven el audio comenzar simultáneamente
+- **Técnica:** Daily.co tiene broadcast API, o simplemente: host controla play/pause y se refleja en todos (usando estado compartido en Supabase Realtime)
+- **No es:** WebSockets custom complejos
+- **Sí es:** Suficiente para sentirse sincronizados
+
+**Semana 12: IA Post-Sesión (Primera integración real)**
+- **Implementación:**
+  - Webhook: cuando sesión termina → trigger a Make.com → llamada a Claude API
+  - Prompt: "Genera un insight de 2 párrafos sobre una sesión de meditación grupal de [X] minutos con [Y] participantes, finalizada a las [hora]. Enfócate en conexión grupal y próximo paso."
+  - Guardar resultado en Supabase → mostrar en dashboard del usuario
+
+- **Métrica de éxito:** ≥30 usuarios, ≥5 pagos recurrentes, ≥50% de usuarios regresan a segunda sesión
+
+**Entregables mes 3:**
+- App en FlutterFlow (low-code, mejor UX)
+- Sincronización de audio funcional
+- IA generando insights post-sesión
+- $50-100 MRR
+- **Costo acumulado:** ~$200 (incluye FlutterFlow Pro $50)
+
+---
+
+### **MES 4: MONETIZACIÓN Y RETENCIÓN (Semanas 13-16)**
+
+**Objetivo:** Sistema de pagos automático, contenido expandido, métricas claras.
+
+**Semana 13-14: Stripe Integrado + Planes Definidos**
+- **Planes finales:**
+  | Plan | Precio | Límites |
+  |------|--------|---------|
+  | **Free** | $0 | 1 sesión grupal/semana, máx 5 personas, contenido básico |
+  | **Pro** | $4.99/mes | Sesiones ilimitadas, hasta 10 personas, insights IA |
+  | **Team** | $49/mes | Hasta 20 personas, dashboard de equipo, sesiones privadas |
+
+- **Implementación:** Stripe Checkout + Customer Portal (ahora sí, con código o usando Stripe.js en FlutterFlow)
+
+**Semana 15: Contenido Expandido**
+- **Estrategía híbrida:**
+  - 10 meditaciones más (tú o contratadas en Fiverr, $30 cada una)
+  - 5 "rituales de equipo" diseñados específicamente (ej: "Post-mortem sin estrés", "Pre-sprint de enfoque")
+  - 10 artículos generados con Claude + editados por ti
+
+**Semana 16: Sistema de Retención**
+- **Features:**
+  - Streaks (días consecutivos de sesión)
+  - Recordatorios por email (automáticos con Resend)
+  - "Grupos favoritos" (poder unirse siempre al mismo equipo)
+  - Feedback rápido post-sesión (1-5 estrellas, 10 segundos)
+
+- **Métrica de éxito:** ≥50 usuarios, ≥10 pagos, ≥$150 MRR, <15% churn mensual
+
+**Entregables mes 4:**
+- Pagos automáticos funcionando
+- 25 meditaciones totales
+- Sistema de retención básico
+- $150+ MRR
+- **Costo acumulado:** ~$350
+
+---
+
+### **MES 5: CÓDIGO PROPIO (Semanas 17-20)**
+
+**Objetivo:** Migrar a Next.js para control total, escalabilidad, y diferenciación técnica.
+
+**Semana 17-18: Next.js + Supabase (Finalmente)**
+- **Setup:**
+  - Crear proyecto Next.js 14 (App Router)
+  - Tailwind CSS + Shadcn/ui (componentes pre-hechos)
+  - Conectar Supabase existente (migrar datos)
+  - Clerk para auth (más simple que NextAuth)
+
+- **Reconstruir página por página:**
+  1. Landing (estática, rápida)
+  2. Dashboard (server components para datos)
+  3. Sala de sesión (client component con Daily.co SDK)
+  4. Perfil y pagos (Stripe Elements)
+
+- **Uso intensivo de IA:**
+  - Cursor AI ($20/mes) para generar 70% del código
+  - Claude para debugging y arquitectura
+  - v0.dev para componentes UI complejos
+
+**Semana 19: Sincronización Real**
+- **Mejora técnica:** Usar Daily.co broadcast o migrar a 100ms para control total del audio
+- **Feature:** "Modo orquestador" donde IA sugiere cambios de ritmo basados en participación (quién tiene cámara/micrófono activo)
+
+**Semana 20: Dashboard de Equipo (B2B)**
+- Para planes Team: métricas simples de uso, participación, frecuencia de sesiones
+- **NO incluir:** "Coherencia neuronal", "estados mentales", biometría
+- **SÍ incluir:** "Tu equipo ha meditado juntos X veces este mes", "Próxima sesión sugerida: [día]"
+
+- **Métrica de éxito:** ≥100 usuarios, ≥20 pagos, ≥$300 MRR, app estable en Next.js
+
+**Entregables mes 5:**
+- App propia en Next.js
+- Sincronización robusta
+- Dashboard B2B básico
+- $300+ MRR
+- **Costo acumulado:** ~$500 (incluye Cursor, Vercel Pro)
+
+---
+
+### **MES 6: DECISIÓN Y ESCALADO (Semanas 21-24)**
+
+**Objetivo:** Evaluar tracción, decidir camino, preparar siguiente fase.
+
+**Semana 21-22: Análisis de Métricas**
+- **Revisar:**
+  - CAC (Customer Acquisition Cost): ¿Cuánto cuesta obtener un usuario pagado?
+  - LTV (Lifetime Value): ¿Cuánto paga en promedio antes de churn?
+  - Engagement: ¿Cuántas sesiones por usuario/mes?
+  - NPS: ¿Recomendarían el producto?
+
+**Semana 23: Decisión Estratégica**
+| Escenario | Métrica | Decisión |
+|-----------|---------|----------|
+| 🟢 **Éxito** | >$500 MRR, >15% conversión, <10% churn | Buscar inversión seed o cofounder técnico |
+| 🟡 **Prometedor** | $200-500 MRR, crecimiento estable | Continuar solo, automatizar más, contratar freelance para contenido |
+| 🔴 **Estancado** | <$200 MRR, alto churn, bajo engagement | Pivotar a B2C individual, o cerrar y aplicar aprendizajes |
+
+**Semana 24: Siguiente Paso**
+- **Si 🟢:** Preparar pitch deck, aplicar a YC/otros, buscar $100-300k seed
+- **Si 🟡:** Plan de contenido para 6 meses, optimizar funnel de conversión
+- **Si 🔴:** Post-mortem honesto, documentar aprendizajes, decidir próximo proyecto
+
+**Entregables mes 6:**
+- Métricas claras de negocio
+- Decisión fundamentada de escalado
+- Roadmap para siguiente trimestre
+- **Costo acumulado:** ~$600-700 total
+
+---
+
+## **STACK TECNOLÓGICO EVOLUTIVO DEFINITIVO**
+
+| Fase | Frontend | Backend | Real-time | IA | Pagos | Costo/mes |
+|------|----------|---------|-----------|-----|-------|-----------|
+| **Mes 1** | Carrd | Airtable | Zoom | N/A | N/A | $20 |
+| **Mes 2** | Softr | Airtable | Daily.co | N/A | Stripe Links | $40 |
+| **Mes 3** | FlutterFlow | Supabase | Daily.co + Realtime | Claude API | Stripe Links | $90 |
+| **Mes 4** | FlutterFlow | Supabase | Daily.co + Realtime | Claude API | Stripe SDK | $100 |
+| **Mes 5-6** | Next.js 14 | Supabase | 100ms/Daily | Claude API | Stripe SDK | $130 |
+
+**Herramientas de desarrollo (constantes):**
+- Cursor AI: $20/mes (desde mes 3)
+- Figma: Gratis
+- GitHub: Gratis
+- Vercel: $0 → $20 (mes 5)
+
+---
+
+## **CONTENIDO: ESTRATEGIA REALISTA**
+
+### **Producción de Audio:**
+
+| Fase | Cantidad | Origen | Costo | Calidad |
+|------|----------|--------|-------|---------|
+| Mes 1 | 0 | N/A (sesiones manuales) | $0 | Voz propia, en vivo |
+| Mes 2 | 5 | Tu voz grabada | $0 | Media, auténtica |
+| Mes 3 | 5 | Fiverr voiceover | $150 | Alta, profesional |
+| Mes 4 | 10 | Mix (tú + Fiverr) | $100 | Variada |
+| Mes 5 | 10 | Fiverr + Claude guiones | $200 | Alta, escalable |
+| Mes 6 | 20 | Sistema de plantillas | $300 | Consistente |
+
+**Total 6 meses:** 50 meditaciones, ~$750 inversión en contenido
+
+### **Tipos de Contenido Priorizados:**
+
+1. **Meditación grupal sincronizada** (core, 60% del catálogo)
+2. **Respiración guiada** (20%, más corto, accesible)
+3. **Body scan** (10%, para estrés físico)
+4. **Visualización creativa** (10%, para equipos de creativos)
+
+---
+
+## **SISTEMA DE IA: EVOLUCIÓN PRÁGMATICA**
+
+| Fase | Uso de IA | Implementación | Costo/mes |
+|------|-----------|----------------|-----------|
+| Mes 1 | Ninguno | N/A | $0 |
+| Mes 2 | Generación de guiones | Claude, pre-sesión | $5 |
+| Mes 3 | Insights post-sesión | Claude API vía webhook | $15 |
+| Mes 4 | Recomendaciones | Claude + reglas simples | $20 |
+| Mes 5 | Asistente de onboarding | Claude + embeddings | $30 |
+| Mes 6 | Narrativa adaptativa | Fine-tuning con datos propios | $50 |
+
+**Principio:** Empezar con **selección de contenido pre-generado**, evolucionar a **generación contextual**, nunca prometer **personalización en tiempo real** hasta tener datos suficientes.
+
+---
+
+## **BIOMETRÍA: POSICIÓN CLARA**
+
+### **NO implementar en los primeros 6 meses:**
+
+- ❌ PPG por cámara (poco fiable, complejo, riesgo legal)
+- ❌ Análisis de audio en tiempo real (costoso, invasivo)
+- ❌ "Sincronización neuronal" (pseudociencia, no defendible)
+
+### **SÍ implementar como reemplazo:**
+
+- ✅ **Self-reporting inteligente:** Escala 1-10 antes/después, análisis de texto breve
+- ✅ **Participación pasiva:** ¿Estuvo presente? ¿Interactuó? (datos de Daily.co)
+- ✅ **Integración con wearables:** Apple Health, Google Fit, Oura (APIs existentes, mes 6+)
+- ✅ **"Coherencia percibida":** Promedio de ratings del grupo post-sesión
+
+**Comunicación al usuario:**
+> "No medimos tu cerebro. Diseñamos experiencias que tu equipo siente como conectadas, y mejoramos basándonos en tu feedback."
+
+---
+
+## **MÉTRICAS DE ÉXITO POR FASE**
+
+| Fase | Métrica Clave | Mínimo | Ideal | Acción si no se cumple |
+|------|---------------|--------|-------|------------------------|
+| **Mes 1** | Emails validados | 50 | 100 | Pivotar propuesta de valor |
+| **Mes 2** | Usuarios activos | 10 | 25 | Simplificar onboarding |
+| **Mes 3** | MRR | $50 | $150 | Ajustar pricing/features |
+| **Mes 4** | Retención mensual | 60% | 80% | Mejorar contenido/core |
+| **Mes 5** | MRR | $300 | $600 | Optimizar conversión |
+| **Mes 6** | Crecimiento MoM | 10% | 20% | Decisión: inversión/pivot |
+
+---
+
+## **PLAN DE CONTINGENCIA POR RIESGO**
+
+| Riesgo | Probabilidad | Mitigación | Plan B |
+|--------|--------------|------------|--------|
+| No aprendo suficiente código | Media | Cursor AI + tutoriales específicos | Quedarse en FlutterFlow, contratar dev freelance |
+| Daily.co limita funcionalidad | Baja | Migrar a 100ms o Agora | Construir WebRTC simple con Daily SDK |
+| No hay demanda B2B | Media | Validar mes 1 rigurosamente | Pivot a B2C individual con precio más bajo |
+| Contenido no es suficiente | Baja | Contratar Fiverr temprano | Licenciar contenido existente (Meditation Oasis) |
+| Competencia grande entra | Baja | Speed to market, comunidad temprana | Enfocar en nicho específico (ej: solo startups tech) |
+| Gastos superan ingresos | Media | Presupuesto estricto, fases claras | Reducir a mínimo viable, buscar pre-seed |
+
+---
+
+## **CHECKLIST DE DECISIÓN SEMANAL**
+
+Cada domingo, responder:
+
+1. ¿Estoy en el camino para la métrica de esta fase?
+2. ¿He usado IA (Cursor/Claude) para acelerar esta semana?
+3. ¿He hablado con al menos 1 usuario esta semana?
+4. ¿Hay algo que estoy construyendo que podría ser No-Code?
+5. ¿El diferenciador (sincronización grupal) sigue siendo el foco?
+
+Si 3+ respuestas son "no", pausar y replanificar.
+
+---
+
+## **VISIÓN FINAL SINTETIZADA**
+
+### **Lo que SÍ es ORBITA WELLNESS:**
+
+> Una plataforma donde equipos remotos realizan sesiones de bienestar sincronizadas, con experiencias adaptadas por IA basadas en el contexto del grupo y el feedback colectivo, priorizando la **sensación de conexión** sobre la medición biométrica.
+
+### **Lo que NO es:**
+
+- ❌ Una app de meditación individual (competiría con Calm/Headspace)
+- ❌ Un dispositivo médico (no mide estados cerebrales reales)
+- ❌ Un marketplace de contenido (no es YouTube de meditación)
+- ❌ Un sistema de terapia (no reemplaza profesionales de salud mental)
+
+### **La promesa de valor:**
+
+**"Tu equipo, en sintonía, en 10 minutos."**
+
+No importa si están en 5 zonas horarias diferentes. No importa si nunca han meditado. Entran a la sesión, salen conectados.
+
+---
+
+## **PRIMER PASO CONCRETO (HOY)**
+
+1. **Comprar dominio** (Namecheap, $12)
+2. **Crear cuenta Carrd** ($19/año)
+3. **Escribir script de 60 segundos** para video de landing
+4. **Grabar video con Loom** (3 tomas máximo, no perfeccionar)
+5. **Publicar landing** con formulario de email
+6. **Compartir en LinkedIn/Twitter** con texto personal sobre el problema que resuelves
+
+**Tiempo total:** 4 horas.
+**Costo:** $31.
+**Resultado:** Test de validación en marcha.
+
+---
+
+

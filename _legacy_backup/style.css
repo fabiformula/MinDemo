@@ -1,0 +1,418 @@
+:root {
+    --primary-color: #ff3b30;
+    --relax-color: #30d1ff;
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --secondary-text: #888888;
+    --card-bg: #1c1c1e;
+    --success-color: #4CAF50;
+    --warning-color: #FFC107;
+    --danger-color: #F44336;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--secondary-text);
+    margin-bottom: 2rem;
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* ==================== PULSE DISPLAY ==================== */
+
+.pulse-display {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--card-bg);
+    box-shadow: 0 0 20px rgba(255, 59, 48, 0.1);
+    transition: transform 0.1s ease, box-shadow 0.5s ease;
+}
+
+.relax-mode .pulse-display {
+    background: #001a2c;
+    box-shadow: 0 0 30px rgba(48, 209, 255, 0.2);
+}
+
+.relax-mode .bpm-value {
+    color: var(--relax-color);
+}
+
+.relax-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--relax-color);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.breathing {
+    animation: breathe 4s infinite ease-in-out;
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.1;
+    }
+}
+
+.bpm-value {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    z-index: 2;
+    transition: color 1s;
+}
+
+.bpm-unit {
+    font-size: 1.2rem;
+    color: var(--secondary-text);
+    position: absolute;
+    bottom: 40px;
+}
+
+/* Heartbeat Animation */
+.beating {
+    animation: beat 0.3s ease-out;
+    will-change: transform, box-shadow;
+}
+
+@keyframes beat {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 59, 48, 0.2);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 40px rgba(255, 59, 48, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 59, 48, 0.2);
+    }
+}
+
+/* ==================== STATUS & TIMERS ==================== */
+
+.session-timer {
+    font-size: 1.8rem;
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+.status-text {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    min-height: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.instruction-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 20px;
+    padding: 0 20px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ==================== SIGNAL QUALITY INDICATOR ==================== */
+
+.signal-quality {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 10px;
+}
+
+.quality-bar {
+    width: 100%;
+    height: 8px;
+    background: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.quality-indicator {
+    height: 100%;
+    width: 0%;
+    background: var(--success-color);
+    transition: width 0.3s ease, background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+#qualityText {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    text-align: center;
+}
+
+/* ==================== SIGNAL GRAPH ==================== */
+
+#signalCanvas {
+    width: 100%;
+    height: 60px;
+    margin-top: 20px;
+    border-bottom: 1px solid #333;
+    border-radius: 4px;
+    background: #0a0a0a;
+    transition: opacity 0.3s;
+}
+
+.faded {
+    opacity: 0.2;
+}
+
+/* ==================== CONTROLS ==================== */
+
+.control-group {
+    margin: 20px 0;
+    text-align: left;
+    width: 100%;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+input[type=range] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #333;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s;
+}
+
+input[type=range]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+input[type=checkbox] {
+    margin-right: 10px;
+    accent-color: var(--primary-color);
+}
+
+/* ==================== BUTTONS ==================== */
+
+#startBtn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #d63228 100%);
+    color: white;
+    border: none;
+    padding: 16px 50px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 59, 48, 0.4);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#startBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 59, 48, 0.5);
+}
+
+#startBtn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
+}
+
+/* ==================== DEBUG PANEL ==================== */
+
+.debug-panel {
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.debug-panel h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--relax-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#debugInfo {
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    line-height: 1.6;
+}
+
+#debugInfo div {
+    padding: 4px 0;
+    border-bottom: 1px solid #222;
+}
+
+#debugInfo div:last-child {
+    border-bottom: none;
+}
+
+#debugCanvas {
+    width: 100%;
+    height: 150px;
+    margin-top: 15px;
+    background: #0a0a0a;
+    border-radius: 4px;
+    border: 1px solid #222;
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+
+.hidden {
+    display: none !important;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .pulse-display {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .bpm-value {
+        font-size: 4rem;
+    }
+    
+    .session-timer {
+        font-size: 1.5rem;
+    }
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#appInterface {
+    animation: fadeIn 0.5s ease;
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==================== FOCUS STATES ==================== */
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}

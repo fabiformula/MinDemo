@@ -1,0 +1,16 @@
+Copia y pega estas 5 variables en Netlify (Site Settings > Environment Variables > Add a variable):
+
+1. Key: DATABASE_URL
+   Value: postgresql://postgres.vortrqxzypdccepdmolh:culodemonja1234@aws-1-us-east-2.pooler.supabase.com:6543/postgres?pgbouncer=true
+
+2. Key: DIRECT_URL
+   Value: postgresql://postgres.vortrqxzypdccepdmolh:culodemonja1234@aws-1-us-east-2.pooler.supabase.com:5432/postgres
+
+3. Key: NEXT_PUBLIC_SUPABASE_URL
+   Value: https://vortrqxzypdccepdmolh.supabase.co
+
+4. Key: NEXTAUTH_SECRET
+   Value: culodemonja1234_secret_2026
+
+5. Key: NEXTAUTH_URL
+   Value:https://detectordepulso.netlify.app

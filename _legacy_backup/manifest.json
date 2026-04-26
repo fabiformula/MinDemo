@@ -1,0 +1,21 @@
+{
+  "name": "Monitor de Pulso",
+  "short_name": "Pulso",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff0000",
+  "description": "Monitor de frecuencia cardíaca experimental.",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192/ff0000/ffffff?text=PULSO",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+        "src": "https://via.placeholder.com/512/ff0000/ffffff?text=PULSO",
+        "sizes": "512x512",
+        "type": "image/png"
+    }
+  ]
+}
